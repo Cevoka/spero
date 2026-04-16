@@ -1,0 +1,215 @@
+{
+  "source": "Tevrat",
+  "verses": [
+    {
+      "id": "torah_001",
+      "reference": "Mezmurlar 46:1",
+      "text": "Allah bizim sigınagımız ve kuvvetimizdir; dar zamanda yardımcımızdır.",
+      "tags": ["guven", "zorluk", "kaygi", "teselli"],
+      "theme": "Siginak"
+    },
+    {
+      "id": "torah_002",
+      "reference": "Yaratilis 1:27",
+      "text": "Tanrı insanı kendi suretinde yarattı, onu Tanrı'nın suretinde yarattı. Onları erkek ve disi olarak yarattı.",
+      "tags": ["guven", "sevgi", "genel"],
+      "theme": "Ilahi Suret"
+    },
+    {
+      "id": "torah_003",
+      "reference": "Yasa'nin Tekrari 31:6",
+      "text": "Guclu ve yürekli olun! Onlardan korkmayın, yılmayın! Cunku sizinle birlikte giden Tanrınız Rab'dir. O sizi bırakmayacak, terk etmeyecektir.",
+      "tags": ["guven", "kaygi", "zorluk", "umut"],
+      "theme": "Cesaret"
+    },
+    {
+      "id": "torah_004",
+      "reference": "Mezmurlar 23:4",
+      "text": "Olum golgesinin vadisinden gecsem bile kötülükten korkmam. Cunku sen benimlesin; celik comankin ve deynegin beni teselli eder.",
+      "tags": ["guven", "teselli", "kaygi", "zorluk"],
+      "theme": "Korkusuzluk"
+    },
+    {
+      "id": "torah_005",
+      "reference": "Meseller 3:5-6",
+      "text": "Butun yureginle Rab'be guven, kendi anlayısına dayanma. Her yolunda O'nu tani, O senin yollarını düze cıkaracaktır.",
+      "tags": ["guven", "iman", "hikmet"],
+      "theme": "Tam Guven"
+    },
+    {
+      "id": "torah_006",
+      "reference": "Mezmurlar 119:105",
+      "text": "Senin sozun ayagıma lamba, yoluma ısıktır.",
+      "tags": ["hikmet", "iman", "guven"],
+      "theme": "Ilahi Rehberlik"
+    },
+    {
+      "id": "torah_007",
+      "reference": "Mezmurlar 30:5",
+      "text": "Cunku ofkesi bir an surer, lutfu omur boyu. Aksam agıt olsa da sabah sevinc gelir.",
+      "tags": ["umut", "teselli", "sabir", "zorluk"],
+      "theme": "Sabah Sevinci"
+    },
+    {
+      "id": "torah_008",
+      "reference": "Meseller 16:9",
+      "text": "Insanın yuregi yolunu tasarlar; fakat adımlarını Rab yonetir.",
+      "tags": ["guven", "hikmet", "iman"],
+      "theme": "Ilahi Yonetim"
+    },
+    {
+      "id": "torah_009",
+      "reference": "Mezmurlar 55:22",
+      "text": "Yukunu Rab'be bırak, O seni destekleyecek; dogrularin sarsılmasına asla izin vermez.",
+      "tags": ["kaygi", "guven", "teselli", "sabir"],
+      "theme": "Yukunu Birak"
+    },
+    {
+      "id": "torah_010",
+      "reference": "Yasa'nin Tekrari 30:19",
+      "text": "Onunuze yasam ile olumu, bereket ile laneti koydum. Yasami secin ki siz de cocuklarınız da yasayasınız.",
+      "tags": ["hikmet", "umut", "genel"],
+      "theme": "Yasami Sec"
+    },
+    {
+      "id": "torah_011",
+      "reference": "Mezmurlar 51:10",
+      "text": "Ey Tanrı, temiz bir yurek yarat, icime yeniden kararlı bir ruh koy.",
+      "tags": ["tovbe", "dua", "teselli"],
+      "theme": "Yeni Baslangic"
+    },
+    {
+      "id": "torah_012",
+      "reference": "Meseller 4:23",
+      "text": "Her seyden cok yüregini koru, cunku yasam kaynagı odur.",
+      "tags": ["hikmet", "guven", "genel"],
+      "theme": "Kalbi Korumak"
+    },
+    {
+      "id": "torah_013",
+      "reference": "Mezmurlar 145:8-9",
+      "text": "Rab lutufkardır, merhametlidir, ofkeye yavaştır, iyiligi boldur. Rab herkese iyidir, merhameti butun yaptıklarının ustundedir.",
+      "tags": ["merhamet", "sevgi", "sukur", "genel"],
+      "theme": "Ilahi Merhamet"
+    },
+    {
+      "id": "torah_014",
+      "reference": "Mezmurlar 147:3",
+      "text": "Yurek kırıkları iyilestirir, yaralarını sarar.",
+      "tags": ["teselli", "zorluk", "merhamet", "kaygi"],
+      "theme": "Sifa Veren"
+    },
+    {
+      "id": "torah_015",
+      "reference": "Vaiz 3:1",
+      "text": "Her seyin bir zamani var, gogun altında her isin bir vakti var.",
+      "tags": ["sabir", "hikmet", "genel"],
+      "theme": "Her Seyin Zamani"
+    },
+    {
+      "id": "torah_016",
+      "reference": "Mezmurlar 37:4",
+      "text": "Rab'den zevk al, O sana yureginin dileklerini verecektir.",
+      "tags": ["guven", "dua", "umut", "sukur"],
+      "theme": "Rab'den Zevk Al"
+    },
+    {
+      "id": "torah_017",
+      "reference": "Isaya 43:2",
+      "text": "Sulardan gecerken seninle olacagım, ırmaklardan gecerken sular seni bogmayacak. Atesin icinden yuruyeceksin yanmayacaksın, alevler seni yakmayacak.",
+      "tags": ["guven", "zorluk", "teselli", "kaygi"],
+      "theme": "Zorlukta Birlikte"
+    },
+    {
+      "id": "torah_018",
+      "reference": "Meseller 15:1",
+      "text": "Yumusak cevap ofkeyi yatıstırır, kırıcı soz ofke dogurur.",
+      "tags": ["hikmet", "baris", "sabir", "merhamet"],
+      "theme": "Yumusak Soz"
+    },
+    {
+      "id": "torah_019",
+      "reference": "Mezmurlar 16:11",
+      "text": "Yasam yolunu bana bildireceksin; senin huzurunda sevinc dolulugu, senin sag elinde sonsuza dek zevkler var.",
+      "tags": ["umut", "sukur", "guven"],
+      "theme": "Sevinc Dolulugu"
+    },
+    {
+      "id": "torah_020",
+      "reference": "Mezmurlar 46:10",
+      "text": "Durun ve bilin ki ben Tanrı'yım.",
+      "tags": ["sabir", "guven", "dua", "kaygi"],
+      "theme": "Sessizlikte Tanri"
+    },
+    {
+      "id": "torah_021",
+      "reference": "Mika 6:8",
+      "text": "Senden istenen adil davranman, iyilik sevmen ve alcakgonullulukle Tanrı'nla yurumendir.",
+      "tags": ["adalet", "merhamet", "hikmet"],
+      "theme": "Tanri'nin Istegi"
+    },
+    {
+      "id": "torah_022",
+      "reference": "Mezmurlar 121:1-2",
+      "text": "Gozlerimi daglara kaldırırım, yardımım nereden gelecek? Yardımım gogu ve yeri yaratan Rab'den gelecek.",
+      "tags": ["guven", "dua", "umut"],
+      "theme": "Yardim Kaynagi"
+    },
+    {
+      "id": "torah_023",
+      "reference": "Mezmurlar 62:5-6",
+      "text": "Yalnız Tanrı'da huzur bul, ey canim! Cunku umutum O'ndadır. Yalnız O'dur kayam ve kurtulsum, kalemdir, asla sarsılmam.",
+      "tags": ["guven", "teselli", "kaygi", "iman"],
+      "theme": "Tek Huzur"
+    },
+    {
+      "id": "torah_024",
+      "reference": "Yesu 1:9",
+      "text": "Sana emretmedim mi? Guclu ve yürekli ol! Korkma, yılma. Cunku nereye gidersen git, Tanrın Rab seninle birlikte olacaktır.",
+      "tags": ["guven", "kaygi", "zorluk", "umut"],
+      "theme": "Guclu ve Yurekli Ol"
+    },
+    {
+      "id": "torah_025",
+      "reference": "Meseller 18:10",
+      "text": "Rabbin adı guclu bir kuledir; dogru kisi oraya kosup guvenlige kavusur.",
+      "tags": ["guven", "teselli", "iman"],
+      "theme": "Guclu Kule"
+    },
+    {
+      "id": "torah_026",
+      "reference": "Mezmurlar 34:8",
+      "text": "Rab'bin iyi oldugunu tadın ve gorün! Ne mutlu O'na sıgınan adama!",
+      "tags": ["sukur", "guven", "iman"],
+      "theme": "Rab'bin Iyiligi"
+    },
+    {
+      "id": "torah_027",
+      "reference": "Meseller 17:22",
+      "text": "Sevinçli yürek iyi bir ilac olur, kırılmış ruh kemikleri kurutur.",
+      "tags": ["teselli", "umut", "hikmet"],
+      "theme": "Sevinçli Yurek"
+    },
+    {
+      "id": "torah_028",
+      "reference": "Mezmurlar 42:11",
+      "text": "Neden cokmusun, ey canim? Neden icimde inliyorsun? Tanrı'ya umut bagla! Cunku onu yine ovecegim.",
+      "tags": ["kaygi", "umut", "teselli", "dua"],
+      "theme": "Umut Bagla"
+    },
+    {
+      "id": "torah_029",
+      "reference": "Mezmurlar 118:24",
+      "text": "Bugün Rab'bin yarattıgı gundur; bunda sevinelim, mesut olalım!",
+      "tags": ["sukur", "umut", "genel"],
+      "theme": "Bugunu Kutla"
+    },
+    {
+      "id": "torah_030",
+      "reference": "Sayilar 6:24-26",
+      "text": "Rab seni kutsasın ve korusun; Rab yuzunu uzerine parlatsın ve sana lutfetsin; Rab yuzunu sana cevirsin ve sana esenlik versin.",
+      "tags": ["dua", "baris", "guven", "genel"],
+      "theme": "Kutsal Bereket"
+    }
+  ]
+}

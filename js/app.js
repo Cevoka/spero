@@ -1,0 +1,95 @@
+// app.js - Ortak yardımcılar, navigasyon, günlük içerik
+
+const App = {
+    formatDate(dateStr) {
+        const d = new Date(dateStr);
+        return d.toLocaleDateString('tr-TR', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        });
+    },
+
+    formatTime(dateStr) {
+        const d = new Date(dateStr);
+        return d.toLocaleTimeString('tr-TR', {
+            hour: '2-digit', minute: '2-digit'
+        });
+    },
+
+    formatDateTime(dateStr) {
+        return this.formatDate(dateStr) + ' ' + this.formatTime(dateStr);
+    },
+
+    generateId() {
+        return 'conv_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+    },
+
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    },
+
+    renderNav() {
+        const nav = document.getElementById('main-nav');
+        if (!nav) return;
+
+        const user = Auth.getCurrentUser();
+        if (!user) {
+            nav.style.display = 'none';
+            return;
+        }
+
+        nav.innerHTML = `
+            <div class="nav-inner">
+                <a href="index.html" class="nav-logo">Spero</a>
+                <div class="nav-links">
+                    <a href="chat.html" class="nav-link">Sohbet</a>
+                    <a href="history.html" class="nav-link">Gecmis</a>
+                    <a href="settings.html" class="nav-link">Ayarlar</a>
+                </div>
+                <div class="nav-user">
+                    <span class="nav-username">${App.escapeHtml(user)}</span>
+                    <button onclick="Auth.logout()" class="nav-logout">Cikis</button>
+                </div>
+            </div>
+        `;
+    },
+
+    // Statik fallback günlük mesajlar
+    fallbackMessages: [
+        { content: "Sabır, kalbin huzura ulaşma yolculuğudur. Bugün sabrınla güçlen.", verse: { source: "Kuran", reference: "Bakara 153", text: "Ey iman edenler! Sabır ve namaz ile Allah'tan yardım isteyin." } },
+        { content: "Sevgi, tüm dinlerin ortak dilidir. Bugün etrafına sevgi saç.", verse: { source: "İncil", reference: "1. Korintliler 13:4", text: "Sevgi sabırlıdır, sevgi şefkatlidir." } },
+        { content: "Şükür, bereketin anahtarıdır. Sahip olduklarına şükret.", verse: { source: "Kuran", reference: "İbrahim 7", text: "Eğer şükrederseniz, elbette size nimetimi artırırım." } },
+        { content: "Umut, karanlıktaki ışıktır. Asla umudunu kaybetme.", verse: { source: "Tevrat", reference: "Mezmurlar 46:1", text: "Allah bizim sığınağımız ve kuvvetimizdir." } },
+        { content: "Merhamet göstermek, ruhun en güzel ibadetidir.", verse: { source: "Kuran", reference: "Enbiya 107", text: "Seni ancak alemlere rahmet olarak gönderdik." } },
+        { content: "İç huzur, dışarıda değil kalbinde bulunur.", verse: { source: "İncil", reference: "Yuhanna 14:27", text: "Size esenlik bırakıyorum, size kendi esenliğimi veriyorum." } },
+        { content: "Her yeni gün, yeni bir başlangıçtır.", verse: { source: "Tevrat", reference: "Ağıtlar 3:22-23", text: "Rabbin iyilikleri tükenmez, her sabah yenidir." } }
+    ],
+
+    getDailyContent(username) {
+        const today = new Date().toISOString().split('T')[0];
+        const cached = Storage.getDailyContent(username);
+
+        if (cached && cached.date === today) {
+            return cached;
+        }
+
+        // Güne göre sabit bir fallback mesaj seç
+        const dayIndex = new Date().getDate() % this.fallbackMessages.length;
+        const msg = this.fallbackMessages[dayIndex];
+        const content = {
+            date: today,
+            content: msg.content,
+            verses: [msg.verse],
+            generated: false
+        };
+
+        Storage.setDailyContent(username, content);
+        return content;
+    }
+};
+
+// Sayfa yüklendiğinde nav'ı render et
+document.addEventListener('DOMContentLoaded', () => {
+    App.renderNav();
+});

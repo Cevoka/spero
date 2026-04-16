@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gecmis Konusmalar - Spero</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav id="main-nav"></nav>
+
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="color: var(--primary);">Gecmis Konusmalar</h2>
+            <button id="clear-all-btn" class="btn btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.85rem; display: none;">
+                Tumunu Sil
+            </button>
+        </div>
+
+        <div id="history-list" class="history-list"></div>
+    </div>
+
+    <!-- Konuşma Görüntüleme Modal -->
+    <div id="convo-viewer" class="convo-viewer">
+        <div class="convo-viewer-inner">
+            <div class="convo-viewer-header">
+                <h3 id="viewer-title"></h3>
+                <button class="convo-viewer-close" onclick="closeViewer()">&times;</button>
+            </div>
+            <div class="convo-viewer-messages" id="viewer-messages"></div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        let username;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!Auth.requireAuth()) return;
+            App.renderNav();
+            username = Auth.getCurrentUser();
+            renderHistory();
+        });
+
+        function renderHistory() {
+            const convos = Storage.getConversations(username);
+            const activeId = Storage.getActiveConvoId(username);
+            const list = document.getElementById('history-list');
+            const clearBtn = document.getElementById('clear-all-btn');
+
+            // Sadece mesajı olan konuşmaları göster
+            const withMessages = convos.filter(c => c.messages && c.messages.length > 0);
+
+            if (withMessages.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <span class="empty-icon">&#128196;</span>
+                        <p>Henuz bir konusma gecmisiniz yok.</p>
+                        <a href="chat.html" class="btn btn-primary" style="margin-top: 1rem;">Sohbet Baslat</a>
+                    </div>
+                `;
+                clearBtn.style.display = 'none';
+                return;
+            }
+
+            clearBtn.style.display = '';
+            clearBtn.onclick = () => {
+                if (confirm('Tum konusma gecmisiniz silinecek. Emin misiniz?')) {
+                    Storage.saveConversations(username, []);
+                    Storage.setActiveConvoId(username, null);
+                    renderHistory();
+                    showToast('Tum konusmalar silindi', 'success');
+                }
+            };
+
+            list.innerHTML = withMessages.map(c => {
+                const isActive = c.id === activeId;
+                const date = App.formatDateTime(c.updatedAt || c.createdAt);
+                const preview = c.preview || (c.messages[0] ? c.messages[0].content.substring(0, 80) : 'Bos konusma');
+                const count = c.messages.length;
+
+                return `
+                    <div class="history-item" onclick="viewConversation('${c.id}')">
+                        <div class="history-item-info">
+                            <div class="history-item-date">
+                                ${App.escapeHtml(date)}
+                                ${isActive ? ' <strong>(Aktif)</strong>' : ''}
+                            </div>
+                            <div class="history-item-preview">${App.escapeHtml(preview)}</div>
+                            <div class="history-item-count">${count} mesaj</div>
+                        </div>
+                        <div class="history-item-actions">
+                            <button class="history-delete-btn" onclick="deleteConversation(event, '${c.id}')" title="Sil">
+                                &#128465;
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function viewConversation(convoId) {
+            const convo = Storage.getConversation(username, convoId);
+            if (!convo) return;
+
+            const viewer = document.getElementById('convo-viewer');
+            const title = document.getElementById('viewer-title');
+            const messages = document.getElementById('viewer-messages');
+
+            title.textContent = App.formatDate(convo.createdAt);
+
+            messages.innerHTML = convo.messages.map(m => {
+                const cssClass = m.role === 'user' ? 'message-user' : 'message-assistant';
+                const timeStr = m.timestamp ? App.formatTime(m.timestamp) : '';
+                const content = App.escapeHtml(m.content).replace(/\n/g, '<br>');
+
+                return `
+                    <div class="message ${cssClass}">
+                        <div>${content}</div>
+                        <div class="message-time">${timeStr}</div>
+                    </div>
+                `;
+            }).join('');
+
+            viewer.classList.add('active');
+        }
+
+        function closeViewer() {
+            document.getElementById('convo-viewer').classList.remove('active');
+        }
+
+        function deleteConversation(event, convoId) {
+            event.stopPropagation();
+            if (confirm('Bu konusmayi silmek istiyor musunuz?')) {
+                Storage.deleteConversation(username, convoId);
+                renderHistory();
+                showToast('Konusma silindi', 'success');
+            }
+        }
+
+        function showToast(msg, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = 'toast ' + (type || '');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // ESC ile modal kapat
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeViewer();
+        });
+    </script>
+</body>
+</html>
