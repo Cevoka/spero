@@ -1,0 +1,27 @@
+# Environment files (never commit secrets)
+.env
+.env.local
+.env.*.local
+
+# Supabase CLI local files
+supabase/.temp/
+supabase/.branches/
+
+# Node (Phase 3 — Capacitor)
+node_modules/
+dist/
+build/
+
+# Capacitor generated (Phase 3)
+ios/App/Pods/
+android/.gradle/
+android/build/
+android/app/build/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
