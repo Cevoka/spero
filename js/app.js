@@ -41,7 +41,7 @@ const App = {
 
         nav.innerHTML = `
             <div class="nav-inner">
-                <a href="index.html" class="nav-logo">Spero</a>
+                <a href="index.html" class="nav-logo">JESSE</a>
                 <div class="nav-links">
                     <a href="chat.html" class="nav-link">Sohbet</a>
                     <a href="history.html" class="nav-link">Gecmis</a>

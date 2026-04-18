@@ -55,9 +55,9 @@ const Chat = {
     getWelcomeMessage() {
         return `
             <div class="message message-assistant">
-                <div>Merhaba! Ben Spero. Sana manevi ve duygusal destek sunmak icin buradayim.
+                <div>Merhaba! Ben JESSE. Sana manevi ve duygusal destek sunmak icin buradayim.
                 <br><br>Bugun nasil hissediyorsun? Icini acmak istedigin bir konu var mi?</div>
-                <div class="message-time">Spero</div>
+                <div class="message-time">JESSE</div>
             </div>
         `;
     },

@@ -1,21 +1,25 @@
-/* style.css - Spero Stilleri */
+/* style.css - JESSE Stilleri */
 
 :root {
-    --primary: #1a6b5a;
-    --primary-light: #2a9d8f;
-    --primary-dark: #0f4035;
-    --secondary: #e9c46a;
-    --secondary-light: #f4d98c;
-    --bg: #faf5ee;
-    --bg-card: #ffffff;
-    --text: #264653;
-    --text-light: #5a7d8a;
-    --text-muted: #8fa8b3;
+    --primary: #c9a961;
+    --primary-light: #e0bf7a;
+    --primary-dark: #a68a3f;
+    --secondary: #6b4a8e;
+    --secondary-light: #8d6cb0;
+    --bg: #2a1b4a;
+    --bg-deep: #1a0f38;
+    --bg-elevated: #4a2c6f;
+    --bg-card: rgba(255, 255, 255, 0.08);
+    --bg-card-solid: #3a2a5e;
+    --text: #f4ecd8;
+    --text-light: #c9b8d4;
+    --text-muted: #8a7a9c;
     --danger: #e76f51;
     --danger-dark: #c4533a;
-    --border: #d4c5a9;
-    --shadow: 0 2px 12px rgba(26, 107, 90, 0.08);
-    --shadow-lg: 0 4px 24px rgba(26, 107, 90, 0.12);
+    --border: rgba(255, 255, 255, 0.15);
+    --border-strong: rgba(255, 255, 255, 0.25);
+    --shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.35);
     --radius: 12px;
     --radius-sm: 8px;
     --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -34,7 +38,8 @@ html {
 
 body {
     font-family: var(--font);
-    background: var(--bg);
+    background: linear-gradient(160deg, var(--bg-deep) 0%, var(--bg) 50%, var(--bg-elevated) 100%);
+    background-attachment: fixed;
     color: var(--text);
     min-height: 100vh;
     line-height: 1.6;
@@ -42,13 +47,16 @@ body {
 
 /* --- Navigasyon --- */
 #main-nav {
-    background: var(--primary);
+    background: rgba(26, 15, 56, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     color: white;
     padding: 0 1rem;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
 }
 
 .nav-inner {
@@ -64,9 +72,10 @@ body {
 .nav-logo {
     font-size: 1.2rem;
     font-weight: 700;
-    color: var(--secondary);
+    color: var(--primary);
     text-decoration: none;
     white-space: nowrap;
+    letter-spacing: 2px;
 }
 
 .nav-links {
@@ -123,48 +132,285 @@ body {
 
 .card {
     background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: var(--radius);
     padding: 2rem;
     box-shadow: var(--shadow);
     border: 1px solid var(--border);
 }
 
+@supports not ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+    .card,
+    .home-action-card,
+    .history-item,
+    .chat-header,
+    .chat-input-area,
+    .message-assistant,
+    .typing-indicator {
+        background: var(--bg-card-solid);
+    }
+    #main-nav {
+        background: var(--bg-deep);
+    }
+}
+
 /* --- Giriş Sayfası --- */
 .login-wrapper {
     display: flex;
+    min-height: 100vh;
+    background: transparent;
+}
+
+/* Sol marka paneli */
+.login-brand {
+    position: relative;
+    flex: 0 0 55%;
+    display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
-    padding: 1rem;
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+    overflow: hidden;
+    background: linear-gradient(160deg, var(--bg-deep) 0%, var(--bg) 50%, var(--bg-elevated) 100%);
+}
+
+.login-brand-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 80%, rgba(201,169,97,0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(141,108,176,0.25) 0%, transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(224,191,122,0.1) 0%, transparent 45%);
+    background-size: 100% 100%;
+}
+
+.login-brand-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    padding: 3rem;
+    max-width: 440px;
+    animation: fadeInLeft 0.8s ease both;
+}
+
+.logo-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid var(--primary);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 24px rgba(201,169,97,0.35);
+    animation: scaleIn 0.6s ease 0.2s both;
+}
+
+.login-brand-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+    color: white;
+    animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+.login-brand-tagline {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    color: var(--primary-light);
+    animation: fadeInUp 0.6s ease 0.4s both;
+}
+
+.login-brand-tagline-en {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+    color: var(--text-light);
+    animation: fadeInUp 0.6s ease 0.45s both;
+}
+
+.login-brand-divider {
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
+    border-radius: 2px;
+    margin: 2rem auto;
+    animation: fadeInUp 0.6s ease 0.5s both;
+}
+
+.login-brand-quote {
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.7;
+    opacity: 0.8;
+    padding: 0 1rem;
+    border: none;
+    margin: 0;
+    animation: fadeInUp 0.6s ease 0.6s both;
+}
+
+.login-brand-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 2rem;
+    animation: fadeInUp 0.6s ease 0.7s both;
+}
+
+.login-brand-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+}
+
+.login-brand-dots span:nth-child(1) { animation: floatDot 3s ease-in-out infinite; }
+.login-brand-dots span:nth-child(2) { animation: floatDot 3s ease-in-out 0.5s infinite; background: var(--primary); opacity: 0.85; }
+.login-brand-dots span:nth-child(3) { animation: floatDot 3s ease-in-out 1s infinite; }
+
+/* Sağ form paneli */
+.login-form-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: transparent;
+    animation: fadeInRight 0.8s ease both;
 }
 
 .login-card {
-    background: var(--bg-card);
-    border-radius: var(--radius);
-    padding: 3rem 2.5rem;
-    box-shadow: var(--shadow-lg);
     width: 100%;
-    max-width: 420px;
-    text-align: center;
+    max-width: 400px;
+    text-align: left;
 }
 
-.login-card h1 {
-    color: var(--primary);
+.login-card-header {
+    margin-bottom: 2.5rem;
+}
+
+.login-card-header h2 {
     font-size: 1.8rem;
-    margin-bottom: 0.3rem;
+    color: var(--text);
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    animation: fadeInUp 0.6s ease 0.3s both;
 }
 
 .login-card .subtitle {
+    font-size: 1rem;
     color: var(--text-light);
-    font-size: 0.95rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
+    animation: fadeInUp 0.6s ease 0.4s both;
 }
 
-.login-card .icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    display: block;
+/* Input icon wrapper */
+.input-icon-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: color 0.2s;
+}
+
+.form-input-icon {
+    padding-left: 2.8rem;
+}
+
+.input-icon-wrapper:focus-within .input-icon {
+    color: var(--primary-light);
+}
+
+.login-card .form-input {
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-card .form-input:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(224,191,122,0.18);
+}
+
+.login-card .form-input-icon {
+    padding-left: 2.8rem;
+}
+
+.login-card .form-group {
+    animation: fadeInUp 0.6s ease 0.5s both;
+}
+
+/* Gelişmiş giriş butonu */
+.btn-login {
+    margin-top: 0.5rem;
+    padding: 0.9rem 1.5rem;
+    font-size: 1.05rem;
+    border-radius: var(--radius-sm);
+    justify-content: center;
+    gap: 0.6rem;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    animation: fadeInUp 0.6s ease 0.6s both;
+}
+
+.btn-login:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(201,169,97,0.45);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.btn-arrow {
+    transition: transform 0.2s;
+    font-size: 1.2rem;
+}
+
+.btn-login:hover .btn-arrow {
+    transform: translateX(3px);
+}
+
+/* Giriş footer */
+.login-footer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    animation: fadeInUp 0.6s ease 0.7s both;
+}
+
+.login-footer-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.login-footer-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 /* --- Form Elemanları --- */
@@ -184,14 +430,18 @@ body {
 .form-input {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 2px solid var(--border);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius-sm);
     font-size: 1rem;
     font-family: var(--font);
     color: var(--text);
-    background: var(--bg);
-    transition: border-color 0.2s;
+    background: rgba(255, 255, 255, 0.06);
+    transition: border-color 0.2s, background 0.2s;
     outline: none;
+}
+
+.form-input:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .form-input:focus {
@@ -220,17 +470,20 @@ body {
 }
 
 .btn-primary {
-    background: var(--primary);
-    color: white;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: var(--bg-deep);
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(201,169,97,0.25);
 }
 
 .btn-primary:hover {
-    background: var(--primary-dark);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+    box-shadow: 0 4px 16px rgba(201,169,97,0.4);
 }
 
 .btn-secondary {
     background: var(--secondary);
-    color: var(--text);
+    color: white;
 }
 
 .btn-secondary:hover {
@@ -288,12 +541,13 @@ body {
 }
 
 .daily-card {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--primary) 100%);
+    color: var(--text);
     border-radius: var(--radius);
     padding: 2rem;
     margin: 1.5rem 0;
     box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-strong);
 }
 
 .daily-card h3 {
@@ -337,6 +591,8 @@ body {
 
 .home-action-card {
     background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: var(--radius);
     padding: 1.5rem;
     text-align: center;
@@ -344,13 +600,14 @@ body {
     border: 1px solid var(--border);
     text-decoration: none;
     color: var(--text);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     display: block;
 }
 
 .home-action-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
 }
 
 .home-action-card .action-icon {
@@ -378,6 +635,8 @@ body {
 
 .chat-header {
     background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 0.8rem 1rem;
     border-bottom: 1px solid var(--border);
     display: flex;
@@ -395,13 +654,14 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: var(--primary);
-    color: white;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: var(--bg-deep);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
     font-weight: 700;
+    box-shadow: 0 2px 8px rgba(201,169,97,0.3);
 }
 
 .chat-header-info h3 {
@@ -433,6 +693,31 @@ body {
     word-wrap: break-word;
 }
 
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes floatDot {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+}
+
 @keyframes messageIn {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
@@ -440,14 +725,17 @@ body {
 
 .message-user {
     align-self: flex-end;
-    background: var(--primary);
-    color: white;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: var(--bg-deep);
     border-bottom-right-radius: 4px;
+    box-shadow: 0 2px 12px rgba(201,169,97,0.25);
 }
 
 .message-assistant {
     align-self: flex-start;
     background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: var(--text);
     border: 1px solid var(--border);
     border-bottom-left-radius: 4px;
@@ -471,6 +759,8 @@ body {
     padding: 0.8rem 1rem;
     align-self: flex-start;
     background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: var(--radius);
 }
@@ -494,6 +784,8 @@ body {
 /* Sohbet giriş alanı */
 .chat-input-area {
     background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid var(--border);
     padding: 0.8rem 1rem;
     display: flex;
@@ -504,7 +796,7 @@ body {
 .chat-input-area textarea {
     flex: 1;
     padding: 0.7rem 1rem;
-    border: 2px solid var(--border);
+    border: 1px solid var(--border-strong);
     border-radius: 20px;
     font-size: 0.95rem;
     font-family: var(--font);
@@ -513,8 +805,8 @@ body {
     max-height: 120px;
     line-height: 1.4;
     color: var(--text);
-    background: var(--bg);
-    transition: border-color 0.2s;
+    background: rgba(255, 255, 255, 0.06);
+    transition: border-color 0.2s, background 0.2s;
 }
 
 .chat-input-area textarea:focus {
@@ -525,20 +817,23 @@ body {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: var(--primary);
-    color: white;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: var(--bg-deep);
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
-    transition: background 0.2s;
+    font-weight: 700;
+    transition: transform 0.15s, box-shadow 0.2s;
     flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(201,169,97,0.3);
 }
 
 .chat-send-btn:hover {
-    background: var(--primary-dark);
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(201,169,97,0.45);
 }
 
 .chat-send-btn:disabled {
@@ -576,7 +871,7 @@ body {
 }
 
 .info-box {
-    background: var(--bg);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     padding: 1rem;
@@ -586,9 +881,13 @@ body {
     margin-top: 0.5rem;
 }
 
+.info-box strong {
+    color: var(--primary);
+}
+
 .storage-bar {
     height: 8px;
-    background: var(--border);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     overflow: hidden;
     margin-top: 0.5rem;
@@ -596,7 +895,7 @@ body {
 
 .storage-bar-fill {
     height: 100%;
-    background: var(--primary);
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
     border-radius: 4px;
     transition: width 0.3s;
 }
@@ -632,11 +931,13 @@ body {
 
 .history-item {
     background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1rem 1.2rem;
     cursor: pointer;
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -644,6 +945,8 @@ body {
 
 .history-item:hover {
     box-shadow: var(--shadow);
+    border-color: var(--primary);
+    transform: translateY(-1px);
 }
 
 .history-item-info {
@@ -728,7 +1031,8 @@ body {
 }
 
 .convo-viewer-inner {
-    background: var(--bg);
+    background: var(--bg-card-solid);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius);
     width: 100%;
     max-width: var(--max-width);
@@ -744,7 +1048,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--bg-card);
+    background: rgba(255, 255, 255, 0.04);
     border-radius: var(--radius) var(--radius) 0 0;
 }
 
@@ -777,14 +1081,16 @@ body {
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%) translateY(100px);
-    background: var(--text);
-    color: white;
+    background: var(--bg-deep);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
     padding: 0.8rem 1.5rem;
     border-radius: var(--radius-sm);
     font-size: 0.9rem;
     z-index: 300;
     transition: transform 0.3s ease;
     white-space: nowrap;
+    box-shadow: var(--shadow-lg);
 }
 
 .toast.show {
@@ -793,28 +1099,31 @@ body {
 
 .toast.error {
     background: var(--danger);
+    color: white;
 }
 
 .toast.success {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: var(--bg-deep);
+    font-weight: 600;
 }
 
 /* --- API Key yokken uyarı --- */
 .api-warning {
-    background: #fff3cd;
-    border: 1px solid #ffc107;
+    background: rgba(255, 243, 205, 0.12);
+    border: 1px solid rgba(255, 193, 7, 0.4);
     border-radius: var(--radius-sm);
     padding: 1rem;
     margin-bottom: 1rem;
     font-size: 0.9rem;
-    color: #856404;
+    color: #f4d98c;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
 .api-warning a {
-    color: var(--primary);
+    color: var(--primary-light);
     font-weight: 600;
 }
 
@@ -839,11 +1148,46 @@ body {
         padding: 0.3rem 0.6rem;
     }
 
-    .login-card {
-        padding: 2rem 1.5rem;
+    .login-wrapper {
+        flex-direction: column;
     }
 
-    .login-card h1 {
+    .login-brand {
+        flex: none;
+        padding: 2.5rem 1.5rem 2rem;
+    }
+
+    .login-brand-content {
+        animation: fadeInUp 0.6s ease both;
+    }
+
+    .login-brand-title {
+        font-size: 2rem;
+    }
+
+    .login-brand-tagline {
+        font-size: 0.95rem;
+    }
+
+    .login-brand-quote,
+    .login-brand-divider,
+    .login-brand-dots {
+        display: none;
+    }
+
+    .logo-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .login-form-panel {
+        padding: 2rem 1.5rem;
+        animation: fadeInUp 0.6s ease 0.2s both;
+    }
+
+    .login-card-header h2 {
         font-size: 1.4rem;
     }
 

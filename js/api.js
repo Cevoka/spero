@@ -130,7 +130,7 @@ const API = {
             ).join('\n');
         }
 
-        return `Sen "Spero" adinda, sefkatli ve bilge bir manevi danismansin.
+        return `Sen "JESSE" adinda, sefkatli ve bilge bir manevi danismansin.
 
 Gorevlerin:
 1. Kullanicinin duygusal ve manevi ihtiyaclarina karsilik vermek.

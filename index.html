@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spero - Manevi Danismanlık Platformu</title>
+    <title>JESSE - Manevi Danismanlık & Saglık | Spiritual Counseling & Health</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -11,17 +11,52 @@
 
     <!-- Giriş Ekranı -->
     <div id="login-screen" class="login-wrapper" style="display:none;">
-        <div class="login-card">
-            <span class="icon">&#9775;</span>
-            <h1>Spero</h1>
-            <p class="subtitle">Manevi danismanlık ve ic huzur platformu</p>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="username">Kullanici Adiniz</label>
-                    <input type="text" id="username" class="form-input" placeholder="Adinizi girin..." autocomplete="off" required minlength="2" maxlength="30">
+        <!-- Sol dekoratif panel -->
+        <div class="login-brand">
+            <div class="login-brand-bg"></div>
+            <div class="login-brand-content">
+                <div class="login-brand-logo">
+                    <span class="logo-circle">J</span>
                 </div>
-                <button type="submit" class="btn btn-primary btn-full">Giris Yap</button>
-            </form>
+                <h1 class="login-brand-title">JESSE</h1>
+                <p class="login-brand-tagline">Manevi Danismanlık & Saglık</p>
+                <p class="login-brand-tagline login-brand-tagline-en">Spiritual Counseling & Health</p>
+                <div class="login-brand-divider"></div>
+                <blockquote class="login-brand-quote">
+                    "Huzur, disarida aranacak bir sey degil; icinde kesfedilecek bir hazinedir."
+                </blockquote>
+                <div class="login-brand-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ form paneli -->
+        <div class="login-form-panel">
+            <div class="login-card">
+                <div class="login-card-header">
+                    <h2>Hos Geldiniz</h2>
+                    <p class="subtitle">Devam etmek icin adinizi girin</p>
+                </div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Kullanici Adiniz</label>
+                        <div class="input-icon-wrapper">
+                            <span class="input-icon">&#9786;</span>
+                            <input type="text" id="username" class="form-input form-input-icon" placeholder="Adinizi girin..." autocomplete="off" required minlength="2" maxlength="30">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full btn-login">
+                        <span>Giris Yap</span>
+                        <span class="btn-arrow">&rarr;</span>
+                    </button>
+                </form>
+                <div class="login-footer">
+                    <div class="login-footer-line"></div>
+                    <span class="login-footer-text">Guvenli ve gizli</span>
+                    <div class="login-footer-line"></div>
+                </div>
+            </div>
         </div>
     </div>
 
