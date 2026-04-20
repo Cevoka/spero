@@ -1,0 +1,242 @@
+{
+  "source": "Tasavvuf Ustadlari",
+  "verses": [
+    {
+      "id": "yunus_001",
+      "source": "Yunus Emre",
+      "reference": "Divan",
+      "text": "Yaratilani severiz Yaratandan oturu.",
+      "tags": ["sevgi", "merhamet", "ask", "iman", "vahdet"],
+      "theme": "Yaratana Muhabbet"
+    },
+    {
+      "id": "yunus_002",
+      "source": "Yunus Emre",
+      "reference": "Divan",
+      "text": "Ilim ilim bilmektir, ilim kendin bilmektir. Sen kendini bilmezsin, ya nice okumaktir.",
+      "tags": ["hikmet", "marifet", "genel", "tevazu"],
+      "theme": "Kendini Bilmek"
+    },
+    {
+      "id": "yunus_003",
+      "source": "Yunus Emre",
+      "reference": "Divan",
+      "text": "Gelin tanis olalim, isi kolay kilalim, sevelim sevilelim, dunya kimseye kalmaz.",
+      "tags": ["sevgi", "baris", "merhamet", "genel"],
+      "theme": "Kardeslik"
+    },
+    {
+      "id": "yunus_004",
+      "source": "Yunus Emre",
+      "reference": "Divan",
+      "text": "Bir ben vardir bende benden iceru.",
+      "tags": ["marifet", "hikmet", "nefis"],
+      "theme": "Ic Alem"
+    },
+    {
+      "id": "yunus_005",
+      "source": "Yunus Emre",
+      "reference": "Divan",
+      "text": "Cennet cennet dedikleri birkac kosk ile birkac huri, isteyene ver sen onlari, bana seni gerek seni.",
+      "tags": ["ask", "iman", "vahdet", "sevgi"],
+      "theme": "Ilahi Ask"
+    },
+    {
+      "id": "yunus_006",
+      "source": "Yunus Emre",
+      "reference": "Divan",
+      "text": "Dervislik dedikleri hirka ile tac degil, gonlunu dervis eyleyen Hakka olan askta.",
+      "tags": ["tevazu", "ask", "hikmet"],
+      "theme": "Hakiki Dervislik"
+    },
+
+    {
+      "id": "mevlana_001",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Divan-i Kebir",
+      "text": "Ya oldugun gibi gorun, ya gorundugun gibi ol.",
+      "tags": ["hikmet", "genel", "tevazu"],
+      "theme": "Samimiyet"
+    },
+    {
+      "id": "mevlana_002",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi",
+      "text": "Sevgide gunes gibi ol. Dostluk ve kardeslikte akar su gibi ol. Hatalari ortmede gece gibi ol. Tevazuda toprak gibi ol. Ofkede olu gibi ol.",
+      "tags": ["sevgi", "tevazu", "sabir", "baris", "merhamet"],
+      "theme": "Yedi Ogut"
+    },
+    {
+      "id": "mevlana_003",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi",
+      "text": "Dunle beraber gitti dun; ne kadar soz varsa dune ait. Simdi yeni seyler soylemek lazim.",
+      "tags": ["umut", "genel", "hikmet"],
+      "theme": "Yeniden Baslamak"
+    },
+    {
+      "id": "mevlana_004",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi",
+      "text": "Hamdim, pistim, yandim.",
+      "tags": ["marifet", "zorluk", "hikmet"],
+      "theme": "Manevi Olgunlasma"
+    },
+    {
+      "id": "mevlana_005",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi",
+      "text": "Sabir, selamete ermenin anahtaridir; aceleci olan, cogu zaman pismanlik eker.",
+      "tags": ["sabir", "hikmet", "zorluk"],
+      "theme": "Sabir"
+    },
+    {
+      "id": "mevlana_006",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi",
+      "text": "Mum olmak kolay degildir; isik sacabilmek icin once yanmak gerekir.",
+      "tags": ["zorluk", "sabir", "umut", "teselli"],
+      "theme": "Fedakarlik"
+    },
+
+    {
+      "id": "gazali_001",
+      "source": "Imam Gazali",
+      "reference": "Ihya-u Ulumi'd-din",
+      "text": "Insanin en buyuk dusmani kendi nefsidir; onu tanimayan hayatini tanimamis olur.",
+      "tags": ["nefis", "marifet", "hikmet"],
+      "theme": "Nefisle Mucadele"
+    },
+    {
+      "id": "gazali_002",
+      "source": "Imam Gazali",
+      "reference": "Ihya-u Ulumi'd-din",
+      "text": "Sukur, nimetin degerini bilmek ve onu veren Hakka yoneltmektir.",
+      "tags": ["sukur", "iman", "marifet"],
+      "theme": "Sukur Sirri"
+    },
+    {
+      "id": "gazali_003",
+      "source": "Imam Gazali",
+      "reference": "Kimya-i Saadet",
+      "text": "Ilim, amele donusmezse bir yuktur; amel, ihlasla taninmazsa bir gosteristir.",
+      "tags": ["hikmet", "iman", "marifet"],
+      "theme": "Ilim ve Amel"
+    },
+    {
+      "id": "gazali_004",
+      "source": "Imam Gazali",
+      "reference": "Ihya-u Ulumi'd-din",
+      "text": "Kalp bir padisah, nefis vezir, akil muftu gibidir; sehvet ve gazap ise iki bekcidir.",
+      "tags": ["nefis", "hikmet", "marifet"],
+      "theme": "Ic Dunya Duzeni"
+    },
+    {
+      "id": "gazali_005",
+      "source": "Imam Gazali",
+      "reference": "Ihya-u Ulumi'd-din",
+      "text": "Tevazu, kulun yucelmesinin kapisidir; kibir ise dusmesinin.",
+      "tags": ["tevazu", "hikmet", "nefis"],
+      "theme": "Tevazu"
+    },
+
+    {
+      "id": "fuzuli_001",
+      "source": "Fuzuli",
+      "reference": "Divan Onsozu",
+      "text": "Ask imis her ne var alemde; ilim bir kil u kal imis ancak.",
+      "tags": ["ask", "sevgi", "hikmet", "marifet"],
+      "theme": "Ilahi Ask"
+    },
+    {
+      "id": "fuzuli_002",
+      "source": "Fuzuli",
+      "reference": "Leyla ile Mecnun",
+      "text": "Mende Mecnun'dan fuzun asiklik isti'dadi var; Asik-i sadik menem, Mecnun'un ancak adi var.",
+      "tags": ["ask", "sevgi"],
+      "theme": "Sadakat-i Ask"
+    },
+    {
+      "id": "fuzuli_003",
+      "source": "Fuzuli",
+      "reference": "Divan",
+      "text": "Cani kim cananini icun sevse cananin sever; cani icun kim ki cananin sever canin sever.",
+      "tags": ["ask", "sevgi", "hikmet"],
+      "theme": "Hakiki Muhabbet"
+    },
+    {
+      "id": "fuzuli_004",
+      "source": "Fuzuli",
+      "reference": "Divan",
+      "text": "Dert cok, hem-dert yok; dusman kavi, talih zebun. Hakkin kapisina sigmak teselli vesilesidir.",
+      "tags": ["teselli", "umut", "zorluk", "dua"],
+      "theme": "Teselli Kaynagi"
+    },
+
+    {
+      "id": "esref_001",
+      "source": "Esrefoglu Rumi",
+      "reference": "Divan",
+      "text": "Gonul tahtina sultan olan ask; adalet eyleyip ferman olan asktir.",
+      "tags": ["ask", "sevgi", "adalet"],
+      "theme": "Ilahi Sevgi"
+    },
+    {
+      "id": "esref_002",
+      "source": "Esrefoglu Rumi",
+      "reference": "Muzekki'n-Nufus",
+      "text": "Nefsini temizlemeyen kalbini pak edemez; kalbini pak etmeyen Hakki goremez.",
+      "tags": ["nefis", "marifet", "tovbe"],
+      "theme": "Nefis Terbiyesi"
+    },
+    {
+      "id": "esref_003",
+      "source": "Esrefoglu Rumi",
+      "reference": "Divan",
+      "text": "Ey asik, bu yolda yanmayi goze almayan vuslata eremez.",
+      "tags": ["ask", "sabir", "zorluk"],
+      "theme": "Ask Yolu"
+    },
+    {
+      "id": "esref_004",
+      "source": "Esrefoglu Rumi",
+      "reference": "Muzekki'n-Nufus",
+      "text": "Zikir kalbin gidasidir; zikirsiz kalp, susuz topraga benzer.",
+      "tags": ["dua", "iman", "marifet"],
+      "theme": "Zikrin Tesiri"
+    },
+
+    {
+      "id": "lutfi_001",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu",
+      "text": "Insan, icindeki sonsuzluga ulastiginda, disarida aradigi her seyin icinde oldugunu anlar.",
+      "tags": ["marifet", "hikmet", "genel"],
+      "theme": "Ic Sonsuzluk"
+    },
+    {
+      "id": "lutfi_002",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu",
+      "text": "Sevgi, varligin ozu ve butun dinlerin ortak dilidir.",
+      "tags": ["sevgi", "ask", "baris", "vahdet"],
+      "theme": "Vahdet"
+    },
+    {
+      "id": "lutfi_003",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu",
+      "text": "Hakikat yoluna giren evvela kendini terk etmelidir; cunku benlik, Hak ile kul arasindaki perdedir.",
+      "tags": ["nefis", "marifet", "tevazu"],
+      "theme": "Fenafillah"
+    },
+    {
+      "id": "lutfi_004",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu",
+      "text": "Bilmek ile olmak arasinda uzun bir yol vardir; bilen cok, olan azdir.",
+      "tags": ["marifet", "hikmet", "tevazu"],
+      "theme": "Ilm ve Hal"
+    }
+  ]
+}

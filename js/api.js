@@ -54,7 +54,25 @@ const API = {
         'huzur': ['baris', 'guven', 'dua'],
         'guven': ['guven', 'iman'],
         'basari': ['umut', 'guven', 'sukur'],
-        'basarisiz': ['umut', 'sabir', 'guven']
+        'basarisiz': ['umut', 'sabir', 'guven'],
+        'ask': ['ask', 'sevgi', 'merhamet'],
+        'asik': ['ask', 'sevgi'],
+        'nefis': ['nefis', 'tevazu', 'marifet'],
+        'nefsim': ['nefis', 'tevazu'],
+        'kibir': ['tevazu', 'nefis'],
+        'benlik': ['nefis', 'tevazu'],
+        'ego': ['nefis', 'tevazu'],
+        'tasavvuf': ['marifet', 'hikmet', 'vahdet'],
+        'tarikat': ['marifet', 'hikmet'],
+        'gonul': ['ask', 'sevgi', 'marifet'],
+        'ruh': ['marifet', 'hikmet', 'vahdet'],
+        'vahdet': ['vahdet', 'iman'],
+        'mevlana': ['ask', 'hikmet', 'sevgi'],
+        'yunus': ['ask', 'sevgi', 'tevazu'],
+        'hakikat': ['marifet', 'hikmet', 'iman'],
+        'zikir': ['dua', 'iman', 'marifet'],
+        'fenafillah': ['nefis', 'vahdet', 'marifet'],
+        'murakabe': ['dua', 'marifet', 'hikmet']
     },
 
     // Tüm ayet verilerini yükle
@@ -64,17 +82,32 @@ const API = {
         if (this._scriptureCache) return this._scriptureCache;
 
         try {
-            const [quranRes, bibleRes, torahRes] = await Promise.all([
+            const [quranRes, bibleRes, torahRes, ustadRes] = await Promise.all([
                 fetch('data/quran.json'),
                 fetch('data/bible.json'),
-                fetch('data/torah.json')
+                fetch('data/torah.json'),
+                fetch('data/ustadlar.json')
             ]);
 
             const quran = await quranRes.json();
             const bible = await bibleRes.json();
             const torah = await torahRes.json();
+            const ustadlar = await ustadRes.json();
 
-            this._scriptureCache = { quran, bible, torah };
+            // Her verse'e kaynak bilgisini yerlestir (ekranda gosterim icin)
+            const stampSource = (data) => {
+                data.verses.forEach(v => {
+                    if (!v.source) v.source = data.source;
+                });
+                return data;
+            };
+
+            this._scriptureCache = {
+                quran: stampSource(quran),
+                bible: stampSource(bible),
+                torah: stampSource(torah),
+                ustadlar: stampSource(ustadlar)
+            };
             return this._scriptureCache;
         } catch (e) {
             console.error('Ayet verileri yuklenemedi:', e);
@@ -102,23 +135,23 @@ const API = {
             matchedTags.add('umut');
         }
 
-        const allSources = [scriptures.quran, scriptures.bible, scriptures.torah];
+        const allSources = [scriptures.quran, scriptures.bible, scriptures.torah, scriptures.ustadlar];
         const selected = [];
 
-        // Her kaynaktan 1-2 ayet seç
+        // Her kaynaktan 1-2 ayet/hikmet sec
         for (const source of allSources) {
+            if (!source || !source.verses) continue;
             const matching = source.verses.filter(v =>
                 v.tags.some(t => matchedTags.has(t))
             );
 
             if (matching.length > 0) {
-                // Rastgele 1-2 ayet seç
                 const shuffled = matching.sort(() => Math.random() - 0.5);
                 selected.push(...shuffled.slice(0, 2));
             }
         }
 
-        return selected.slice(0, 6); // Maksimum 6 ayet
+        return selected.slice(0, 8); // Maksimum 8 kaynak (3 kutsal kitap + ustalar)
     },
 
     // Sistem promptunu oluştur
@@ -134,22 +167,25 @@ const API = {
 
 Gorevlerin:
 1. Kullanicinin duygusal ve manevi ihtiyaclarina karsilik vermek.
-2. Uc buyuk ilahi gelenegden (Islam, Hristiyanlik, Yahudilik) ayetler ve ogretilerle rehberlik etmek.
-3. Her zaman saygiyla, yargilamadan ve sevecenlikle yaklasmak.
-4. Profesyonel psikolojik tedavinin yerini almadigini gerektiginde hatirlatmak.
-5. Turkce konusmak.
+2. Uc buyuk ilahi gelenegden (Islam, Hristiyanlik, Yahudilik) ayetlerle rehberlik etmek.
+3. Tasavvuf-i Islamin buyuk usta ve mursidlerinin (Yunus Emre, Mevlana Celaleddin Rumi, Imam Gazali, Fuzuli, Esrefoglu Rumi, Lutfi Filiz gibi) hikmetli sozleri ve ogretileriyle gonul yolunu aydinlatmak.
+4. Her zaman saygiyla, yargilamadan ve sevecenlikle yaklasmak.
+5. Profesyonel psikolojik tedavinin yerini almadigini gerektiginde hatirlatmak.
+6. Turkce konusmak.
 
 Yaklasim ilkelerin:
 - Kullanicinin ruh halini anla ve empati goster.
-- Ilgili kutsal kitap ayetlerini paylasirken kaynak belirt (Kuran, Incil, Tevrat).
-- Pratik manevi tavsiyeler sun (dua, meditasyon, sukur pratigi, nefes egzersizi vb.).
+- Kaynaklari acikca belirt: ayet paylastiginda "Kuran", "Incil", "Tevrat"; tasavvuf sozu paylastiginda ustat adini ve eserini (ornegin "Mevlana, Mesnevi" veya "Yunus Emre, Divan") belirt.
+- Kutsal kitap ayetlerini ve tasavvuf ustalarinin sozlerini bir arada kullanabilirsin; ikisi birbirini tamamlar. Bazen yalniz bir ayet, bazen yalniz bir hikmet, bazen ikisini birlikte sun.
+- Pratik manevi tavsiyeler sun (dua, meditasyon, zikir, sukur pratigi, nefes egzersizi, murakabe vb.).
 - Kullaniciyi olumlu dusunmeye ve ic huzura yonlendir.
 - Asla belirli bir dini dayatma veya din degistirmeye tesvik etme.
-- Uc dini gelenegi esit saygiyla ele al.
+- Uc dini gelenegi esit saygiyla ele al; tasavvuf mirasini ise Islam gelenegi icinde sunarken evrensel hikmet olarak da degerlendir.
 - Yanitlarin sicak, insani ve dogal olsun. Robotik veya kalipsal konusma.
+- Alinti yaparken sadakat goster; bir sozun kime ait olduguna dair suphen varsa "bu anlamda soylenen bir sozdur" gibi nazik bir ifadeyle aktar.
 - Gerektiginde "Bu konuda profesyonel bir uzmana danismanizi tavsiye ederim" de.
 
-${verseText ? 'Asagida konuyla ilgili kutsal kitap ayetleri verilmistir. Uygun gordugunde yanitlarinda kullanabilirsin:\n\n' + verseText : ''}`;
+${verseText ? 'Asagida konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustalarinin hikmetli sozleri verilmistir. Uygun gordugunde yanitlarinda kullanabilirsin:\n\n' + verseText : ''}`;
     },
 
     // Claude API'ye mesaj gönder

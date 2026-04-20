@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-label="JESSE">
+  <defs>
+    <linearGradient id="markGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4d98c"/>
+      <stop offset="100%" stop-color="#e9c46a"/>
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="44" fill="none" stroke="#f4d98c" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="54" cy="23" rx="4.5" ry="6.5" fill="url(#markGold)"/>
+  <path d="M54 34 L54 60 Q54 72 42 72 Q30 72 28 60"
+        fill="none" stroke="url(#markGold)" stroke-width="6"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="72" cy="34" r="1.5" fill="#f4d98c" opacity="0.7"/>
+  <circle cx="28" cy="38" r="1" fill="#f4d98c" opacity="0.5"/>
+</svg>

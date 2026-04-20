@@ -41,7 +41,7 @@ const App = {
 
         nav.innerHTML = `
             <div class="nav-inner">
-                <a href="index.html" class="nav-logo">JESSE</a>
+                <a href="index.html" class="nav-logo"><img src="assets/jesse-wordmark.svg" alt="JESSE" class="nav-logo-img"></a>
                 <div class="nav-links">
                     <a href="chat.html" class="nav-link">Sohbet</a>
                     <a href="history.html" class="nav-link">Gecmis</a>
@@ -63,7 +63,13 @@ const App = {
         { content: "Umut, karanlıktaki ışıktır. Asla umudunu kaybetme.", verse: { source: "Tevrat", reference: "Mezmurlar 46:1", text: "Allah bizim sığınağımız ve kuvvetimizdir." } },
         { content: "Merhamet göstermek, ruhun en güzel ibadetidir.", verse: { source: "Kuran", reference: "Enbiya 107", text: "Seni ancak alemlere rahmet olarak gönderdik." } },
         { content: "İç huzur, dışarıda değil kalbinde bulunur.", verse: { source: "İncil", reference: "Yuhanna 14:27", text: "Size esenlik bırakıyorum, size kendi esenliğimi veriyorum." } },
-        { content: "Her yeni gün, yeni bir başlangıçtır.", verse: { source: "Tevrat", reference: "Ağıtlar 3:22-23", text: "Rabbin iyilikleri tükenmez, her sabah yenidir." } }
+        { content: "Her yeni gün, yeni bir başlangıçtır.", verse: { source: "Tevrat", reference: "Ağıtlar 3:22-23", text: "Rabbin iyilikleri tükenmez, her sabah yenidir." } },
+        { content: "Kendini bilmek, en büyük ilimdir. Bugün bir an durup içine bak.", verse: { source: "Yunus Emre", reference: "Divan", text: "İlim ilim bilmektir, ilim kendin bilmektir. Sen kendini bilmezsin, ya nice okumaktır." } },
+        { content: "Samimiyet, ruhun temizliğinin alametidir. Olduğun gibi görün.", verse: { source: "Mevlana", reference: "Divan-ı Kebir", text: "Ya olduğun gibi görün, ya göründüğün gibi ol." } },
+        { content: "Kalbini sevgiyle doldur; yaratılanı Yaratan'dan ötürü sev.", verse: { source: "Yunus Emre", reference: "Divan", text: "Yaratılanı severiz Yaratan'dan ötürü." } },
+        { content: "Nefsi tanımak, manevi yolculuğun ilk adımıdır.", verse: { source: "İmam Gazali", reference: "İhya-u Ulumi'd-din", text: "İnsanın en büyük düşmanı kendi nefsidir; onu tanımayan hayatını tanımamış olur." } },
+        { content: "Aşk, varlığın özü ve bütün dinlerin ortak dilidir.", verse: { source: "Fuzuli", reference: "Divan Önsözü", text: "Aşk imiş her ne var âlemde; ilim bir kıl u kâl imiş ancak." } },
+        { content: "Dünü bırak, bugünü aç bir sayfa olarak karşıla.", verse: { source: "Mevlana", reference: "Mesnevi", text: "Dünle beraber gitti dün, ne kadar söz varsa düne ait. Şimdi yeni şeyler söylemek lazım." } }
     ],
 
     getDailyContent(username) {
