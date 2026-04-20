@@ -77,9 +77,11 @@ body {
 }
 
 .nav-logo-img {
-    height: 34px;
+    height: 40px;
     width: auto;
     display: block;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .nav-links {
@@ -198,13 +200,15 @@ body {
     animation: fadeInLeft 0.8s ease both;
 }
 
-.logo-mark {
+.logo-main {
     display: block;
-    width: 104px;
-    height: 104px;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
     margin: 0 auto 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 215, 130, 0.15);
     animation: scaleIn 0.7s ease 0.2s both;
-    filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.28));
 }
 
 .login-brand-title {
@@ -1169,10 +1173,13 @@ body {
         display: none;
     }
 
-    .logo-mark {
-        width: 72px;
-        height: 72px;
+    .logo-main {
+        max-width: 280px;
         margin-bottom: 1rem;
+    }
+
+    .nav-logo-img {
+        height: 32px;
     }
 
     .login-form-panel {

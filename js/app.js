@@ -41,7 +41,7 @@ const App = {
 
         nav.innerHTML = `
             <div class="nav-inner">
-                <a href="index.html" class="nav-logo"><img src="assets/jesse-wordmark.svg" alt="JESSE" class="nav-logo-img"></a>
+                <a href="index.html" class="nav-logo"><img src="assets/jesse-logo.jpg" alt="JESSE" class="nav-logo-img"></a>
                 <div class="nav-links">
                     <a href="chat.html" class="nav-link">Sohbet</a>
                     <a href="history.html" class="nav-link">Gecmis</a>
