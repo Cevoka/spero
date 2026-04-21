@@ -32,6 +32,16 @@ const Supabase = {
         }
     },
 
+    // Süresi dolmuş olsa bile yenilenebilir bir oturum var mı?
+    hasSession() {
+        try {
+            const raw = localStorage.getItem(SESSION_KEY);
+            if (!raw) return false;
+            const s = JSON.parse(raw);
+            return !!(s && s.refresh_token);
+        } catch { return false; }
+    },
+
     _saveSession(data) {
         const session = {
             access_token: data.access_token,

@@ -75,7 +75,7 @@ const Auth = {
     },
 
     isLoggedIn() {
-        return !!(Storage.getCurrentUser() || Supabase.getSession());
+        return !!(Storage.getCurrentUser() || Supabase.hasSession());
     },
 
     requireAuth() {

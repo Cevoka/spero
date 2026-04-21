@@ -239,9 +239,9 @@ Yaklasim ilkelerin:
 ${verseText ? 'Asagida bu konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustadlarinin hikmetli sozleri verilmistir. Bunlari yanıtinda kullan:\n\n' + verseText : ''}`;
     },
 
-    // Supabase oturum token'ını al
-    _getAuthHeader() {
-        const session = Supabase.getSession();
+    // Supabase oturum token'ını al — gerekirse refresh yapar
+    async _getAuthHeader() {
+        const session = await Supabase.ensureSession();
         if (!session) throw new Error('Oturum bulunamadi. Lutfen tekrar giris yapin.');
         return 'Bearer ' + session.access_token;
     },
@@ -250,12 +250,13 @@ ${verseText ? 'Asagida bu konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustad
     async sendMessage(messages, scriptureContext) {
         const systemPrompt = this.buildSystemPrompt(scriptureContext);
         const recentMessages = messages.slice(-20);
+        const authHeader = await this._getAuthHeader();
 
         const response = await fetch(this.API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': this._getAuthHeader(),
+                'Authorization': authHeader,
                 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGt4Z291eWpjZXlweG10dmlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MjY0MTAsImV4cCI6MjA5MjEwMjQxMH0.MV72tv-63uoV-cBEa0aCF5rgfR4BKufQO1F7zKwjvd8'
             },
             body: JSON.stringify({
@@ -280,11 +281,12 @@ ${verseText ? 'Asagida bu konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustad
     // Bağlantı testi (Edge Function)
     async testApiKey(apiKey) {
         try {
+            const authHeader = await this._getAuthHeader();
             const response = await fetch(this.API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': this._getAuthHeader(),
+                    'Authorization': authHeader,
                     'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGt4Z291eWpjZXlweG10dmlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MjY0MTAsImV4cCI6MjA5MjEwMjQxMH0.MV72tv-63uoV-cBEa0aCF5rgfR4BKufQO1F7zKwjvd8'
                 },
                 body: JSON.stringify({ model: this.MODEL, max_tokens: 10, messages: [{ role: 'user', content: 'test' }] })
@@ -303,7 +305,7 @@ JSON formatinda yanit ver:
         const today = new Date().toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' });
 
         let authHeader;
-        try { authHeader = this._getAuthHeader(); } catch { return null; }
+        try { authHeader = await this._getAuthHeader(); } catch { return null; }
 
         const response = await fetch(this.API_URL, {
             method: 'POST',
