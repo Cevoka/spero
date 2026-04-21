@@ -1,5 +1,4 @@
 // JESSE chat-proxy Edge Function
-// Not: Supabase altyapısı JWT'yi zaten doğrular; koda ulaşan istek geçerli demektir.
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -13,15 +12,6 @@ const json = (body: unknown, status = 200) =>
     headers: { ...corsHeaders, 'Content-Type': 'application/json' },
   })
 
-function decodeJWT(token: string): Record<string, unknown> | null {
-  try {
-    const parts = token.split('.')
-    if (parts.length !== 3) return null
-    const payload = atob(parts[1].replace(/-/g, '+').replace(/_/g, '/'))
-    return JSON.parse(payload)
-  } catch { return null }
-}
-
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
@@ -31,13 +21,7 @@ Deno.serve(async (req) => {
     return json({ error: 'Giris yapmaniz gerekiyor.' }, 401)
   }
 
-  // JWT altyapı tarafından doğrulandı; payload'dan user_id al
-  const token = authHeader.slice(7)
-  const payload = decodeJWT(token)
-  if (!payload?.sub) {
-    return json({ error: 'Gecersiz oturum.' }, 401)
-  }
-
+  // Supabase altyapısı JWT'yi zaten doğruladı; buraya geldiyse token geçerlidir.
   const anthropicKey = Deno.env.get('ANTHROPIC_API_KEY')
   if (!anthropicKey) return json({ error: 'Sunucu yapilandirma hatasi.' }, 500)
 
