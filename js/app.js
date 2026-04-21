@@ -69,7 +69,9 @@ const App = {
         { content: "Kalbini sevgiyle doldur; yaratılanı Yaratan'dan ötürü sev.", verse: { source: "Yunus Emre", reference: "Divan", text: "Yaratılanı severiz Yaratan'dan ötürü." } },
         { content: "Nefsi tanımak, manevi yolculuğun ilk adımıdır.", verse: { source: "İmam Gazali", reference: "İhya-u Ulumi'd-din", text: "İnsanın en büyük düşmanı kendi nefsidir; onu tanımayan hayatını tanımamış olur." } },
         { content: "Aşk, varlığın özü ve bütün dinlerin ortak dilidir.", verse: { source: "Fuzuli", reference: "Divan Önsözü", text: "Aşk imiş her ne var âlemde; ilim bir kıl u kâl imiş ancak." } },
-        { content: "Dünü bırak, bugünü aç bir sayfa olarak karşıla.", verse: { source: "Mevlana", reference: "Mesnevi", text: "Dünle beraber gitti dün, ne kadar söz varsa düne ait. Şimdi yeni şeyler söylemek lazım." } }
+        { content: "Dünü bırak, bugünü aç bir sayfa olarak karşıla.", verse: { source: "Mevlana", reference: "Mesnevi", text: "Dünle beraber gitti dün, ne kadar söz varsa düne ait. Şimdi yeni şeyler söylemek lazım." } },
+        { content: "Dünyaya gönlünü kaptırma; geçici olan şeylere kalıcı değer verme.", verse: { source: "Esrefoglu Rumi", reference: "Divan", text: "Bu dünyaya verme gönül, dünya sana kalmaz." } },
+        { content: "Kalbi bulmak, tüm arayışların sonudur. Bugün içine dön.", verse: { source: "Lutfi Filiz", reference: "Noktanın Sonsuzluğu", text: "İnsan, Allah'ı kalbinde bulabilirse miraç etmiş olur." } }
     ],
 
     getDailyContent(username) {
@@ -92,10 +94,15 @@ const App = {
 
         Storage.setDailyContent(username, content);
         return content;
+    },
+
+    init() {
+        Storage.migrate();
+        this.renderNav();
     }
 };
 
-// Sayfa yüklendiğinde nav'ı render et
+// Sayfa yüklendiğinde init çalıştır
 document.addEventListener('DOMContentLoaded', () => {
-    App.renderNav();
+    App.init();
 });

@@ -163,6 +163,80 @@
       "text": "Cani kim cananini icun sevse cananin sever; cani icun kim ki cananin sever canin sever.",
       "tags": ["ask", "sevgi", "hikmet"],
       "theme": "Hakiki Muhabbet"
+    },
+
+    {
+      "id": "esrefoglu_001",
+      "source": "Esrefoglu Rumi",
+      "reference": "Divan, 'Adi Ask' siiri",
+      "text": "Cihani hice satmaktir adi ask; dokup varligi gitmektir adi ask.",
+      "tags": ["ask", "tevazu", "gonul", "tasavvuf"],
+      "theme": "Ilahi Askin Bedeli"
+    },
+    {
+      "id": "esrefoglu_002",
+      "source": "Esrefoglu Rumi",
+      "reference": "Divan",
+      "text": "Bu dunyaya verme gonul, dunya sana kalmaz.",
+      "tags": ["hikmet", "dunya", "tevazu", "genel"],
+      "theme": "Dunyadan El Cekmek"
+    },
+    {
+      "id": "esrefoglu_003",
+      "source": "Esrefoglu Rumi",
+      "reference": "Divan",
+      "text": "Gel bu nefsin zulmetini tozunu sur aradan; kande baksan gozlerine gorune ol Yaradan.",
+      "tags": ["nefis", "marifet", "tasavvuf", "gonul"],
+      "theme": "Nefsi Terbiye"
+    },
+    {
+      "id": "esrefoglu_004",
+      "source": "Esrefoglu Rumi",
+      "reference": "Divan, 'Seni Sen' siiri",
+      "text": "Seni sen yavi kil kulli, dilersen bulasın ani.",
+      "tags": ["nefis", "marifet", "hikmet", "tasavvuf"],
+      "theme": "Benlikten Gecmek"
+    },
+    {
+      "id": "esrefoglu_005",
+      "source": "Esrefoglu Rumi",
+      "reference": "Divan",
+      "text": "Bana askin gerek askin, gerekmez ozge gavgayi.",
+      "tags": ["ask", "sevgi", "gonul", "tasavvuf"],
+      "theme": "Ilahi Aska Yonelmek"
+    },
+
+    {
+      "id": "lutfi_001",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu, 1. Kitap",
+      "text": "Allah olmasaydi insan bulunmazdi; insan olmasaydi Allah bilinmezdi.",
+      "tags": ["vahdet", "marifet", "iman", "hikmet"],
+      "theme": "Insan ve Allah"
+    },
+    {
+      "id": "lutfi_002",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu, 1. Kitap",
+      "text": "Kainat bir noktadan ibaret iken kalem bu noktayi uzatip harfleri yazmistir.",
+      "tags": ["hikmet", "vahdet", "marifet"],
+      "theme": "Varligin Kaynagi"
+    },
+    {
+      "id": "lutfi_003",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu, 1. Kitap",
+      "text": "Insan, Allah'i kalbinde bulabilirse mirac etmis olur.",
+      "tags": ["gonul", "marifet", "iman", "huzur"],
+      "theme": "Kalbin Miracı"
+    },
+    {
+      "id": "lutfi_004",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu, 1. Kitap",
+      "text": "Gonul, Allah'in gozle gorulmeyen bahr-i ahadiyet alemidir; nasil Allah bir ise gonul de birdir.",
+      "tags": ["gonul", "vahdet", "marifet", "ask"],
+      "theme": "Gonlun Sirri"
     }
   ]
 }

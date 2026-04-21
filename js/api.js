@@ -72,7 +72,15 @@ const API = {
         'hakikat': ['marifet', 'hikmet', 'iman'],
         'zikir': ['dua', 'iman', 'marifet'],
         'fenafillah': ['nefis', 'vahdet', 'marifet'],
-        'murakabe': ['dua', 'marifet', 'hikmet']
+        'murakabe': ['dua', 'marifet', 'hikmet'],
+        'esrefoglu': ['ask', 'nefis', 'tasavvuf'],
+        'lutfi': ['gonul', 'vahdet', 'marifet'],
+        'filiz': ['gonul', 'vahdet', 'marifet'],
+        'muzekki': ['nefis', 'marifet', 'tasavvuf'],
+        'tarikatname': ['tasavvuf', 'hikmet'],
+        'dunya': ['tevazu', 'hikmet', 'dunya'],
+        'gonlum': ['gonul', 'ask', 'teselli'],
+        'noktanin': ['vahdet', 'marifet', 'hikmet']
     },
 
     // Tüm ayet verilerini yükle
@@ -151,7 +159,12 @@ const API = {
             }
         }
 
-        return selected.slice(0, 8); // Maksimum 8 kaynak (3 kutsal kitap + ustalar)
+        // Performans: API'ye sadece gerekli alanları gönder
+        return selected.slice(0, 8).map(v => ({
+            source: v.source,
+            reference: v.reference,
+            text: v.text
+        }));
     },
 
     // Sistem promptunu oluştur
@@ -168,7 +181,7 @@ const API = {
 Gorevlerin:
 1. Kullanicinin duygusal ve manevi ihtiyaclarina karsilik vermek.
 2. Uc buyuk ilahi gelenegden (Islam, Hristiyanlik, Yahudilik) ayetlerle rehberlik etmek.
-3. Tasavvuf-i Islamin buyuk usta ve mursidlerinin (Yunus Emre, Mevlana Celaleddin Rumi, Imam Gazali, Fuzuli gibi) hikmetli sozleri ve ogretileriyle gonul yolunu aydinlatmak.
+3. Tasavvuf-i Islamin buyuk usta ve mursidlerinin (Yunus Emre, Mevlana Celaleddin Rumi, Imam Gazali, Fuzuli, Esrefoglu Rumi, Lutfi Filiz gibi) hikmetli sozleri ve ogretileriyle gonul yolunu aydinlatmak.
 4. Her zaman saygiyla, yargilamadan ve sevecenlikle yaklasmak.
 5. Profesyonel psikolojik tedavinin yerini almadigini gerektiginde hatirlatmak.
 6. Turkce konusmak.
@@ -225,7 +238,9 @@ ${verseText ? 'Asagida konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustalari
             } else if (response.status === 429) {
                 throw new Error('Cok fazla istek gonderildi. Lutfen biraz bekleyin.');
             } else {
-                throw new Error(err.error?.message || 'API hatasi: ' + response.status);
+                // Hata mesajında API key asla gösterilmez
+                const safeMsg = Storage.sanitizeForLog(err.error?.message || '');
+                throw new Error(safeMsg || 'API hatasi: ' + response.status);
             }
         }
 
