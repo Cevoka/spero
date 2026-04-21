@@ -98,6 +98,10 @@ const App = {
 
     init() {
         Storage.migrate();
+        if (Auth.isLoggedIn()) {
+            const userId = Auth.getUserId();
+            if (userId) Storage.pullFromSupabase(userId); // arka planda sync
+        }
         this.renderNav();
     }
 };

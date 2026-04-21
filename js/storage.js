@@ -115,6 +115,113 @@ const Storage = {
     setApiKey(key) {
         // API key asla log'a düşmesin
         this._set('api_key', key);
+        // Supabase'de de güncelle (fire-and-forget)
+        const userId = typeof Auth !== 'undefined' ? Auth.getUserId() : null;
+        if (userId) {
+            Supabase.db.update('profiles', { api_key: key }, { id: userId }).catch(() => {});
+        }
+    },
+
+    // --- Supabase Senkronizasyonu ---
+
+    async pullFromSupabase(userId) {
+        if (!userId) return;
+        try {
+            // Profil
+            const profiles = await Supabase.db.select('profiles', {
+                select: 'display_name,api_key',
+                filters: { id: userId }
+            });
+            if (profiles && profiles[0]) {
+                if (profiles[0].display_name) this.setCurrentUser(profiles[0].display_name);
+                if (profiles[0].api_key && !this.getApiKey()) {
+                    this._set('api_key', profiles[0].api_key);
+                }
+            }
+
+            // Konuşmalar (meta, mesajsız, son 50)
+            const convos = await Supabase.db.select('conversations', {
+                select: 'id,title,preview,created_at,updated_at',
+                filters: { user_id: userId },
+                order: 'updated_at.desc',
+                limit: 50
+            });
+            if (convos && convos.length > 0) {
+                const username = this.getCurrentUser();
+                const local = this.getConversations(username);
+                // Supabase kayıtları local'e yansıt (ID yoksa ekle)
+                const localIds = new Set(local.map(c => c.id));
+                convos.forEach(c => {
+                    if (!localIds.has(c.id)) {
+                        local.push({ id: c.id, preview: c.preview || '', messages: [], createdAt: c.created_at, updatedAt: c.updated_at });
+                    }
+                });
+                this.saveConversations(username, local);
+            }
+
+            // Günlük içerik
+            const today = new Date().toISOString().split('T')[0];
+            const daily = await Supabase.db.select('daily_content', {
+                filters: { user_id: userId, date: today }
+            });
+            if (daily && daily[0]) {
+                const username = this.getCurrentUser();
+                this._set('daily_content_' + username, {
+                    date: today,
+                    content: daily[0].content,
+                    verses: daily[0].verses || [],
+                    generated: daily[0].generated
+                });
+            }
+
+            document.dispatchEvent(new CustomEvent('jesse:synced'));
+        } catch {
+            // Sync hatası sessizce geçilir; uygulama localStorage ile çalışmaya devam eder
+        }
+    },
+
+    async syncConversation(conversation, userId) {
+        if (!userId || !conversation) return;
+        try {
+            const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-/.test(conversation.id);
+            const convData = {
+                user_id: userId,
+                title: conversation.preview ? conversation.preview.substring(0, 60) : 'Sohbet',
+                preview: conversation.preview || '',
+                updated_at: new Date().toISOString()
+            };
+
+            if (isUuid) {
+                await Supabase.db.update('conversations', convData, { id: conversation.id });
+            } else {
+                const created = await Supabase.db.insert('conversations', {
+                    ...convData,
+                    created_at: conversation.createdAt || new Date().toISOString()
+                });
+                if (created && created.id) {
+                    // UUID ile yeniden anahtarla
+                    const username = this.getCurrentUser();
+                    const convos = this.getConversations(username);
+                    const idx = convos.findIndex(c => c.id === conversation.id);
+                    if (idx >= 0) convos[idx].id = created.id;
+                    this.saveConversations(username, convos);
+                    conversation.id = created.id;
+                }
+            }
+
+            // Yeni mesajları ekle
+            if (Array.isArray(conversation.messages) && conversation.messages.length > 0) {
+                const msgs = conversation.messages.slice(-20).map(m => ({
+                    conversation_id: conversation.id,
+                    role: m.role,
+                    content: m.content,
+                    created_at: m.timestamp || new Date().toISOString()
+                }));
+                await Supabase.db.insert('messages', msgs).catch(() => {});
+            }
+        } catch {
+            // Senkronizasyon hatası UI'yi etkilemesin
+        }
     },
 
     // --- Konuşmalar ---
@@ -155,6 +262,10 @@ const Storage = {
             convos.unshift(conv);
         }
         this.saveConversations(username, convos);
+
+        // Supabase'e fire-and-forget sync
+        const userId = typeof Auth !== 'undefined' ? Auth.getUserId() : null;
+        if (userId) this.syncConversation(conv, userId);
     },
 
     deleteConversation(username, convoId) {
@@ -174,6 +285,17 @@ const Storage = {
 
     setDailyContent(username, content) {
         this._set('daily_content_' + username, content);
+        // Supabase upsert (fire-and-forget)
+        const userId = typeof Auth !== 'undefined' ? Auth.getUserId() : null;
+        if (userId && content) {
+            Supabase.db.upsert('daily_content', {
+                user_id: userId,
+                date: content.date,
+                content: content.content,
+                verses: content.verses || [],
+                generated: content.generated || false
+            }, 'user_id,date').catch(() => {});
+        }
     },
 
     // --- Yardımcılar ---
