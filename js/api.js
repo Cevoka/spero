@@ -246,26 +246,39 @@ ${verseText ? 'Asagida bu konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustad
         return 'Bearer ' + session.access_token;
     },
 
+    _buildRequestBody(systemPrompt, recentMessages) {
+        return JSON.stringify({
+            model: this.MODEL,
+            max_tokens: 1024,
+            system: systemPrompt,
+            messages: recentMessages.map(m => ({ role: m.role, content: m.content }))
+        });
+    },
+
     // Claude API'ye mesaj gönder (Edge Function üzerinden)
     async sendMessage(messages, scriptureContext) {
         const systemPrompt = this.buildSystemPrompt(scriptureContext);
         const recentMessages = messages.slice(-20);
-        const authHeader = await this._getAuthHeader();
+        const body = this._buildRequestBody(systemPrompt, recentMessages);
+        const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGt4Z291eWpjZXlweG10dmlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MjY0MTAsImV4cCI6MjA5MjEwMjQxMH0.MV72tv-63uoV-cBEa0aCF5rgfR4BKufQO1F7zKwjvd8';
 
-        const response = await fetch(this.API_URL, {
+        const doFetch = async (auth) => fetch(this.API_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': authHeader,
-                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGt4Z291eWpjZXlweG10dmlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MjY0MTAsImV4cCI6MjA5MjEwMjQxMH0.MV72tv-63uoV-cBEa0aCF5rgfR4BKufQO1F7zKwjvd8'
-            },
-            body: JSON.stringify({
-                model: this.MODEL,
-                max_tokens: 1024,
-                system: systemPrompt,
-                messages: recentMessages.map(m => ({ role: m.role, content: m.content }))
-            })
+            headers: { 'Content-Type': 'application/json', 'Authorization': auth, 'apikey': ANON },
+            body
         });
+
+        let auth = await this._getAuthHeader();
+        let response = await doFetch(auth);
+
+        // 401: token yenile ve bir kez daha dene
+        if (response.status === 401) {
+            const newSession = await Supabase._refreshSession();
+            if (newSession) {
+                auth = 'Bearer ' + newSession.access_token;
+                response = await doFetch(auth);
+            }
+        }
 
         if (!response.ok) {
             const err = await response.json().catch(() => ({}));

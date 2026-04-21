@@ -57,24 +57,33 @@ const Supabase = {
         localStorage.removeItem(SESSION_KEY);
     },
 
+    _refreshPromise: null,
+
     async _refreshSession() {
-        const raw = localStorage.getItem(SESSION_KEY);
-        if (!raw) return null;
-        try {
-            const stored = JSON.parse(raw);
-            if (!stored.refresh_token) return null;
-            const res = await fetch(`${AUTH_URL}/token?grant_type=refresh_token`, {
-                method: 'POST',
-                headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
-                body: JSON.stringify({ refresh_token: stored.refresh_token })
-            });
-            if (!res.ok) { this._clearSession(); return null; }
-            const data = await res.json();
-            return this._saveSession(data);
-        } catch {
-            this._clearSession();
-            return null;
-        }
+        // Eş zamanlı refresh isteklerini tek promise'e indir (token rotation race condition önlemi)
+        if (this._refreshPromise) return this._refreshPromise;
+        this._refreshPromise = (async () => {
+            try {
+                const raw = localStorage.getItem(SESSION_KEY);
+                if (!raw) return null;
+                const stored = JSON.parse(raw);
+                if (!stored.refresh_token) return null;
+                const res = await fetch(`${AUTH_URL}/token?grant_type=refresh_token`, {
+                    method: 'POST',
+                    headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ refresh_token: stored.refresh_token })
+                });
+                if (!res.ok) { this._clearSession(); return null; }
+                const data = await res.json();
+                return this._saveSession(data);
+            } catch {
+                this._clearSession();
+                return null;
+            } finally {
+                this._refreshPromise = null;
+            }
+        })();
+        return this._refreshPromise;
     },
 
     async ensureSession() {
