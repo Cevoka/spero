@@ -143,12 +143,7 @@
                 <p>Bugun ruhun icin ne yapabilirim?</p>
             </div>
 
-            <div id="api-warning-home" class="api-warning" style="display:none;">
-                &#9888; Yapay zeka destegi icin
-                <a href="settings.html">Ayarlar</a> sayfasindan API anahtarinizi girin.
-            </div>
-
-            <div class="daily-card">
+<div class="daily-card">
                 <h3>Gunun Manevi Mesaji</h3>
                 <div class="daily-message" id="daily-message"></div>
                 <div class="daily-verse" id="daily-verse"></div>
@@ -290,11 +285,7 @@
                 const user = Auth.getCurrentUser();
                 document.getElementById('welcome-text').textContent = 'Hos geldin, ' + user;
 
-                if (!Storage.getApiKey()) {
-                    document.getElementById('api-warning-home').style.display = '';
-                }
-
-                const daily = App.getDailyContent(user);
+const daily = App.getDailyContent(user);
                 document.getElementById('daily-message').textContent = daily.content;
 
                 if (daily.verses && daily.verses.length > 0) {

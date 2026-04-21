@@ -12,25 +12,13 @@
     <div class="container">
         <h2 style="margin-bottom: 1.5rem; color: var(--primary);">Ayarlar</h2>
 
-        <!-- API Key -->
+        <!-- Hesap Bilgisi -->
         <div class="card settings-section">
-            <h3>Claude API Anahtari</h3>
-            <div class="form-group">
-                <label for="api-key">API Anahtari</label>
-                <div class="api-key-wrapper">
-                    <input type="password" id="api-key" class="form-input" placeholder="sk-ant-...">
-                    <button type="button" class="api-key-toggle" onclick="toggleApiKey()">Goster</button>
-                </div>
+            <h3>Hesap</h3>
+            <p style="font-size:0.95rem; color:var(--text-light);">Giriş yapan: <strong id="user-email" style="color:var(--primary);"></strong></p>
+            <div class="info-box" style="margin-top:0.75rem;">
+                Yapay zeka desteği sunucu üzerinden sağlanmaktadır. Herhangi bir API anahtarı girmenize gerek yoktur.
             </div>
-            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                <button class="btn btn-primary" onclick="saveApiKey()">Kaydet</button>
-                <button class="btn btn-outline" onclick="testApiKey()">Test Et</button>
-            </div>
-            <div class="info-box">
-                API anahtarinizi <strong>console.anthropic.com</strong> adresinden alabilirsiniz.
-                Anahtariniz yalnizca tarayicinizda saklanir, hicbir sunucuya gonderilmez.
-            </div>
-            <div id="api-test-result" style="margin-top: 0.8rem; display: none;"></div>
         </div>
 
         <!-- Depolama -->
@@ -47,7 +35,7 @@
         <!-- Tehlike Bölgesi -->
         <div class="danger-zone">
             <h4>Tehlikeli Bolge</h4>
-            <p>Bu islem tum verilerinizi (konusmalar, ayarlar, API anahtari) kalici olarak siler.</p>
+            <p>Bu islem tum yerel verilerinizi (konusmalar, onbellek) kalici olarak siler.</p>
             <button class="btn btn-danger" onclick="clearAllData()">Tum Verileri Sil</button>
         </div>
     </div>
@@ -62,72 +50,16 @@
         document.addEventListener('DOMContentLoaded', () => {
             if (!Auth.requireAuth()) return;
             App.renderNav();
-            loadSettings();
-        });
 
-        function loadSettings() {
-            const key = Storage.getApiKey();
-            if (key) {
-                document.getElementById('api-key').value = key;
-            }
-            updateStorageInfo();
-        }
-
-        function toggleApiKey() {
-            const input = document.getElementById('api-key');
-            const btn = input.nextElementSibling;
-            if (input.type === 'password') {
-                input.type = 'text';
-                btn.textContent = 'Gizle';
+            const session = Supabase.getSession();
+            if (session && session.user) {
+                document.getElementById('user-email').textContent = session.user.email || Auth.getCurrentUser();
             } else {
-                input.type = 'password';
-                btn.textContent = 'Goster';
-            }
-        }
-
-        function saveApiKey() {
-            const key = document.getElementById('api-key').value.trim();
-            Storage.setApiKey(key);
-            showToast('API anahtari kaydedildi', 'success');
-        }
-
-        async function testApiKey() {
-            const key = document.getElementById('api-key').value.trim();
-            if (!key) {
-                showToast('Lutfen once bir API anahtari girin', 'error');
-                return;
+                document.getElementById('user-email').textContent = Auth.getCurrentUser();
             }
 
-            const resultDiv = document.getElementById('api-test-result');
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = '<p style="color: var(--text-muted);">Test ediliyor...</p>';
-
-            try {
-                const response = await fetch('https://api.anthropic.com/v1/messages', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'x-api-key': key,
-                        'anthropic-version': '2023-06-01',
-                        'anthropic-dangerous-direct-browser-access': 'true'
-                    },
-                    body: JSON.stringify({
-                        model: 'claude-sonnet-4-20250514',
-                        max_tokens: 20,
-                        messages: [{ role: 'user', content: 'Merhaba' }]
-                    })
-                });
-
-                if (response.ok) {
-                    resultDiv.innerHTML = '<p style="color: var(--primary); font-weight: 600;">&#10003; API anahtari gecerli!</p>';
-                } else {
-                    const err = await response.json();
-                    resultDiv.innerHTML = '<p style="color: var(--danger);">&#10007; Hata: ' + App.escapeHtml(err.error?.message || 'Gecersiz anahtar') + '</p>';
-                }
-            } catch (e) {
-                resultDiv.innerHTML = '<p style="color: var(--danger);">&#10007; Baglanti hatasi: ' + App.escapeHtml(e.message) + '</p>';
-            }
-        }
+            updateStorageInfo();
+        });
 
         function updateStorageInfo() {
             const usage = Storage.getStorageUsage();
@@ -141,7 +73,7 @@
         }
 
         function clearAllData() {
-            if (confirm('Tum verileriniz silinecek. Bu islem geri alinamaz. Emin misiniz?')) {
+            if (confirm('Tum yerel verileriniz silinecek. Emin misiniz?')) {
                 Storage.clearAllData();
                 showToast('Tum veriler silindi', 'success');
                 setTimeout(() => { window.location.href = 'index.html'; }, 1000);

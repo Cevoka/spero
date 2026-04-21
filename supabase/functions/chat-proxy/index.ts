@@ -1,6 +1,5 @@
 // JESSE chat-proxy Edge Function
-// Auth-gated Anthropic API proxy for paid-tier users.
-// Free-tier users call Anthropic directly from the client with their own key.
+// Tüm kayıtlı kullanıcılar için Anthropic API proxy
 
 import { createClient } from 'jsr:@supabase/supabase-js@2'
 
@@ -22,32 +21,26 @@ Deno.serve(async (req) => {
 
   const authHeader = req.headers.get('Authorization')
   if (!authHeader?.startsWith('Bearer ')) {
-    return json({ error: 'Missing bearer token' }, 401)
+    return json({ error: 'Giriş yapmanız gerekiyor.' }, 401)
   }
 
   const supabaseUrl = Deno.env.get('SUPABASE_URL')
   const supabaseAnon = Deno.env.get('SUPABASE_ANON_KEY')
   const anthropicKey = Deno.env.get('ANTHROPIC_API_KEY')
+
   if (!supabaseUrl || !supabaseAnon || !anthropicKey) {
-    return json({ error: 'Server misconfigured' }, 500)
+    return json({ error: 'Sunucu yapılandırma hatası.' }, 500)
   }
 
+  // Kullanıcıyı doğrula
   const supabase = createClient(supabaseUrl, supabaseAnon, {
     global: { headers: { Authorization: authHeader } },
   })
 
   const { data: userData, error: userErr } = await supabase.auth.getUser()
-  if (userErr || !userData.user) return json({ error: 'Unauthorized' }, 401)
-  const userId = userData.user.id
-
-  const { data: profile, error: profileErr } = await supabase
-    .from('profiles')
-    .select('tier')
-    .eq('id', userId)
-    .single()
-
-  if (profileErr) return json({ error: 'Profile not found' }, 403)
-  if (profile.tier !== 'paid') return json({ error: 'Paid tier required' }, 403)
+  if (userErr || !userData.user) {
+    return json({ error: 'Oturum geçersiz. Lütfen tekrar giriş yapın.' }, 401)
+  }
 
   let body: {
     messages?: Array<{ role: string; content: string }>
@@ -58,12 +51,12 @@ Deno.serve(async (req) => {
   try {
     body = await req.json()
   } catch {
-    return json({ error: 'Invalid JSON body' }, 400)
+    return json({ error: 'Geçersiz istek.' }, 400)
   }
 
   const { messages, system, model = 'claude-sonnet-4-6', max_tokens = 1024 } = body
   if (!Array.isArray(messages) || messages.length === 0) {
-    return json({ error: 'messages array required' }, 400)
+    return json({ error: 'Mesaj listesi boş.' }, 400)
   }
 
   const anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {

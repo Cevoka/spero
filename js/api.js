@@ -1,8 +1,8 @@
 // api.js - Claude API entegrasyonu ve ayet seçimi
 
 const API = {
-    MODEL: 'claude-sonnet-4-20250514',
-    API_URL: 'https://api.anthropic.com/v1/messages',
+    MODEL: 'claude-sonnet-4-6',
+    API_URL: 'https://kehkxgouyjceypxmtvip.supabase.co/functions/v1/chat-proxy',
 
     // Kullanıcı mesajından anahtar kelime eşleştirme
     KEYWORD_MAP: {
@@ -201,74 +201,61 @@ Yaklasim ilkelerin:
 ${verseText ? 'Asagida konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustalarinin hikmetli sozleri verilmistir. Uygun gordugunde yanitlarinda kullanabilirsin:\n\n' + verseText : ''}`;
     },
 
-    // Claude API'ye mesaj gönder
+    // Supabase oturum token'ını al
+    _getAuthHeader() {
+        const session = Supabase.getSession();
+        if (!session) throw new Error('Oturum bulunamadi. Lutfen tekrar giris yapin.');
+        return 'Bearer ' + session.access_token;
+    },
+
+    // Claude API'ye mesaj gönder (Edge Function üzerinden)
     async sendMessage(apiKey, messages, scriptureContext) {
-        if (!apiKey) {
-            throw new Error('API anahtari bulunamadi. Lutfen Ayarlar sayfasindan API anahtarinizi girin.');
-        }
-
         const systemPrompt = this.buildSystemPrompt(scriptureContext);
-
-        // Son 20 mesajı al (token sınırı için)
         const recentMessages = messages.slice(-20);
 
         const response = await fetch(this.API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': apiKey,
-                'anthropic-version': '2023-06-01',
-                'anthropic-dangerous-direct-browser-access': 'true'
+                'Authorization': this._getAuthHeader(),
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGt4Z291eWpjZXlweG10dmlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MjY0MTAsImV4cCI6MjA5MjEwMjQxMH0.MV72tv-63uoV-cBEa0aCF5rgfR4BKufQO1F7zKwjvd8'
             },
             body: JSON.stringify({
                 model: this.MODEL,
                 max_tokens: 1024,
                 system: systemPrompt,
-                messages: recentMessages.map(m => ({
-                    role: m.role,
-                    content: m.content
-                }))
+                messages: recentMessages.map(m => ({ role: m.role, content: m.content }))
             })
         });
 
         if (!response.ok) {
             const err = await response.json().catch(() => ({}));
-            if (response.status === 401) {
-                throw new Error('Gecersiz API anahtari. Lutfen Ayarlar sayfasindan kontrol edin.');
-            } else if (response.status === 429) {
-                throw new Error('Cok fazla istek gonderildi. Lutfen biraz bekleyin.');
-            } else {
-                // Hata mesajında API key asla gösterilmez
-                const safeMsg = Storage.sanitizeForLog(err.error?.message || '');
-                throw new Error(safeMsg || 'API hatasi: ' + response.status);
-            }
+            if (response.status === 401) throw new Error('Oturum suresi doldu. Lutfen tekrar giris yapin.');
+            if (response.status === 429) throw new Error('Cok fazla istek gonderildi. Lutfen biraz bekleyin.');
+            throw new Error(err.error?.message || 'Baglanti hatasi: ' + response.status);
         }
 
         const data = await response.json();
         return data.content[0].text;
     },
 
-    // API key test et
+    // Bağlantı testi (Edge Function)
     async testApiKey(apiKey) {
-        const response = await fetch(this.API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': apiKey,
-                'anthropic-version': '2023-06-01',
-                'anthropic-dangerous-direct-browser-access': 'true'
-            },
-            body: JSON.stringify({
-                model: this.MODEL,
-                max_tokens: 10,
-                messages: [{ role: 'user', content: 'test' }]
-            })
-        });
-
-        return response.ok;
+        try {
+            const response = await fetch(this.API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': this._getAuthHeader(),
+                    'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGt4Z291eWpjZXlweG10dmlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MjY0MTAsImV4cCI6MjA5MjEwMjQxMH0.MV72tv-63uoV-cBEa0aCF5rgfR4BKufQO1F7zKwjvd8'
+                },
+                body: JSON.stringify({ model: this.MODEL, max_tokens: 10, messages: [{ role: 'user', content: 'test' }] })
+            });
+            return response.ok;
+        } catch { return false; }
     },
 
-    // Günlük içerik üret
+    // Günlük içerik üret (Edge Function üzerinden)
     async generateDailyContent(apiKey) {
         const systemPrompt = `Sen manevi bir rehbersin. Kullaniciya gunluk motivasyon ve manevi destek mesaji uretiyorsun.
 Turkce yaz. Kisa ve etkili bir mesaj ver (2-3 cumle). Ardindan Kuran, Incil veya Tevrat'tan uygun bir ayet paylasm.
@@ -277,13 +264,15 @@ JSON formatinda yanit ver:
 
         const today = new Date().toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' });
 
+        let authHeader;
+        try { authHeader = this._getAuthHeader(); } catch { return null; }
+
         const response = await fetch(this.API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': apiKey,
-                'anthropic-version': '2023-06-01',
-                'anthropic-dangerous-direct-browser-access': 'true'
+                'Authorization': authHeader,
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGt4Z291eWpjZXlweG10dmlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MjY0MTAsImV4cCI6MjA5MjEwMjQxMH0.MV72tv-63uoV-cBEa0aCF5rgfR4BKufQO1F7zKwjvd8'
             },
             body: JSON.stringify({
                 model: this.MODEL,
