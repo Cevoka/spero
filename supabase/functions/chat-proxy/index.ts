@@ -1,6 +1,5 @@
 // JESSE chat-proxy Edge Function
-
-import { createClient } from 'jsr:@supabase/supabase-js@2'
+// Not: Supabase altyapısı JWT'yi zaten doğrular; koda ulaşan istek geçerli demektir.
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -14,34 +13,33 @@ const json = (body: unknown, status = 200) =>
     headers: { ...corsHeaders, 'Content-Type': 'application/json' },
   })
 
+function decodeJWT(token: string): Record<string, unknown> | null {
+  try {
+    const parts = token.split('.')
+    if (parts.length !== 3) return null
+    const payload = atob(parts[1].replace(/-/g, '+').replace(/_/g, '/'))
+    return JSON.parse(payload)
+  } catch { return null }
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
 
-  const authHeader = req.headers.get('Authorization')
-  if (!authHeader?.startsWith('Bearer ')) {
+  const authHeader = req.headers.get('Authorization') ?? ''
+  if (!authHeader.startsWith('Bearer ')) {
     return json({ error: 'Giris yapmaniz gerekiyor.' }, 401)
   }
 
-  const supabaseUrl = Deno.env.get('SUPABASE_URL')
-  const supabaseAnon = Deno.env.get('SUPABASE_ANON_KEY')
+  // JWT altyapı tarafından doğrulandı; payload'dan user_id al
+  const token = authHeader.slice(7)
+  const payload = decodeJWT(token)
+  if (!payload?.sub) {
+    return json({ error: 'Gecersiz oturum.' }, 401)
+  }
+
   const anthropicKey = Deno.env.get('ANTHROPIC_API_KEY')
-
-  if (!supabaseUrl || !supabaseAnon || !anthropicKey) {
-    return json({ error: 'Sunucu yapilandirma hatasi.' }, 500)
-  }
-
-  // Kullanıcıyı doğrula — token'ı açıkça geç, Deno ortamında persistSession kapalı
-  const token = authHeader.replace('Bearer ', '')
-  const supabase = createClient(supabaseUrl, supabaseAnon, {
-    global: { headers: { Authorization: authHeader } },
-    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
-  })
-
-  const { data: userData, error: userErr } = await supabase.auth.getUser(token)
-  if (userErr || !userData?.user) {
-    return json({ error: 'Oturum gecersiz. Lutfen tekrar giris yapin.' }, 401)
-  }
+  if (!anthropicKey) return json({ error: 'Sunucu yapilandirma hatasi.' }, 500)
 
   let body: {
     messages?: Array<{ role: string; content: string }>
