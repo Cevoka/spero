@@ -127,7 +127,7 @@
     </div>
 
     <!-- Onay Başarılı Mesajı (hash redirect'ten gelinince kısa gösterilir) -->
-    <div id="confirm-success" style="display:none; position:fixed; inset:0; background:var(--bg-deep,#1a0f38); display:flex; align-items:center; justify-content:center; z-index:999;">
+    <div id="confirm-success" style="display:none; position:fixed; inset:0; background:var(--bg-deep,#1a0f38); align-items:center; justify-content:center; z-index:999;">
         <div style="text-align:center; color:#c9a961; padding:2rem;">
             <div style="font-size:3rem; margin-bottom:1rem;">&#10003;</div>
             <h2>E-posta onaylandı!</h2>
@@ -214,7 +214,7 @@
 
             // 1. Önce URL hash'ini kontrol et (onay linkinden mi gelindiği)
             if (window.location.hash && window.location.hash.includes('access_token')) {
-                confirmSuccess.style.display = 'flex';
+                confirmSuccess.style.cssText = 'display:flex; position:fixed; inset:0; background:var(--bg-deep,#1a0f38); align-items:center; justify-content:center; z-index:999;';
                 try {
                     const result = await Auth.handleEmailConfirmation();
                     if (result) {

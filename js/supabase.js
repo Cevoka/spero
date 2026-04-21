@@ -108,29 +108,26 @@ const Supabase = {
 
     auth: {
         async signUp(email, password) {
-            const res = await fetch(`${AUTH_URL}/signup`, {
+            // redirect_to query param olarak verilmeli (body içinde değil)
+            const url = `${AUTH_URL}/signup?redirect_to=${encodeURIComponent(SITE_URL)}`;
+            const res = await fetch(url, {
                 method: 'POST',
                 headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email,
-                    password,
-                    // Onay linkinden sonra yönlendirilecek URL
-                    options: { emailRedirectTo: SITE_URL }
-                })
+                body: JSON.stringify({ email, password })
             });
             const data = await res.json();
             if (!res.ok) {
-                const msg = data.msg || data.message || data.error_description || 'Kayıt başarısız.';
-                if (msg.toLowerCase().includes('already registered') || msg.toLowerCase().includes('already exists')) {
+                const msg = data.msg || data.message || 'Kayıt başarısız.';
+                if (data.error_code === 'user_already_exists' || msg.toLowerCase().includes('already')) {
                     throw new SupabaseError(res.status, 'user_exists', 'Bu e-posta zaten kayıtlı. Giriş yapın.');
                 }
                 throw new SupabaseError(res.status, data.error_code, msg);
             }
-            // identities boşsa kullanıcı zaten var ama onay bekleniyor
+            // identities boşsa e-posta zaten kayıtlı ama onaysız
             if (data.identities && data.identities.length === 0) {
                 throw new SupabaseError(400, 'user_exists', 'Bu e-posta zaten kayıtlı. Giriş yapın.');
             }
-            return data; // { id, email, confirmation_sent_at, ... }
+            return data;
         },
 
         async signInWithPassword(email, password) {
@@ -141,14 +138,16 @@ const Supabase = {
             });
             const data = await res.json();
             if (!res.ok) {
-                const msg = data.error_description || data.message || data.msg || '';
-                if (res.status === 400 && msg.toLowerCase().includes('invalid')) {
+                // Supabase hata alanı: data.error_code ve data.msg
+                const code = data.error_code || data.error || '';
+                const msg = data.msg || data.message || '';
+                if (code === 'invalid_credentials' || code === 'bad_json' || msg.toLowerCase().includes('invalid')) {
                     throw new SupabaseError(400, 'invalid_credentials', 'E-posta veya şifre hatalı.');
                 }
-                if (msg.toLowerCase().includes('email not confirmed') || msg.toLowerCase().includes('not confirmed')) {
+                if (code === 'email_not_confirmed') {
                     throw new SupabaseError(400, 'email_not_confirmed', 'E-posta adresiniz henüz onaylanmamış. Gelen kutunuzu kontrol edin.');
                 }
-                throw new SupabaseError(res.status, data.error, msg || 'Giriş başarısız.');
+                throw new SupabaseError(res.status, code, msg || 'Giriş başarısız.');
             }
             return Supabase._saveSession(data);
         },
