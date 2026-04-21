@@ -63,13 +63,9 @@ const Chat = {
     },
 
     checkApiKey() {
-        const apiKey = Storage.getApiKey();
+        // API anahtarı artık Supabase Edge Function üzerinden sunucu tarafında yönetiliyor.
         const warning = document.getElementById('api-warning');
-        if (!apiKey && warning) {
-            warning.style.display = '';
-        } else if (warning) {
-            warning.style.display = 'none';
-        }
+        if (warning) warning.style.display = 'none';
     },
 
     renderMessages() {
@@ -148,12 +144,6 @@ const Chat = {
         const text = input.value.trim();
         if (!text) return;
 
-        const apiKey = Storage.getApiKey();
-        if (!apiKey) {
-            this.showToast('Lutfen once Ayarlar sayfasindan API anahtarinizi girin.', 'error');
-            return;
-        }
-
         // Kullanıcı mesajını ekle
         const timestamp = new Date().toISOString();
         const userMsg = { role: 'user', content: text, timestamp };
@@ -190,7 +180,6 @@ const Chat = {
 
             // API'ye gönder
             const response = await API.sendMessage(
-                apiKey,
                 this.currentConvo.messages,
                 scriptureContext
             );

@@ -247,7 +247,7 @@ ${verseText ? 'Asagida bu konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustad
     },
 
     // Claude API'ye mesaj gönder (Edge Function üzerinden)
-    async sendMessage(apiKey, messages, scriptureContext) {
+    async sendMessage(messages, scriptureContext) {
         const systemPrompt = this.buildSystemPrompt(scriptureContext);
         const recentMessages = messages.slice(-20);
 
