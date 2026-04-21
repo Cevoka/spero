@@ -1,6 +1,7 @@
 {
   "source": "Tasavvuf Ustadlari",
   "verses": [
+
     {
       "id": "yunus_001",
       "source": "Yunus Emre",
@@ -13,7 +14,7 @@
       "id": "yunus_002",
       "source": "Yunus Emre",
       "reference": "Divan",
-      "text": "Ilim ilim bilmektir, ilim kendin bilmektir. Sen kendini bilmezsin, ya nice okumaktir.",
+      "text": "Ilim ilim bilmektir, ilim kendin bilmektir. Sen kendini bilmezsen, ya nice okumaktir.",
       "tags": ["hikmet", "marifet", "genel", "tevazu"],
       "theme": "Kendini Bilmek"
     },
@@ -86,7 +87,7 @@
       "id": "mevlana_005",
       "source": "Mevlana Celaleddin Rumi",
       "reference": "Mesnevi",
-      "text": "Sabir, selamete ermenin anahtaridir; aceleci olan, cogu zaman pismanlik eker.",
+      "text": "Sabir, selamete ermenin anahtaridir; aceleci olan cogu zaman pismanlik eker.",
       "tags": ["sabir", "hikmet", "zorluk"],
       "theme": "Sabir"
     },
@@ -98,71 +99,118 @@
       "tags": ["zorluk", "sabir", "umut", "teselli"],
       "theme": "Fedakarlik"
     },
+    {
+      "id": "mevlana_007",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi, Defter I",
+      "text": "Dinle bu ney nasil sikayet eder; ayrilik atesinden hikayeler anlatir. Her kim aslından uzak dustu, yeniden kavusma vaktini arar.",
+      "tags": ["ask", "teselli", "ozlem", "sevgi"],
+      "theme": "Ayrilik Aci si"
+    },
+    {
+      "id": "mevlana_008",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi",
+      "text": "Ask atesi duser, ne varsa yakar; ask atesi olmayan diri olsa da olmu sayilir.",
+      "tags": ["ask", "sevgi", "hikmet", "iman"],
+      "theme": "Askin Ates i"
+    },
+    {
+      "id": "mevlana_009",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi",
+      "text": "Dert, saadet anahtaridir; cicek gibi ac ile niyaz ile, o siginilacak kapiya git.",
+      "tags": ["zorluk", "dua", "umut", "sabir"],
+      "theme": "Derdin Hikmeti"
+    },
+    {
+      "id": "mevlana_010",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi",
+      "text": "Senin icinde bir gece var; ama gunduzun sonu degil, yildizlarin baslangicindir o.",
+      "tags": ["umut", "teselli", "hikmet", "marifet"],
+      "theme": "Ic Aydınlanma"
+    },
+    {
+      "id": "mevlana_011",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi",
+      "text": "Gonul hoş ol, kavusma vakti geldi; ayrilik gecesi gecti, kavusma sabahi dogdu.",
+      "tags": ["umut", "sevgi", "ask", "teselli"],
+      "theme": "Kavusma Umidi"
+    },
+    {
+      "id": "mevlana_012",
+      "source": "Mevlana Celaleddin Rumi",
+      "reference": "Mesnevi",
+      "text": "Ne arar insan bu evrende? Kendi kendini arar. Kendini bulana ne lazim gelir ki bir sey arasin.",
+      "tags": ["marifet", "hikmet", "nefis", "vahdet"],
+      "theme": "Kendini Aramak"
+    },
 
     {
-      "id": "gazali_001",
-      "source": "Imam Gazali",
-      "reference": "Ihya-u Ulumi'd-din",
-      "text": "Insanin en buyuk dusmani kendi nefsidir; onu tanimayan hayatini tanimamis olur.",
-      "tags": ["nefis", "marifet", "hikmet"],
-      "theme": "Nefisle Mucadele"
+      "id": "geylani_001",
+      "source": "Abdulkadir Geylani",
+      "reference": "Hakki Arayanlarin Kitabi",
+      "text": "Dunya sevgisini kalbinden cikar; zira Allah sevgisi ile dunya sevgisi bir kalpte bir arada durmaz.",
+      "tags": ["dunya", "iman", "hikmet", "nefis"],
+      "theme": "Kalbi Temizlemek"
     },
     {
-      "id": "gazali_002",
-      "source": "Imam Gazali",
-      "reference": "Ihya-u Ulumi'd-din",
-      "text": "Sukur, nimetin degerini bilmek ve onu veren Hakka yoneltmektir.",
-      "tags": ["sukur", "iman", "marifet"],
-      "theme": "Sukur Sirri"
+      "id": "geylani_002",
+      "source": "Abdulkadir Geylani",
+      "reference": "Hakki Arayanlarin Kitabi",
+      "text": "Hakk'a yakin olmak istiyorsan, halktan uzak dur; halktan uzak durmak istiyorsan, kendi nefsinden uzak dur.",
+      "tags": ["marifet", "nefis", "hikmet", "tasavvuf"],
+      "theme": "Yakinlik Yolu"
     },
     {
-      "id": "gazali_003",
-      "source": "Imam Gazali",
-      "reference": "Kimya-i Saadet",
-      "text": "Ilim, amele donusmezse bir yuktur; amel, ihlasla taninmazsa bir gosteristir.",
-      "tags": ["hikmet", "iman", "marifet"],
-      "theme": "Ilim ve Amel"
+      "id": "geylani_003",
+      "source": "Abdulkadir Geylani",
+      "reference": "Hakki Arayanlarin Kitabi",
+      "text": "Sabir uc cesittir: Allah'in emirlerine uymakta sabir, yasaklarindan uzak durmakta sabir ve O'nun kazasina katlanmakta sabir.",
+      "tags": ["sabir", "iman", "zorluk", "hikmet"],
+      "theme": "Sabrin Cesitleri"
     },
     {
-      "id": "gazali_004",
-      "source": "Imam Gazali",
-      "reference": "Ihya-u Ulumi'd-din",
-      "text": "Kalp bir padisah, nefis vezir, akil muftu gibidir; sehvet ve gazap ise iki bekcidir.",
-      "tags": ["nefis", "hikmet", "marifet"],
-      "theme": "Ic Dunya Duzeni"
+      "id": "geylani_004",
+      "source": "Abdulkadir Geylani",
+      "reference": "Hakki Arayanlarin Kitabi",
+      "text": "Kul, nefsinin esiri oldugu surece gercek hurriyete kavusamaz.",
+      "tags": ["nefis", "hikmet", "marifet", "ozgurluk"],
+      "theme": "Gercek Hurriyet"
     },
     {
-      "id": "gazali_005",
-      "source": "Imam Gazali",
-      "reference": "Ihya-u Ulumi'd-din",
-      "text": "Tevazu, kulun yucelmesinin kapisidir; kibir ise dusmesinin.",
-      "tags": ["tevazu", "hikmet", "nefis"],
-      "theme": "Tevazu"
-    },
-
-    {
-      "id": "fuzuli_001",
-      "source": "Fuzuli",
-      "reference": "Divan Onsozu",
-      "text": "Ask imis her ne var alemde; ilim bir kil u kal imis ancak.",
-      "tags": ["ask", "sevgi", "hikmet", "marifet"],
-      "theme": "Ilahi Ask"
+      "id": "geylani_005",
+      "source": "Abdulkadir Geylani",
+      "reference": "Hakki Arayanlarin Kitabi",
+      "text": "Allah'in seni gordugunun bilincinde ol; bu bilinc, kalbi gunah islemekten korur.",
+      "tags": ["iman", "dua", "marifet", "guven"],
+      "theme": "Muraqabe"
     },
     {
-      "id": "fuzuli_002",
-      "source": "Fuzuli",
-      "reference": "Leyla ile Mecnun",
-      "text": "Mende Mecnun'dan fuzun asiklik isti'dadi var; Asik-i sadik menem, Mecnun'un ancak adi var.",
-      "tags": ["ask", "sevgi"],
-      "theme": "Sadakat-i Ask"
+      "id": "geylani_006",
+      "source": "Abdulkadir Geylani",
+      "reference": "Hakki Arayanlarin Kitabi",
+      "text": "Tovbe yalniz dille yapilan bir sey degildir; asil tovbe, kalbin butunuyle Allah'a donmesidir.",
+      "tags": ["tovbe", "iman", "marifet", "merhamet"],
+      "theme": "Gercek Tovbe"
     },
     {
-      "id": "fuzuli_003",
-      "source": "Fuzuli",
-      "reference": "Divan",
-      "text": "Cani kim cananini icun sevse cananin sever; cani icun kim ki cananin sever canin sever.",
-      "tags": ["ask", "sevgi", "hikmet"],
-      "theme": "Hakiki Muhabbet"
+      "id": "geylani_007",
+      "source": "Abdulkadir Geylani",
+      "reference": "Hakki Arayanlarin Kitabi",
+      "text": "Zenginlik mal cokluguyla degil, gonul tokluguyla olur.",
+      "tags": ["hikmet", "dunya", "tevazu", "sukur"],
+      "theme": "Gercek Zenginlik"
+    },
+    {
+      "id": "geylani_008",
+      "source": "Abdulkadir Geylani",
+      "reference": "Hakki Arayanlarin Kitabi",
+      "text": "Sikintiyi Allah'tan bil ve O'ndan iste kurtulusu; sikintinin sebebini baskasinda arama.",
+      "tags": ["zorluk", "sabir", "guven", "dua", "iman"],
+      "theme": "Belaya Teslim"
     },
 
     {
@@ -205,6 +253,168 @@
       "tags": ["ask", "sevgi", "gonul", "tasavvuf"],
       "theme": "Ilahi Aska Yonelmek"
     },
+    {
+      "id": "esrefoglu_006",
+      "source": "Esrefoglu Rumi",
+      "reference": "Muzekkin Nefis",
+      "text": "Nefsin isteklerine uyan, Hakk'in yolundan uzaklasmis olur; onu terbiye eden ise Hakk'a kavusur.",
+      "tags": ["nefis", "marifet", "tasavvuf", "iman"],
+      "theme": "Nefsin Tehlikesi"
+    },
+    {
+      "id": "esrefoglu_007",
+      "source": "Esrefoglu Rumi",
+      "reference": "Muzekkin Nefis",
+      "text": "Nefsi arindurmak, kalbi aydinlatmanin ilk adimidir; temiz gonul, Hakk'in nuruyla dolar.",
+      "tags": ["nefis", "gonul", "marifet", "iman"],
+      "theme": "Tezkiyenin Onemi"
+    },
+    {
+      "id": "esrefoglu_008",
+      "source": "Esrefoglu Rumi",
+      "reference": "Muzekkin Nefis",
+      "text": "Kim nefsini tanirsa, icinde nasil bir dusmanin yasadigini anlar ve ona karsi uyanik olur.",
+      "tags": ["nefis", "hikmet", "marifet", "tasavvuf"],
+      "theme": "Nefsi Tanima"
+    },
+    {
+      "id": "esrefoglu_009",
+      "source": "Esrefoglu Rumi",
+      "reference": "Muzekkin Nefis",
+      "text": "Tovbe kapisi sonuna kadar aciktir; yeter ki icten bir pismanlikla, tamam bir kararla don.",
+      "tags": ["tovbe", "umut", "merhamet", "iman"],
+      "theme": "Tovbenin Kapisi"
+    },
+    {
+      "id": "esrefoglu_010",
+      "source": "Esrefoglu Rumi",
+      "reference": "Muzekkin Nefis",
+      "text": "Seytan seni once kucuk gunalarla dener; sen o kucuklere aldirmazsan, buyukleri getirir. Uyanik ol.",
+      "tags": ["nefis", "iman", "hikmet", "marifet"],
+      "theme": "Seytanin Hilesi"
+    },
+
+    {
+      "id": "sems_001",
+      "source": "Sems-i Tebrizi",
+      "reference": "Makalat",
+      "text": "Gecmisin ve gelecegin derdine dusme; su an ne yapabilecegine bak, onu yap.",
+      "tags": ["hikmet", "sabir", "genel", "umut"],
+      "theme": "Su Anda Olmak"
+    },
+    {
+      "id": "sems_002",
+      "source": "Sems-i Tebrizi",
+      "reference": "Makalat",
+      "text": "Seni seven, seni oldugu gibi kabul edendir; seni degistirmeye calisanin sevgisinde bir sart vardir.",
+      "tags": ["sevgi", "merhamet", "hikmet", "ask"],
+      "theme": "Kosulsuz Sevgi"
+    },
+    {
+      "id": "sems_003",
+      "source": "Sems-i Tebrizi",
+      "reference": "Makalat",
+      "text": "Hakikat arayisi, once kendine dürustlukle bakmakla baslar.",
+      "tags": ["marifet", "hikmet", "tevazu", "genel"],
+      "theme": "Hakikat Yolu"
+    },
+    {
+      "id": "sems_004",
+      "source": "Sems-i Tebrizi",
+      "reference": "Makalat",
+      "text": "Gercek sevgi insani oldugundan buyuk yapar; kisi sevdigiyle birlikte yetisir.",
+      "tags": ["ask", "sevgi", "hikmet", "marifet"],
+      "theme": "Sevginin Gucü"
+    },
+    {
+      "id": "sems_005",
+      "source": "Sems-i Tebrizi",
+      "reference": "Makalat",
+      "text": "Susmayı ogren; soz coklugu bazen hakikati örter, bazen kalpleri kapatir.",
+      "tags": ["hikmet", "tevazu", "marifet", "genel"],
+      "theme": "Susmanin Hikmeti"
+    },
+    {
+      "id": "sems_006",
+      "source": "Sems-i Tebrizi",
+      "reference": "Makalat",
+      "text": "Dervis odur ki soz ve surete degil, ozun sesine kulak verir.",
+      "tags": ["marifet", "hikmet", "tasavvuf", "gonul"],
+      "theme": "Iç Ses"
+    },
+    {
+      "id": "sems_007",
+      "source": "Sems-i Tebrizi",
+      "reference": "Makalat",
+      "text": "Her insan ayri bir kapidir; ama hepsinin ardindan ayni sir gelir. O sirrı duymak icin kalbin kulagi acik olmali.",
+      "tags": ["vahdet", "marifet", "hikmet", "iman"],
+      "theme": "Varlığın Sırri"
+    },
+    {
+      "id": "sems_008",
+      "source": "Sems-i Tebrizi",
+      "reference": "Makalat",
+      "text": "Kendini cok bilen, az gorer; kendini az bilen, cok gorür. Tevazu bilginin kapisindan girilir.",
+      "tags": ["tevazu", "hikmet", "marifet", "nefis"],
+      "theme": "Tevazunun Hikmeti"
+    },
+
+    {
+      "id": "hudai_001",
+      "source": "Aziz Mahmut Hudai",
+      "reference": "Divan",
+      "text": "Ask yolunda kilabuzun, kalbindeki nur-i Ilahi'dir; onu sondurmemeye bak.",
+      "tags": ["ask", "iman", "gonul", "hikmet"],
+      "theme": "Kalbin Nuru"
+    },
+    {
+      "id": "hudai_002",
+      "source": "Aziz Mahmut Hudai",
+      "reference": "Divan",
+      "text": "Hakk'in kapisina gelen eli bos donmez; yeter ki kul kalbiyle, samimiyetle gelsin.",
+      "tags": ["dua", "iman", "guven", "teselli"],
+      "theme": "Ilahi Lutuf"
+    },
+    {
+      "id": "hudai_003",
+      "source": "Aziz Mahmut Hudai",
+      "reference": "Divan",
+      "text": "Gonlunu Hakk'a verene dunya bir zindan gibi gorünür; gonlunu dünyaya verene ise gercek huzur yoktur.",
+      "tags": ["dunya", "hikmet", "huzur", "iman"],
+      "theme": "Dunya ve Huzur"
+    },
+    {
+      "id": "hudai_004",
+      "source": "Aziz Mahmut Hudai",
+      "reference": "Divan",
+      "text": "Ibadet yalniz namaz kilmaktan ibaret degildir; her nefesi Allah'in huzurunda alip vermektir.",
+      "tags": ["dua", "iman", "marifet", "sukur"],
+      "theme": "Ibadetin Genligi"
+    },
+    {
+      "id": "hudai_005",
+      "source": "Aziz Mahmut Hudai",
+      "reference": "Divan",
+      "text": "Teslimiyeti ogrenen kuldan agir yuk kalkar; her sey Allah'tandır diyene gonul huzur bulur.",
+      "tags": ["guven", "sabir", "iman", "huzur"],
+      "theme": "Teslimiyet"
+    },
+    {
+      "id": "hudai_006",
+      "source": "Aziz Mahmut Hudai",
+      "reference": "Divan",
+      "text": "Dua, kulun Rabbine actigi gonul kapisindan baskasi degildir.",
+      "tags": ["dua", "iman", "gonul", "marifet"],
+      "theme": "Dua"
+    },
+    {
+      "id": "hudai_007",
+      "source": "Aziz Mahmut Hudai",
+      "reference": "Divan",
+      "text": "Sikintilar, gonlü olgunlastirir; rahatlik ise cogu zaman onu uyusturur. Hak, sevdiklerini sikintiyla terbiye eder.",
+      "tags": ["zorluk", "sabir", "hikmet", "teselli"],
+      "theme": "Zorlugun Hikmeti"
+    },
 
     {
       "id": "lutfi_001",
@@ -228,7 +438,7 @@
       "reference": "Noktanin Sonsuzlugu, 1. Kitap",
       "text": "Insan, Allah'i kalbinde bulabilirse mirac etmis olur.",
       "tags": ["gonul", "marifet", "iman", "huzur"],
-      "theme": "Kalbin Miracı"
+      "theme": "Kalbin Miraci"
     },
     {
       "id": "lutfi_004",
@@ -237,6 +447,266 @@
       "text": "Gonul, Allah'in gozle gorulmeyen bahr-i ahadiyet alemidir; nasil Allah bir ise gonul de birdir.",
       "tags": ["gonul", "vahdet", "marifet", "ask"],
       "theme": "Gonlun Sirri"
+    },
+    {
+      "id": "lutfi_005",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu",
+      "text": "Insan, kainatın ozudur; kainatta ne varsa insanda da vardir. Kendini bilen, alemi bilmis olur.",
+      "tags": ["marifet", "vahdet", "hikmet", "iman"],
+      "theme": "Insanin Makami"
+    },
+    {
+      "id": "lutfi_006",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu",
+      "text": "Hakk'i aramak icin uzaklara gitme; O, senden sana daha yakindir.",
+      "tags": ["marifet", "hikmet", "iman", "gonul"],
+      "theme": "Yakin Olan"
+    },
+    {
+      "id": "lutfi_007",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu",
+      "text": "Olüm, ruhun bedenden kurtulup Hakk'a kavusmasidir; korkmak degil, ozlemek gerek.",
+      "tags": ["iman", "hikmet", "ask", "umut"],
+      "theme": "Olume Bakis"
+    },
+    {
+      "id": "lutfi_008",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu",
+      "text": "Her varlık Hakk'in bir tecellisidir; onu gorebilen, her yerde Hakk'ı gorur.",
+      "tags": ["vahdet", "marifet", "iman", "hikmet"],
+      "theme": "Tecelli"
+    },
+    {
+      "id": "lutfi_009",
+      "source": "Lutfi Filiz",
+      "reference": "Noktanin Sonsuzlugu",
+      "text": "Marifet, bilginin otesindeki ic aydinlanmadir; akil buna ulasemaz, gonul ulaşır.",
+      "tags": ["marifet", "hikmet", "gonul", "vahdet"],
+      "theme": "Marifet Nedir"
+    },
+
+    {
+      "id": "gazali_001",
+      "source": "Imam Gazali",
+      "reference": "Ihya-u Ulumi'd-din",
+      "text": "Insanin en buyuk dusmani kendi nefsidir; onu tanimayan hayatini tanimamis olur.",
+      "tags": ["nefis", "marifet", "hikmet"],
+      "theme": "Nefisle Mucadele"
+    },
+    {
+      "id": "gazali_002",
+      "source": "Imam Gazali",
+      "reference": "Ihya-u Ulumi'd-din",
+      "text": "Sukur, nimetin degerini bilmek ve onu veren Hakka yoneltmektir.",
+      "tags": ["sukur", "iman", "marifet"],
+      "theme": "Sukur Sirri"
+    },
+    {
+      "id": "gazali_003",
+      "source": "Imam Gazali",
+      "reference": "Kimya-i Saadet",
+      "text": "Ilim amele donusmezse bir yuktur; amel ihlasla takilmazsa bir gosteristir.",
+      "tags": ["hikmet", "iman", "marifet"],
+      "theme": "Ilim ve Amel"
+    },
+    {
+      "id": "gazali_004",
+      "source": "Imam Gazali",
+      "reference": "Ihya-u Ulumi'd-din",
+      "text": "Kalp bir padisah, nefis vezir, akil muftu gibidir; padisah adaletli olursa, vizir da ona boyun eger.",
+      "tags": ["nefis", "hikmet", "marifet"],
+      "theme": "Ic Dunya Duzeni"
+    },
+    {
+      "id": "gazali_005",
+      "source": "Imam Gazali",
+      "reference": "Ihya-u Ulumi'd-din",
+      "text": "Tevazu, kulun yucelmesinin kapisindan girilir; kibir ise dusmesinin.",
+      "tags": ["tevazu", "hikmet", "nefis"],
+      "theme": "Tevazu"
+    },
+    {
+      "id": "gazali_006",
+      "source": "Imam Gazali",
+      "reference": "Abidler Yolu",
+      "text": "Kulluğun sekiz menzili vardır: ilim, tevbe, engeller, saikler, sükür, tevekkül, uhlet ve riza. Her menzil bir öncekini tamamlar.",
+      "tags": ["iman", "marifet", "hikmet", "dua"],
+      "theme": "Kullugün Menzilleri"
+    },
+    {
+      "id": "gazali_007",
+      "source": "Imam Gazali",
+      "reference": "Abidler Yolu",
+      "text": "Tevbe kapisi daima açiktir; gec kalmis diye usanma, hemen don.",
+      "tags": ["tovbe", "umut", "merhamet", "iman"],
+      "theme": "Tovbeye Davet"
+    },
+    {
+      "id": "gazali_008",
+      "source": "Imam Gazali",
+      "reference": "Abidler Yolu",
+      "text": "Gercek tevekkul, Allah'a guvenirken sebeplere de sarilmaktir; tembelligi tevekkul sanma.",
+      "tags": ["guven", "iman", "hikmet", "sabir"],
+      "theme": "Gercek Tevekkul"
+    },
+    {
+      "id": "gazali_009",
+      "source": "Imam Gazali",
+      "reference": "Abidler Yolu",
+      "text": "Riza, Allah'tan gelen her seyi hosnütlukla karsilamaktir; bu makam, aci ile tatlıyı esit gormeyi ogretir.",
+      "tags": ["sabir", "iman", "hikmet", "sukur"],
+      "theme": "Riza Makamı"
+    },
+    {
+      "id": "gazali_010",
+      "source": "Imam Gazali",
+      "reference": "Abidler Yolu",
+      "text": "Kalp, Allah'in nazargahidir; onu kirletme, onu gunah pisligi ile kapama.",
+      "tags": ["gonul", "iman", "nefis", "marifet"],
+      "theme": "Kalbin Korunmasi"
+    },
+    {
+      "id": "gazali_011",
+      "source": "Imam Gazali",
+      "reference": "Abidler Yolu",
+      "text": "Ibadette asil olan ihlastir; ihlassiz ibadet, ruhsuz bir beden gibidir.",
+      "tags": ["iman", "dua", "marifet", "hikmet"],
+      "theme": "Ihlas"
+    },
+
+    {
+      "id": "abdulaziz_001",
+      "source": "Abdulaziz Senol",
+      "reference": "Kenzi Divani",
+      "text": "Hakk'i arar dururum ben; meğer Hakk beni ararmiş. Ben O'na yonelince, O coktan bana yonelmişti.",
+      "tags": ["marifet", "iman", "ask", "hikmet"],
+      "theme": "Ilahi Arayis"
+    },
+    {
+      "id": "abdulaziz_002",
+      "source": "Abdulaziz Senol",
+      "reference": "Kenzi Divani",
+      "text": "Gonul kuyusunun suyu tukenmez; ne kadar ceksen, yine dolar. Ask ile cek, ask ile ic.",
+      "tags": ["ask", "gonul", "marifet", "sevgi"],
+      "theme": "Gonlun Pinari"
+    },
+    {
+      "id": "abdulaziz_003",
+      "source": "Abdulaziz Senol",
+      "reference": "Kenzi Divani",
+      "text": "Ask denizine dal, kork gitsin; bogulmaz ki hakikat yuzucusu.",
+      "tags": ["ask", "iman", "cesaret", "gonul"],
+      "theme": "Aska Atlamak"
+    },
+    {
+      "id": "abdulaziz_004",
+      "source": "Abdulaziz Senol",
+      "reference": "Kenzi Divani",
+      "text": "Kenz-i mahfiyi ararsan gonlunde ara; gizli hazine, hic disarida olmamistir.",
+      "tags": ["marifet", "gonul", "hikmet", "vahdet"],
+      "theme": "Gizli Hazine"
+    },
+    {
+      "id": "abdulaziz_005",
+      "source": "Abdulaziz Senol",
+      "reference": "Kenzi Divani",
+      "text": "Sevgi ile dol, tas da yumusar; kibir ile dol, gonul de tasar.",
+      "tags": ["sevgi", "tevazu", "nefis", "hikmet"],
+      "theme": "Sevginin Gucü"
+    },
+    {
+      "id": "abdulaziz_006",
+      "source": "Abdulaziz Senol",
+      "reference": "Kenzi Divani",
+      "text": "Her dem yeni bir yuzle gorunur Yaradan; onu bilen, her an yeni bir sevinc yasar.",
+      "tags": ["iman", "sukur", "hikmet", "vahdet"],
+      "theme": "Her Dem Yeni"
+    },
+
+    {
+      "id": "ibnarabi_001",
+      "source": "Ibn Arabi",
+      "reference": "Ogutler Pinari",
+      "text": "Gonlum her sureti kabul etmektedir: geyiklerin otlagi, rahiplerin manastiri, putlarin tapinagi ve Kabe. Askin dini birdir; o din benim dinim ve imanımdır.",
+      "tags": ["ask", "vahdet", "iman", "hikmet"],
+      "theme": "Askin Dini"
+    },
+    {
+      "id": "ibnarabi_002",
+      "source": "Ibn Arabi",
+      "reference": "Ogutler Pinari",
+      "text": "Varlik yalniz Allah'in varligidir; geri kalan her sey O'nun nurunun golgelenmesidir.",
+      "tags": ["vahdet", "marifet", "iman", "hikmet"],
+      "theme": "Vahdet-i Vücud"
+    },
+    {
+      "id": "ibnarabi_003",
+      "source": "Ibn Arabi",
+      "reference": "Ogutler Pinari",
+      "text": "Hakikati arayanin once kendini tanimasi gerekir; kendini bilen, Allah'i bilmis olur.",
+      "tags": ["marifet", "hikmet", "nefis", "iman"],
+      "theme": "Kendini Bilmek"
+    },
+    {
+      "id": "ibnarabi_004",
+      "source": "Ibn Arabi",
+      "reference": "Ogutler Pinari",
+      "text": "Arif odur ki her serde Allah'ı, her serde O'nun sifatlarinin tecellisini gorür.",
+      "tags": ["marifet", "hikmet", "vahdet", "iman"],
+      "theme": "Arifin Gözü"
+    },
+    {
+      "id": "ibnarabi_005",
+      "source": "Ibn Arabi",
+      "reference": "Ogutler Pinari",
+      "text": "Kalp, Allah'i anlayabilen tek yerdir; akil O'na yalniz isaret edebilir, gonul ise O'nda erir.",
+      "tags": ["gonul", "marifet", "hikmet", "ask"],
+      "theme": "Kalbin Makamı"
+    },
+    {
+      "id": "ibnarabi_006",
+      "source": "Ibn Arabi",
+      "reference": "Ogutler Pinari",
+      "text": "Her isim, Allah'in bir guzeline isaret eder; evrenin tamaminda O'ndan baska bir gercek yoktur.",
+      "tags": ["vahdet", "iman", "hikmet", "marifet"],
+      "theme": "Esma-ul Husna"
+    },
+    {
+      "id": "ibnarabi_007",
+      "source": "Ibn Arabi",
+      "reference": "Ogutler Pinari",
+      "text": "Ibnü'l vakt ol; ne gecmiste yas dök, ne gelecekten kork. Bu an, sana verilen tek gerçektir.",
+      "tags": ["hikmet", "genel", "sabir", "huzur"],
+      "theme": "Anda Olmak"
+    },
+
+    {
+      "id": "fuzuli_001",
+      "source": "Fuzuli",
+      "reference": "Divan Onsozu",
+      "text": "Ask imis her ne var alemde; ilim bir kil u kal imis ancak.",
+      "tags": ["ask", "sevgi", "hikmet", "marifet"],
+      "theme": "Ilahi Ask"
+    },
+    {
+      "id": "fuzuli_002",
+      "source": "Fuzuli",
+      "reference": "Leyla ile Mecnun",
+      "text": "Mende Mecnun'dan fuzun asiklik isti'dadi var; Asik-i sadik menem, Mecnun'un ancak adi var.",
+      "tags": ["ask", "sevgi"],
+      "theme": "Sadakat-i Ask"
+    },
+    {
+      "id": "fuzuli_003",
+      "source": "Fuzuli",
+      "reference": "Divan",
+      "text": "Cani kim cananini icun sevse cananin sever; cani icun kim ki cananini sever canin sever.",
+      "tags": ["ask", "sevgi", "hikmet"],
+      "theme": "Hakiki Muhabbet"
     }
   ]
 }

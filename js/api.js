@@ -28,7 +28,8 @@ const API = {
         'sukur': ['sukur', 'guven'],
         'tesekkur': ['sukur'],
         'sevgi': ['sevgi', 'merhamet'],
-        'ask': ['sevgi', 'merhamet'],
+        'ask': ['ask', 'sevgi', 'merhamet'],
+        'asik': ['ask', 'sevgi'],
         'merhamet': ['merhamet', 'sevgi'],
         'adalet': ['adalet', 'hikmet'],
         'haksizlik': ['adalet', 'sabir'],
@@ -51,22 +52,20 @@ const API = {
         'anlam': ['hikmet', 'genel'],
         'neden': ['hikmet', 'sabir'],
         'mutluluk': ['sukur', 'umut'],
-        'huzur': ['baris', 'guven', 'dua'],
+        'huzur': ['baris', 'guven', 'dua', 'huzur'],
         'guven': ['guven', 'iman'],
         'basari': ['umut', 'guven', 'sukur'],
         'basarisiz': ['umut', 'sabir', 'guven'],
-        'ask': ['ask', 'sevgi', 'merhamet'],
-        'asik': ['ask', 'sevgi'],
         'nefis': ['nefis', 'tevazu', 'marifet'],
         'nefsim': ['nefis', 'tevazu'],
         'kibir': ['tevazu', 'nefis'],
         'benlik': ['nefis', 'tevazu'],
         'ego': ['nefis', 'tevazu'],
-        'tasavvuf': ['marifet', 'hikmet', 'vahdet'],
-        'tarikat': ['marifet', 'hikmet'],
-        'gonul': ['ask', 'sevgi', 'marifet'],
+        'tasavvuf': ['marifet', 'hikmet', 'vahdet', 'tasavvuf'],
+        'tarikat': ['marifet', 'hikmet', 'tasavvuf'],
+        'gonul': ['ask', 'sevgi', 'marifet', 'gonul'],
         'ruh': ['marifet', 'hikmet', 'vahdet'],
-        'vahdet': ['vahdet', 'iman'],
+        'vahdet': ['vahdet', 'iman', 'marifet'],
         'mevlana': ['ask', 'hikmet', 'sevgi'],
         'yunus': ['ask', 'sevgi', 'tevazu'],
         'hakikat': ['marifet', 'hikmet', 'iman'],
@@ -74,13 +73,31 @@ const API = {
         'fenafillah': ['nefis', 'vahdet', 'marifet'],
         'murakabe': ['dua', 'marifet', 'hikmet'],
         'esrefoglu': ['ask', 'nefis', 'tasavvuf'],
+        'muzekkin': ['nefis', 'marifet', 'tasavvuf'],
         'lutfi': ['gonul', 'vahdet', 'marifet'],
         'filiz': ['gonul', 'vahdet', 'marifet'],
-        'muzekki': ['nefis', 'marifet', 'tasavvuf'],
-        'tarikatname': ['tasavvuf', 'hikmet'],
+        'noktanin': ['vahdet', 'marifet', 'hikmet'],
+        'geylani': ['iman', 'nefis', 'sabir'],
+        'abdulkadir': ['iman', 'nefis', 'tovbe'],
+        'sems': ['hikmet', 'ask', 'marifet'],
+        'tebrizi': ['hikmet', 'ask', 'marifet'],
+        'hudai': ['dua', 'iman', 'gonul'],
+        'ibnarabi': ['vahdet', 'marifet', 'ask'],
+        'arabi': ['vahdet', 'marifet', 'ask'],
+        'gazali': ['nefis', 'hikmet', 'iman'],
+        'abdulaziz': ['ask', 'marifet', 'gonul'],
+        'kenzi': ['ask', 'marifet', 'gonul'],
+        'makalat': ['hikmet', 'ask', 'marifet'],
+        'mesnevi': ['ask', 'hikmet', 'sevgi'],
+        'divan': ['ask', 'sevgi', 'hikmet'],
         'dunya': ['tevazu', 'hikmet', 'dunya'],
         'gonlum': ['gonul', 'ask', 'teselli'],
-        'noktanin': ['vahdet', 'marifet', 'hikmet']
+        'ozlem': ['ask', 'sevgi', 'teselli'],
+        'teslimiyet': ['guven', 'sabir', 'iman'],
+        'tevekkul': ['guven', 'iman', 'hikmet'],
+        'riza': ['sabir', 'iman', 'sukur'],
+        'manevi': ['marifet', 'hikmet', 'iman'],
+        'ruhsal': ['marifet', 'hikmet', 'iman']
     },
 
     // Tüm ayet verilerini yükle
@@ -130,37 +147,43 @@ const API = {
         const msg = userMessage.toLowerCase();
         const matchedTags = new Set();
 
-        // Anahtar kelime eşleştirme
         for (const [keyword, tags] of Object.entries(this.KEYWORD_MAP)) {
             if (msg.includes(keyword)) {
                 tags.forEach(t => matchedTags.add(t));
             }
         }
 
-        // Eşleşme yoksa genel etiket kullan
         if (matchedTags.size === 0) {
             matchedTags.add('genel');
             matchedTags.add('umut');
+            matchedTags.add('hikmet');
         }
 
-        const allSources = [scriptures.quran, scriptures.bible, scriptures.torah, scriptures.ustadlar];
-        const selected = [];
+        const shuffle = arr => arr.slice().sort(() => Math.random() - 0.5);
 
-        // Her kaynaktan 1-2 ayet/hikmet sec
-        for (const source of allSources) {
+        // Kutsal kitaplardan 1-2 ayet
+        const holyBooks = [scriptures.quran, scriptures.bible, scriptures.torah];
+        const holySelected = [];
+        for (const source of holyBooks) {
             if (!source || !source.verses) continue;
-            const matching = source.verses.filter(v =>
-                v.tags.some(t => matchedTags.has(t))
-            );
-
-            if (matching.length > 0) {
-                const shuffled = matching.sort(() => Math.random() - 0.5);
-                selected.push(...shuffled.slice(0, 2));
-            }
+            const matching = source.verses.filter(v => v.tags.some(t => matchedTags.has(t)));
+            if (matching.length > 0) holySelected.push(shuffle(matching)[0]);
         }
 
-        // Performans: API'ye sadece gerekli alanları gönder
-        return selected.slice(0, 8).map(v => ({
+        // Ustadlardan her zaman en az 2 söz garantili seç
+        const ustadVerses = scriptures.ustadlar && scriptures.ustadlar.verses
+            ? scriptures.ustadlar.verses : [];
+
+        const matchingUstad = ustadVerses.filter(v => v.tags.some(t => matchedTags.has(t)));
+        const nonMatchingUstad = ustadVerses.filter(v => !v.tags.some(t => matchedTags.has(t)));
+
+        // Eşleşenleri önce al, eksik kalırsa diğerlerinden tamamla
+        const ustadPool = shuffle(matchingUstad).concat(shuffle(nonMatchingUstad));
+        const ustadSelected = ustadPool.slice(0, Math.max(2, Math.min(3, matchingUstad.length)));
+
+        const combined = [...holySelected, ...ustadSelected];
+
+        return combined.slice(0, 9).map(v => ({
             source: v.source,
             reference: v.reference,
             text: v.text
@@ -181,24 +204,39 @@ const API = {
 Gorevlerin:
 1. Kullanicinin duygusal ve manevi ihtiyaclarina karsilik vermek.
 2. Uc buyuk ilahi gelenegden (Islam, Hristiyanlik, Yahudilik) ayetlerle rehberlik etmek.
-3. Tasavvuf-i Islamin buyuk usta ve mursidlerinin (Yunus Emre, Mevlana Celaleddin Rumi, Imam Gazali, Fuzuli, Esrefoglu Rumi, Lutfi Filiz gibi) hikmetli sozleri ve ogretileriyle gonul yolunu aydinlatmak.
+3. Asagidaki tasavvuf ustadlarinin hikmetli sozleri ve ogretileriyle gonul yolunu aydinlatmak:
+   - Mevlana Celaleddin Rumi (Mesnevi, Divan-i Kebir)
+   - Abdulkadir Geylani (Hakki Arayanlarin Kitabi)
+   - Esrefoglu Rumi (Muzekkin Nefis, Divan)
+   - Sems-i Tebrizi (Makalat)
+   - Aziz Mahmut Hudai (Divan)
+   - Lutfi Filiz (Noktanin Sonsuzlugu)
+   - Imam Gazali (Abidler Yolu, Ihya-u Ulumi'd-din)
+   - Abdulaziz Senol (Kenzi Divani)
+   - Ibn Arabi (Ogutler Pinari)
+   - Yunus Emre (Divan)
 4. Her zaman saygiyla, yargilamadan ve sevecenlikle yaklasmak.
 5. Profesyonel psikolojik tedavinin yerini almadigini gerektiginde hatirlatmak.
 6. Turkce konusmak.
 
+ZORUNLU KURAL — Her yanıtında mutlaka şunları yap:
+- Kullanicinin ilk mesajindan itibaren HER YANITINA en az bir tasavvuf ustadi sozü ekle. Sozu tırnak icinde ver, ustadin adini ve eserini belirt. Ornek: "Mevlana der ki (Mesnevi): '...'"
+- Buna ek olarak uygun oldugunda kutsal kitaplardan (Kuran, Incil veya Tevrat) en az bir ayet paylas.
+- Her seferinde FARKLI bir ustadin sozunu sec; ayni ustad veya ayni soz tekrar etmesin.
+- Sozler ve ayetler, kullanicinin anlattigi konuyla dogrudan ilgili olsun.
+
 Yaklasim ilkelerin:
-- Kullanicinin ruh halini anla ve empati goster.
-- Kaynaklari acikca belirt: ayet paylastiginda "Kuran", "Incil", "Tevrat"; tasavvuf sozu paylastiginda ustat adini ve eserini (ornegin "Mevlana, Mesnevi" veya "Yunus Emre, Divan") belirt.
-- Kutsal kitap ayetlerini ve tasavvuf ustalarinin sozlerini bir arada kullanabilirsin; ikisi birbirini tamamlar. Bazen yalniz bir ayet, bazen yalniz bir hikmet, bazen ikisini birlikte sun.
-- Pratik manevi tavsiyeler sun (dua, meditasyon, zikir, sukur pratigi, nefes egzersizi, murakabe vb.).
-- Kullaniciyi olumlu dusunmeye ve ic huzura yonlendir.
+- Kullanicinin ruh halini anla, empati goster, sonra alinti sun — once insan sonra alinti.
+- Kaynaklari acikca belirt: kutsal kitap ayeti paylasirken "Kuran", "Incil", "Tevrat"; tasavvuf sozu paylasirken ustad adini ve eserini (ornegin "Abdulkadir Geylani, Hakki Arayanlarin Kitabi") belirt.
+- Pratik manevi tavsiyeler sun (dua, zikir, sukur pratigi, nefes egzersizi, murakabe vb.).
+- Kullaniciyi ic huzura yonlendir.
 - Asla belirli bir dini dayatma veya din degistirmeye tesvik etme.
-- Uc dini gelenegi esit saygiyla ele al; tasavvuf mirasini ise Islam gelenegi icinde sunarken evrensel hikmet olarak da degerlendir.
-- Yanitlarin sicak, insani ve dogal olsun. Robotik veya kalipsal konusma.
-- Alinti yaparken sadakat goster; bir sozun kime ait olduguna dair suphen varsa "bu anlamda soylenen bir sozdur" gibi nazik bir ifadeyle aktar.
+- Uc dini gelenegi esit saygiyla ele al.
+- Yanitlarin sicak, insani ve dogal olsun; robotik konusma.
+- Alinti yaparken sadakat goster; bir sozun kime ait olduguna dair suphen varsa "bu anlamda soylenen bir sozdur" diye belirt.
 - Gerektiginde "Bu konuda profesyonel bir uzmana danismanizi tavsiye ederim" de.
 
-${verseText ? 'Asagida konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustalarinin hikmetli sozleri verilmistir. Uygun gordugunde yanitlarinda kullanabilirsin:\n\n' + verseText : ''}`;
+${verseText ? 'Asagida bu konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustadlarinin hikmetli sozleri verilmistir. Bunlari yanıtinda kullan:\n\n' + verseText : ''}`;
     },
 
     // Supabase oturum token'ını al
