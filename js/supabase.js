@@ -25,7 +25,7 @@ const Supabase = {
             if (!raw) return null;
             const session = JSON.parse(raw);
             if (!session || !session.access_token) return null;
-            if (session.expires_at && Date.now() > session.expires_at - 30000) return null;
+            if (session.expires_at && Date.now() > session.expires_at - 300000) return null;
             return session;
         } catch {
             return null;

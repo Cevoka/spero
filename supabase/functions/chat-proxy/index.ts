@@ -1,5 +1,4 @@
 // JESSE chat-proxy Edge Function
-// Tüm kayıtlı kullanıcılar için Anthropic API proxy
 
 import { createClient } from 'jsr:@supabase/supabase-js@2'
 
@@ -21,7 +20,7 @@ Deno.serve(async (req) => {
 
   const authHeader = req.headers.get('Authorization')
   if (!authHeader?.startsWith('Bearer ')) {
-    return json({ error: 'Giriş yapmanız gerekiyor.' }, 401)
+    return json({ error: 'Giris yapmaniz gerekiyor.' }, 401)
   }
 
   const supabaseUrl = Deno.env.get('SUPABASE_URL')
@@ -29,17 +28,19 @@ Deno.serve(async (req) => {
   const anthropicKey = Deno.env.get('ANTHROPIC_API_KEY')
 
   if (!supabaseUrl || !supabaseAnon || !anthropicKey) {
-    return json({ error: 'Sunucu yapılandırma hatası.' }, 500)
+    return json({ error: 'Sunucu yapilandirma hatasi.' }, 500)
   }
 
-  // Kullanıcıyı doğrula
+  // Kullanıcıyı doğrula — token'ı açıkça geç, Deno ortamında persistSession kapalı
+  const token = authHeader.replace('Bearer ', '')
   const supabase = createClient(supabaseUrl, supabaseAnon, {
     global: { headers: { Authorization: authHeader } },
+    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
   })
 
-  const { data: userData, error: userErr } = await supabase.auth.getUser()
-  if (userErr || !userData.user) {
-    return json({ error: 'Oturum geçersiz. Lütfen tekrar giriş yapın.' }, 401)
+  const { data: userData, error: userErr } = await supabase.auth.getUser(token)
+  if (userErr || !userData?.user) {
+    return json({ error: 'Oturum gecersiz. Lutfen tekrar giris yapin.' }, 401)
   }
 
   let body: {
@@ -51,12 +52,12 @@ Deno.serve(async (req) => {
   try {
     body = await req.json()
   } catch {
-    return json({ error: 'Geçersiz istek.' }, 400)
+    return json({ error: 'Gecersiz istek.' }, 400)
   }
 
   const { messages, system, model = 'claude-sonnet-4-6', max_tokens = 1024 } = body
   if (!Array.isArray(messages) || messages.length === 0) {
-    return json({ error: 'Mesaj listesi boş.' }, 400)
+    return json({ error: 'Mesaj listesi bos.' }, 400)
   }
 
   const anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {
