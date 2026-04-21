@@ -18,7 +18,7 @@
                 <div class="login-brand-logo">
                     <img src="assets/jesse-logo.jpg" alt="JESSE - Spiritual Counseling & Health" class="logo-main">
                 </div>
-                <p class="login-brand-tagline">Manevi Danismanlık & Saglık</p>
+                <p class="login-brand-tagline">Manevi Danismanlık &amp; Saglık</p>
                 <div class="login-brand-divider"></div>
                 <blockquote class="login-brand-quote">
                     "Huzur, disarida aranacak bir sey degil; icinde kesfedilecek bir hazinedir."
@@ -32,59 +32,106 @@
         <!-- Sağ form paneli -->
         <div class="login-form-panel">
             <div class="login-card">
-                <div class="login-card-header">
-                    <h2>Hos Geldiniz</h2>
-                    <p class="subtitle" id="login-subtitle">E-posta adresinizi girin</p>
+
+                <!-- Sekmeler -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Giriş Yap</button>
+                    <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Kayıt Ol</button>
                 </div>
 
-                <!-- Faz 1: E-posta -->
-                <form id="email-form">
-                    <div class="form-group">
-                        <label for="email-input">E-posta Adresiniz</label>
-                        <div class="input-icon-wrapper">
-                            <span class="input-icon">&#9993;</span>
-                            <input type="email" id="email-input" class="form-input form-input-icon"
-                                   placeholder="ornek@email.com" autocomplete="email" required>
-                        </div>
-                    </div>
-                    <div id="email-error" class="form-error" style="display:none;"></div>
-                    <button type="submit" class="btn btn-primary btn-full btn-login" id="email-btn">
-                        <span>Devam Et</span>
-                        <span class="btn-arrow">&rarr;</span>
-                    </button>
-                </form>
-
-                <!-- Faz 2: OTP (başta gizli) -->
-                <div id="otp-screen" style="display:none;">
-                    <p class="otp-hint" id="otp-hint"></p>
-                    <form id="otp-form">
+                <!-- Giriş Formu -->
+                <div id="login-panel">
+                    <form id="login-form" autocomplete="on">
                         <div class="form-group">
-                            <label for="otp-input">Doğrulama Kodu</label>
+                            <label for="login-email">E-posta</label>
                             <div class="input-icon-wrapper">
-                                <span class="input-icon">&#128274;</span>
-                                <input type="text" id="otp-input" class="form-input form-input-icon otp-input"
-                                       maxlength="6" inputmode="numeric" pattern="[0-9]{6}"
-                                       placeholder="000000" autocomplete="one-time-code" required>
+                                <span class="input-icon">&#9993;</span>
+                                <input type="email" id="login-email" class="form-input form-input-icon"
+                                       placeholder="ornek@email.com" autocomplete="email" required>
                             </div>
                         </div>
-                        <div id="otp-error" class="form-error" style="display:none;"></div>
-                        <button type="submit" class="btn btn-primary btn-full btn-login">
+                        <div class="form-group">
+                            <label for="login-password">Şifre</label>
+                            <div class="input-icon-wrapper">
+                                <span class="input-icon">&#128274;</span>
+                                <input type="password" id="login-password" class="form-input form-input-icon"
+                                       placeholder="Şifreniz" autocomplete="current-password" required>
+                            </div>
+                        </div>
+                        <div id="login-error" class="form-error" style="display:none;"></div>
+                        <button type="submit" class="btn btn-primary btn-full btn-login" id="login-btn">
                             <span>Giriş Yap</span>
                             <span class="btn-arrow">&rarr;</span>
                         </button>
                     </form>
-                    <div class="otp-actions">
-                        <button id="resend-btn" class="btn-text">Kodu yeniden gönder</button>
-                        <button id="back-btn" class="btn-text">← Geri</button>
+                    <div class="login-footer">
+                        <div class="login-footer-line"></div>
+                        <span class="login-footer-text">Guvenli ve sifrelenmis</span>
+                        <div class="login-footer-line"></div>
                     </div>
                 </div>
 
-                <div class="login-footer">
-                    <div class="login-footer-line"></div>
-                    <span class="login-footer-text">Guvenli ve gizli</span>
-                    <div class="login-footer-line"></div>
+                <!-- Kayıt Formu -->
+                <div id="register-panel" style="display:none;">
+                    <form id="register-form" autocomplete="off">
+                        <div class="form-group">
+                            <label for="reg-email">E-posta</label>
+                            <div class="input-icon-wrapper">
+                                <span class="input-icon">&#9993;</span>
+                                <input type="email" id="reg-email" class="form-input form-input-icon"
+                                       placeholder="ornek@email.com" autocomplete="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">Şifre <span class="label-hint">(en az 6 karakter)</span></label>
+                            <div class="input-icon-wrapper">
+                                <span class="input-icon">&#128274;</span>
+                                <input type="password" id="reg-password" class="form-input form-input-icon"
+                                       placeholder="Şifre belirleyin" autocomplete="new-password" required minlength="6">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password2">Şifre Tekrar</label>
+                            <div class="input-icon-wrapper">
+                                <span class="input-icon">&#128274;</span>
+                                <input type="password" id="reg-password2" class="form-input form-input-icon"
+                                       placeholder="Şifreyi tekrar girin" autocomplete="new-password" required minlength="6">
+                            </div>
+                        </div>
+                        <div id="register-error" class="form-error" style="display:none;"></div>
+                        <button type="submit" class="btn btn-primary btn-full btn-login" id="register-btn">
+                            <span>Kayıt Ol</span>
+                            <span class="btn-arrow">&rarr;</span>
+                        </button>
+                    </form>
+                    <div class="login-footer">
+                        <div class="login-footer-line"></div>
+                        <span class="login-footer-text">Guvenli ve gizli</span>
+                        <div class="login-footer-line"></div>
+                    </div>
                 </div>
+
+                <!-- Onay Bekleniyor Durumu (kayıt sonrası gösterilir) -->
+                <div id="confirm-pending" style="display:none;">
+                    <div class="confirm-pending-icon">&#128140;</div>
+                    <h3 class="confirm-pending-title">E-postanızı Onaylayın</h3>
+                    <p class="confirm-pending-text" id="confirm-email-hint"></p>
+                    <p class="confirm-pending-sub">Onay bağlantısına tıkladıktan sonra otomatik olarak giriş yapılacaksınız.</p>
+                    <button onclick="switchTab('login')" class="btn btn-primary btn-full" style="margin-top:1.5rem;">
+                        Giriş Sayfasına Dön
+                    </button>
+                </div>
+
             </div>
+        </div>
+    </div>
+
+    <!-- Onay Başarılı Mesajı (hash redirect'ten gelinince kısa gösterilir) -->
+    <div id="confirm-success" style="display:none; position:fixed; inset:0; background:var(--bg-deep,#1a0f38); display:flex; align-items:center; justify-content:center; z-index:999;">
+        <div style="text-align:center; color:#c9a961; padding:2rem;">
+            <div style="font-size:3rem; margin-bottom:1rem;">&#10003;</div>
+            <h2>E-posta onaylandı!</h2>
+            <p style="color:#ccc; margin-top:0.5rem;">Giriş yapılıyor...</p>
         </div>
     </div>
 
@@ -132,128 +179,114 @@
     <script src="js/auth.js"></script>
     <script src="js/app.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        function switchTab(tab) {
+            const isLogin = tab === 'login';
+            document.getElementById('tab-login').classList.toggle('active', isLogin);
+            document.getElementById('tab-register').classList.toggle('active', !isLogin);
+            document.getElementById('login-panel').style.display = isLogin ? '' : 'none';
+            document.getElementById('register-panel').style.display = isLogin ? 'none' : '';
+            document.getElementById('confirm-pending').style.display = 'none';
+            document.getElementById('login-error').style.display = 'none';
+            document.getElementById('register-error').style.display = 'none';
+        }
+
+        function showError(elId, msg) {
+            const el = document.getElementById(elId);
+            el.textContent = msg;
+            el.style.display = '';
+        }
+
+        function hideError(elId) {
+            const el = document.getElementById(elId);
+            el.style.display = 'none';
+        }
+
+        function setLoading(btnId, loading, label) {
+            const btn = document.getElementById(btnId);
+            btn.disabled = loading;
+            btn.querySelector('span').textContent = loading ? 'Lütfen bekleyin...' : label;
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
             const loginScreen = document.getElementById('login-screen');
             const homeScreen = document.getElementById('home-screen');
-            const emailForm = document.getElementById('email-form');
-            const otpScreen = document.getElementById('otp-screen');
-            const otpForm = document.getElementById('otp-form');
+            const confirmSuccess = document.getElementById('confirm-success');
 
-            function showError(el, msg) {
-                el.textContent = msg;
-                el.style.display = '';
-            }
-
-            function hideError(el) {
-                el.style.display = 'none';
-                el.textContent = '';
-            }
-
-            function setLoading(btn, loading) {
-                btn.disabled = loading;
-                btn.querySelector('span').textContent = loading ? 'Bekleniyor...' : btn._label;
-            }
-
-            // Buton etiketlerini kaydet
-            document.querySelectorAll('.btn-login span:first-child').forEach(s => {
-                s._parent = s.closest('button');
-                if (s._parent) s._parent._label = s.textContent;
-            });
-
-            if (Auth.isLoggedIn()) {
-                showHome();
-            } else {
-                loginScreen.style.display = '';
-            }
-
-            // Faz 1: E-posta gönder
-            emailForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const email = document.getElementById('email-input').value;
-                const btn = document.getElementById('email-btn');
-                hideError(document.getElementById('email-error'));
-                btn.disabled = true;
-                const span = btn.querySelector('span');
-                const original = span.textContent;
-                span.textContent = 'Gönderiliyor...';
-
+            // 1. Önce URL hash'ini kontrol et (onay linkinden mi gelindiği)
+            if (window.location.hash && window.location.hash.includes('access_token')) {
+                confirmSuccess.style.display = 'flex';
                 try {
-                    const result = await Auth.requestOtp(email);
-                    if (result === 'already_logged_in') {
-                        showHome();
+                    const result = await Auth.handleEmailConfirmation();
+                    if (result) {
+                        setTimeout(() => {
+                            confirmSuccess.style.display = 'none';
+                            showHome();
+                        }, 1500);
                         return;
                     }
-                    // OTP aşamasına geç
-                    emailForm.style.display = 'none';
-                    otpScreen.style.display = '';
-                    document.getElementById('login-subtitle').textContent = 'Doğrulama kodunu girin';
-                    document.getElementById('otp-hint').textContent =
-                        email + ' adresine 6 haneli kod gönderildi.';
-                    document.getElementById('otp-input').focus();
-                } catch (err) {
-                    showError(document.getElementById('email-error'), err.message);
-                } finally {
-                    btn.disabled = false;
-                    span.textContent = original;
-                }
-            });
+                } catch {}
+                confirmSuccess.style.display = 'none';
+            }
 
-            // Faz 2: OTP doğrula
-            otpForm.addEventListener('submit', async (e) => {
+            // 2. Aktif session var mı?
+            if (Auth.isLoggedIn()) {
+                showHome();
+                return;
+            }
+
+            loginScreen.style.display = '';
+
+            // Giriş formu
+            document.getElementById('login-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
-                const token = document.getElementById('otp-input').value;
-                const btn = otpForm.querySelector('button[type="submit"]');
-                hideError(document.getElementById('otp-error'));
-                btn.disabled = true;
-                const span = btn.querySelector('span');
-                const original = span.textContent;
-                span.textContent = 'Doğrulanıyor...';
-
+                hideError('login-error');
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                setLoading('login-btn', true, 'Giriş Yap');
                 try {
-                    await Auth.verifyOtp(token);
+                    await Auth.login(email, password);
                     loginScreen.style.display = 'none';
                     showHome();
                 } catch (err) {
-                    showError(document.getElementById('otp-error'), err.message);
-                    document.getElementById('otp-input').value = '';
-                    document.getElementById('otp-input').focus();
+                    showError('login-error', err.message);
                 } finally {
-                    btn.disabled = false;
-                    span.textContent = original;
+                    setLoading('login-btn', false, 'Giriş Yap');
                 }
             });
 
-            // Kodu yeniden gönder
-            document.getElementById('resend-btn').addEventListener('click', async () => {
-                const btn = document.getElementById('resend-btn');
-                btn.disabled = true;
-                btn.textContent = 'Gönderiliyor...';
+            // Kayıt formu
+            document.getElementById('register-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                hideError('register-error');
+                const email = document.getElementById('reg-email').value;
+                const password = document.getElementById('reg-password').value;
+                const password2 = document.getElementById('reg-password2').value;
+
+                if (password !== password2) {
+                    showError('register-error', 'Şifreler eşleşmiyor.');
+                    return;
+                }
+
+                setLoading('register-btn', true, 'Kayıt Ol');
                 try {
-                    await Auth.requestOtp(Auth._pendingEmail);
-                    btn.textContent = 'Kod gönderildi ✓';
-                    setTimeout(() => {
-                        btn.textContent = 'Kodu yeniden gönder';
-                        btn.disabled = false;
-                    }, 3000);
-                } catch {
-                    btn.textContent = 'Hata, tekrar dene';
-                    btn.disabled = false;
+                    await Auth.register(email, password);
+                    // Onay bekleniyor ekranını göster
+                    document.getElementById('register-panel').style.display = 'none';
+                    document.getElementById('tab-register').classList.remove('active');
+                    document.getElementById('tab-login').classList.add('active');
+                    document.getElementById('confirm-email-hint').textContent =
+                        email + ' adresine onay bağlantısı gönderildi. Gelen kutunuzu kontrol edin.';
+                    document.getElementById('confirm-pending').style.display = '';
+                } catch (err) {
+                    showError('register-error', err.message);
+                } finally {
+                    setLoading('register-btn', false, 'Kayıt Ol');
                 }
-            });
-
-            // Geri
-            document.getElementById('back-btn').addEventListener('click', () => {
-                otpScreen.style.display = 'none';
-                emailForm.style.display = '';
-                document.getElementById('login-subtitle').textContent = 'E-posta adresinizi girin';
-                hideError(document.getElementById('otp-error'));
-                document.getElementById('otp-input').value = '';
             });
 
             function showHome() {
                 homeScreen.style.display = '';
                 App.renderNav();
-
                 const user = Auth.getCurrentUser();
                 document.getElementById('welcome-text').textContent = 'Hos geldin, ' + user;
 

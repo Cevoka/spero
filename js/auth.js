@@ -1,36 +1,27 @@
-// auth.js - Email + OTP kimlik doğrulama (Supabase)
+// auth.js - Email + Şifre kimlik doğrulama (Supabase)
 
 const Auth = {
-    _pendingEmail: null,
 
-    async requestOtp(email) {
+    async register(email, password) {
         email = email.trim().toLowerCase();
         if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             throw new Error('Geçerli bir e-posta adresi girin.');
         }
-
-        // Geçerli oturum varsa doğrulama atla
-        const existing = await Supabase.ensureSession();
-        if (existing) {
-            const storedEmail = existing.user && existing.user.email;
-            if (storedEmail === email) return 'already_logged_in';
+        if (!password || password.length < 6) {
+            throw new Error('Şifre en az 6 karakter olmalıdır.');
         }
-
-        await Supabase.auth.requestOtp(email);
-        this._pendingEmail = email;
-        return 'otp_sent';
+        await Supabase.auth.signUp(email, password);
+        // Başarı: kullanıcıya onay maili gönderildi, session yok henüz
+        return 'confirmation_sent';
     },
 
-    async verifyOtp(token) {
-        if (!this._pendingEmail) throw new Error('Önce e-posta adresinizi girin.');
-        token = token.trim();
-        if (!token || !/^\d{6}$/.test(token)) {
-            throw new Error('6 haneli kodu doğru girin.');
+    async login(email, password) {
+        email = email.trim().toLowerCase();
+        if (!email || !password) {
+            throw new Error('E-posta ve şifre zorunludur.');
         }
-
-        const session = await Supabase.auth.verifyOtp(this._pendingEmail, token);
-
-        // Display name: profil tablosundan al, yoksa email prefix
+        const session = await Supabase.auth.signInWithPassword(email, password);
+        // display_name profil tablosundan al
         let displayName = null;
         try {
             const rows = await Supabase.db.select('profiles', {
@@ -41,14 +32,25 @@ const Auth = {
                 displayName = rows[0].display_name;
             }
         } catch {}
-
-        if (!displayName) {
-            displayName = this._pendingEmail.split('@')[0];
-        }
-
+        if (!displayName) displayName = email.split('@')[0];
         Storage.setCurrentUser(displayName);
-        this._pendingEmail = null;
         return { session, displayName };
+    },
+
+    // Onay linkinden dönen URL hash'ini işle
+    async handleEmailConfirmation() {
+        const result = Supabase.handleRedirect();
+        if (!result) return null;
+        // Kullanıcı bilgilerini çek ve kaydet
+        try {
+            const user = await Supabase.auth.getUser();
+            if (user) {
+                const displayName = user.user_metadata?.display_name || user.email.split('@')[0];
+                Storage.setCurrentUser(displayName);
+                return { type: result.type, displayName };
+            }
+        } catch {}
+        return { type: result.type, displayName: null };
     },
 
     logout() {
@@ -58,10 +60,8 @@ const Auth = {
     },
 
     getCurrentUser() {
-        // Önce localStorage cache'e bak (sync, hızlı)
         const cached = Storage.getCurrentUser();
         if (cached) return cached;
-        // Supabase session'dan türet
         const session = Supabase.getSession();
         if (!session) return null;
         return session.user?.user_metadata?.display_name

@@ -2,6 +2,7 @@
 
 const SUPABASE_URL = 'https://kehkxgouyjceypxmtvip.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGt4Z291eWpjZXlweG10dmlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MjY0MTAsImV4cCI6MjA5MjEwMjQxMH0.MV72tv-63uoV-cBEa0aCF5rgfR4BKufQO1F7zKwjvd8';
+const SITE_URL = 'https://cevoka.github.io/spero/';
 const REST_URL = SUPABASE_URL + '/rest/v1';
 const AUTH_URL = SUPABASE_URL + '/auth/v1';
 const SESSION_KEY = 'rr_sb_session';
@@ -24,7 +25,6 @@ const Supabase = {
             if (!raw) return null;
             const session = JSON.parse(raw);
             if (!session || !session.access_token) return null;
-            // Süresi dolmuşsa null döner (refresh async gerektirir)
             if (session.expires_at && Date.now() > session.expires_at - 30000) return null;
             return session;
         } catch {
@@ -51,12 +51,12 @@ const Supabase = {
         const raw = localStorage.getItem(SESSION_KEY);
         if (!raw) return null;
         try {
-            const { refresh_token } = JSON.parse(raw);
-            if (!refresh_token) return null;
+            const stored = JSON.parse(raw);
+            if (!stored.refresh_token) return null;
             const res = await fetch(`${AUTH_URL}/token?grant_type=refresh_token`, {
                 method: 'POST',
                 headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
-                body: JSON.stringify({ refresh_token })
+                body: JSON.stringify({ refresh_token: stored.refresh_token })
             });
             if (!res.ok) { this._clearSession(); return null; }
             const data = await res.json();
@@ -73,11 +73,31 @@ const Supabase = {
         return await this._refreshSession();
     },
 
+    // Onay linkinden gelen URL fragment'ını işle (#access_token=...&type=signup)
+    handleRedirect() {
+        const hash = window.location.hash.substring(1);
+        if (!hash) return null;
+        const params = new URLSearchParams(hash);
+        const accessToken = params.get('access_token');
+        const refreshToken = params.get('refresh_token');
+        const type = params.get('type'); // 'signup' | 'recovery' | null
+        if (!accessToken) return null;
+
+        const expiresIn = parseInt(params.get('expires_in') || '3600', 10);
+        const session = this._saveSession({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+            expires_in: expiresIn,
+            user: null // getUser() ile doldurulur
+        });
+
+        // URL'den hash'i temizle (güvenlik + görünüm)
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        return { session, type };
+    },
+
     _headers(session) {
-        const h = {
-            'apikey': SUPABASE_ANON_KEY,
-            'Content-Type': 'application/json'
-        };
+        const h = { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' };
         if (session && session.access_token) {
             h['Authorization'] = 'Bearer ' + session.access_token;
         }
@@ -87,29 +107,49 @@ const Supabase = {
     // --- Auth ---
 
     auth: {
-        async requestOtp(email) {
-            const res = await fetch(`${AUTH_URL}/otp`, {
+        async signUp(email, password) {
+            const res = await fetch(`${AUTH_URL}/signup`, {
                 method: 'POST',
                 headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, create_user: true })
+                body: JSON.stringify({
+                    email,
+                    password,
+                    // Onay linkinden sonra yönlendirilecek URL
+                    options: { emailRedirectTo: SITE_URL }
+                })
             });
+            const data = await res.json();
             if (!res.ok) {
-                const err = await res.json().catch(() => ({}));
-                throw new SupabaseError(res.status, err.error_code, err.msg || 'OTP gönderilemedi');
+                const msg = data.msg || data.message || data.error_description || 'Kayıt başarısız.';
+                if (msg.toLowerCase().includes('already registered') || msg.toLowerCase().includes('already exists')) {
+                    throw new SupabaseError(res.status, 'user_exists', 'Bu e-posta zaten kayıtlı. Giriş yapın.');
+                }
+                throw new SupabaseError(res.status, data.error_code, msg);
             }
+            // identities boşsa kullanıcı zaten var ama onay bekleniyor
+            if (data.identities && data.identities.length === 0) {
+                throw new SupabaseError(400, 'user_exists', 'Bu e-posta zaten kayıtlı. Giriş yapın.');
+            }
+            return data; // { id, email, confirmation_sent_at, ... }
         },
 
-        async verifyOtp(email, token) {
-            const res = await fetch(`${AUTH_URL}/verify`, {
+        async signInWithPassword(email, password) {
+            const res = await fetch(`${AUTH_URL}/token?grant_type=password`, {
                 method: 'POST',
                 headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
-                body: JSON.stringify({ type: 'email', email, token })
+                body: JSON.stringify({ email, password })
             });
-            if (!res.ok) {
-                const err = await res.json().catch(() => ({}));
-                throw new SupabaseError(res.status, err.error_code, 'Geçersiz veya süresi dolmuş kod.');
-            }
             const data = await res.json();
+            if (!res.ok) {
+                const msg = data.error_description || data.message || data.msg || '';
+                if (res.status === 400 && msg.toLowerCase().includes('invalid')) {
+                    throw new SupabaseError(400, 'invalid_credentials', 'E-posta veya şifre hatalı.');
+                }
+                if (msg.toLowerCase().includes('email not confirmed') || msg.toLowerCase().includes('not confirmed')) {
+                    throw new SupabaseError(400, 'email_not_confirmed', 'E-posta adresiniz henüz onaylanmamış. Gelen kutunuzu kontrol edin.');
+                }
+                throw new SupabaseError(res.status, data.error, msg || 'Giriş başarısız.');
+            }
             return Supabase._saveSession(data);
         },
 
@@ -124,6 +164,16 @@ const Supabase = {
             Supabase._clearSession();
         },
 
+        async resetPasswordRequest(email) {
+            const res = await fetch(`${AUTH_URL}/recover`, {
+                method: 'POST',
+                headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, options: { redirectTo: SITE_URL } })
+            });
+            // Her zaman başarılı gibi döner (e-posta varsa gönderir, yoksa sessiz)
+            return res.ok;
+        },
+
         async getUser() {
             const session = await Supabase.ensureSession();
             if (!session) return null;
@@ -131,7 +181,17 @@ const Supabase = {
                 headers: Supabase._headers(session)
             });
             if (!res.ok) return null;
-            return await res.json();
+            const user = await res.json();
+            // Session'daki user'ı da güncelle
+            const stored = localStorage.getItem(SESSION_KEY);
+            if (stored) {
+                try {
+                    const s = JSON.parse(stored);
+                    s.user = user;
+                    localStorage.setItem(SESSION_KEY, JSON.stringify(s));
+                } catch {}
+            }
+            return user;
         }
     },
 
@@ -197,13 +257,13 @@ const Supabase = {
 
         async upsert(table, row, onConflict) {
             const session = await Supabase.ensureSession();
-            const prefer = onConflict
-                ? `return=representation,resolution=merge-duplicates`
-                : 'return=representation,resolution=merge-duplicates';
             const params = onConflict ? `?on_conflict=${onConflict}` : '';
             const res = await fetch(`${REST_URL}/${table}${params}`, {
                 method: 'POST',
-                headers: { ...Supabase._headers(session), 'Prefer': prefer },
+                headers: {
+                    ...Supabase._headers(session),
+                    'Prefer': 'return=representation,resolution=merge-duplicates'
+                },
                 body: JSON.stringify(row)
             });
             if (!res.ok) {
