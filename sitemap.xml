@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  JESSE sitemap
+  Yalnizca public, indekslenebilir sayfalar listelenir.
+  Auth-gated sayfalar (chat/history/settings) noindex isaretlidir, dahil edilmez.
+  TODO: deploy sonrasi gercek domaine guncelle.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://jesse.app/</loc>
+        <lastmod>2026-04-28</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://jesse.app/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://jesse.app/" />
+    </url>
+</urlset>

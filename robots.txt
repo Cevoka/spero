@@ -1,0 +1,18 @@
+# JESSE — robots.txt
+# Public landing page (index.html) is indexable. Auth-gated pages are blocked
+# both via this file and via per-page <meta name="robots" content="noindex">.
+
+User-agent: *
+Allow: /
+Allow: /assets/
+
+Disallow: /chat.html
+Disallow: /history.html
+Disallow: /settings.html
+Disallow: /supabase/
+Disallow: /js/
+Disallow: /data/
+Disallow: /mobile/
+
+# TODO: deploy sonrasi gercek domaine guncelle
+Sitemap: https://jesse.app/sitemap.xml

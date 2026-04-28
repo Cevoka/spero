@@ -3,8 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JESSE - Manevi Danismanlık & Saglık | Spiritual Counseling & Health</title>
+    <meta name="theme-color" content="#2a1b4a">
+
+    <!-- Primary SEO -->
+    <title>JESSE — Manevi Danışmanlık & Sağlık Platformu</title>
+    <meta name="description" content="JESSE, üç büyük ilahi gelenekten (İslam, Hristiyanlık, Yahudilik) ilham alan, yapay zeka destekli manevi danışmanlık ve iç huzur platformu. Türkçe sohbet, ayet rehberliği, günlük manevi mesaj.">
+    <meta name="keywords" content="manevi danışmanlık, manevi rehber, iç huzur, Kuran, İncil, Tevrat, dua, meditasyon, JESSE, spiritual counseling Turkish, ruh sağlığı">
+    <meta name="author" content="JESSE">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <!-- Canonical (TODO: deploy sonrasi gercek domaine guncelle) -->
+    <link rel="canonical" href="https://jesse.app/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="JESSE">
+    <meta property="og:title" content="JESSE — Manevi Danışmanlık & Sağlık Platformu">
+    <meta property="og:description" content="Üç büyük ilahi gelenekten ayet ve öğretilerle rehberlik eden, yapay zeka destekli manevi danışmanlık platformu.">
+    <meta property="og:url" content="https://jesse.app/">
+    <meta property="og:image" content="https://jesse.app/assets/jesse-logo.jpg">
+    <meta property="og:image:alt" content="JESSE — Spiritual Counseling & Health logosu">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JESSE — Manevi Danışmanlık & Sağlık">
+    <meta name="twitter:description" content="Üç büyük ilahi gelenekten ayet ve öğretilerle rehberlik eden, yapay zeka destekli manevi danışmanlık platformu.">
+    <meta name="twitter:image" content="https://jesse.app/assets/jesse-logo.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="assets/jesse-logo.jpg">
+    <link rel="apple-touch-icon" href="assets/jesse-logo.jpg">
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Structured data (Organization + WebSite) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://jesse.app/#organization",
+                "name": "JESSE",
+                "alternateName": "JESSE Spiritual Counseling & Health",
+                "url": "https://jesse.app/",
+                "logo": "https://jesse.app/assets/jesse-logo.jpg",
+                "description": "Yapay zeka destekli, üç ilahi gelenekten ilham alan manevi danışmanlık platformu."
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://jesse.app/#website",
+                "url": "https://jesse.app/",
+                "name": "JESSE",
+                "description": "Manevi danışmanlık ve iç huzur platformu",
+                "publisher": { "@id": "https://jesse.app/#organization" },
+                "inLanguage": ["tr-TR", "en-US"]
+            },
+            {
+                "@type": "WebApplication",
+                "name": "JESSE",
+                "applicationCategory": "HealthApplication",
+                "operatingSystem": "Any (Web, iOS, Android)",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "TRY"
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
     <nav id="main-nav"></nav>
@@ -15,10 +86,17 @@
         <div class="login-brand">
             <div class="login-brand-bg"></div>
             <div class="login-brand-content">
-                <div class="login-brand-logo">
-                    <img src="assets/jesse-logo.jpg" alt="JESSE - Spiritual Counseling & Health" class="logo-main">
-                </div>
-                <p class="login-brand-tagline">Manevi Danismanlık &amp; Saglık</p>
+                <h1 class="login-brand-logo">
+                    <img src="assets/jesse-logo.jpg"
+                         alt="JESSE — Manevi Danışmanlık ve Sağlık Platformu"
+                         class="logo-main"
+                         width="512" height="279"
+                         decoding="async"
+                         fetchpriority="high">
+                    <span class="visually-hidden">JESSE — Manevi Danışmanlık &amp; Sağlık</span>
+                </h1>
+                <p class="login-brand-tagline">Manevi Danışmanlık &amp; Sağlık</p>
+                <p class="login-brand-tagline login-brand-tagline-en" lang="en">Spiritual Counseling &amp; Health</p>
                 <div class="login-brand-divider"></div>
                 <blockquote class="login-brand-quote">
                     "Huzur, disarida aranacak bir sey degil; icinde kesfedilecek bir hazinedir."
