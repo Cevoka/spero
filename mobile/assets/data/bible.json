@@ -1,0 +1,215 @@
+{
+  "source": "Incil",
+  "verses": [
+    {
+      "id": "bible_001",
+      "reference": "Mezmurlar 23:1-3",
+      "text": "Rab cobanımdir, eksigim olmaz. Beni yesil cayırlarda yatırır, durgun suların kıyısına gotururur. Canımı tazeler.",
+      "tags": ["guven", "teselli", "umut"],
+      "theme": "Ilahi Rehberlik"
+    },
+    {
+      "id": "bible_002",
+      "reference": "1. Korintliler 13:4-7",
+      "text": "Sevgi sabırlidir, sevgi sefkatlidir. Sevgi kıskanmaz, bovbovlenmez, kibirlenmez. Kaba davranmaz, kendi cıkarını aramaz, kolay kolay ofkelenmez, kotu niyetli degıldir.",
+      "tags": ["sevgi", "sabir", "merhamet"],
+      "theme": "Sevginin Tanimi"
+    },
+    {
+      "id": "bible_003",
+      "reference": "Yuhanna 14:27",
+      "text": "Size esenlik bırakıyorum, size kendi esenligimi veriyorum. Ben size dünyanın verdigi gibi vermiyorum. Yureginiz sıkılmasın ve korkmasın.",
+      "tags": ["teselli", "kaygi", "baris", "guven"],
+      "theme": "Ic Huzur"
+    },
+    {
+      "id": "bible_004",
+      "reference": "Mezmurlar 46:1-2",
+      "text": "Allah bizim sıgınagımız ve kuvvetimizdir; dar zamanda yardımcımızdır. Bundan dolayi yer degisse de, daglar denizin ortasına yıkılsa da korkmayız.",
+      "tags": ["guven", "zorluk", "kaygi", "teselli"],
+      "theme": "Siginak"
+    },
+    {
+      "id": "bible_005",
+      "reference": "Filipililer 4:6-7",
+      "text": "Hicbir sey icin kaygi duymayın. Her konuda isteklerinizi dua ve yalvarısla, sukranla birlikte Tanrı'ya bildirin. Tanrı'nın her anlayısı asan esenligı yureginizi ve dusuncelerinizi koruyacaktır.",
+      "tags": ["kaygi", "dua", "teselli", "guven"],
+      "theme": "Kaygidan Kurtulus"
+    },
+    {
+      "id": "bible_006",
+      "reference": "Matta 11:28",
+      "text": "Ey bütun yorgunlar ve yuk altında ezilenler! Bana gelin, ben size rahat verecegim.",
+      "tags": ["teselli", "zorluk", "umut", "guven"],
+      "theme": "Rahat Bulma"
+    },
+    {
+      "id": "bible_007",
+      "reference": "Romalılar 8:28",
+      "text": "Tanrı'yı sevenlerin, amacına gore cagırılmıs olanlarin iyiligi icin her seyin birlikte isledigini biliriz.",
+      "tags": ["guven", "hikmet", "umut", "sabir"],
+      "theme": "Ilahi Plan"
+    },
+    {
+      "id": "bible_008",
+      "reference": "Yeremya 29:11",
+      "text": "Cunku sizin icin dusundugum dusunceleri ben bilirim, der Rab; felaket degil, size bir gelecek ve umit vermek icin esenlik dusunceleridir.",
+      "tags": ["umut", "guven", "teselli", "genel"],
+      "theme": "Umitli Gelecek"
+    },
+    {
+      "id": "bible_009",
+      "reference": "Mezmurlar 34:18",
+      "text": "Rab yuregi kırıklara yakındır, ruhu ezilmis olanları kurtarır.",
+      "tags": ["teselli", "zorluk", "kaygi", "merhamet"],
+      "theme": "Kirik Kalplere Yakinlik"
+    },
+    {
+      "id": "bible_010",
+      "reference": "Isaya 41:10",
+      "text": "Korkma, cunku ben seninleyim; sasırma, cunku Tanrın benim. Seni guclendireceğim, sana yardım edeceğim.",
+      "tags": ["guven", "kaygi", "zorluk", "teselli"],
+      "theme": "Korkma"
+    },
+    {
+      "id": "bible_011",
+      "reference": "Mezmurlar 139:14",
+      "text": "Sana hamdederim, cunku korkunç ve sasılası bir surette yaratıldım. Senin islerin harikadır.",
+      "tags": ["sukur", "guven", "sevgi", "genel"],
+      "theme": "Degerli Yaratilis"
+    },
+    {
+      "id": "bible_012",
+      "reference": "Matta 6:34",
+      "text": "Bunun icin yarını dusunup kaygılanmayın. Yarının kaygısı yarının olsun. Her gunun derdi kendine yeter.",
+      "tags": ["kaygi", "sabir", "hikmet"],
+      "theme": "Anda Yas"
+    },
+    {
+      "id": "bible_013",
+      "reference": "Suleyman'in Meselleri 3:5-6",
+      "text": "Butun yureginle Rab'be guven, kendi anlayısına dayanma. Her yolunda O'nu tani, O senin yollarını duze cıkaracaktır.",
+      "tags": ["guven", "iman", "hikmet"],
+      "theme": "Tam Guven"
+    },
+    {
+      "id": "bible_014",
+      "reference": "Agıtlar 3:22-23",
+      "text": "Rabbin iyilikleri tukenmez, merhametleri bitmez; her sabah yenidir. Senin sadakatin buyuktur.",
+      "tags": ["umut", "merhamet", "sukur", "teselli"],
+      "theme": "Her Sabah Yeni"
+    },
+    {
+      "id": "bible_015",
+      "reference": "Matta 5:9",
+      "text": "Ne mutlu barısı sagıyanlara! Cunku onlara Tanrı ogulları denecektir.",
+      "tags": ["baris", "merhamet", "adalet"],
+      "theme": "Baris Yapıcılar"
+    },
+    {
+      "id": "bible_016",
+      "reference": "Yakup 1:2-3",
+      "text": "Kardeslerim, cesitli denemelerle karsılastıgınızda bunu tam bir sevinc sayın. Cunku bilirsiniz ki, imanınızın sınanması dayanma gucu uretir.",
+      "tags": ["sabir", "zorluk", "iman", "guven"],
+      "theme": "Denemede Sevinc"
+    },
+    {
+      "id": "bible_017",
+      "reference": "2. Korintliler 4:16-17",
+      "text": "Bu nedenle cesaretimizi yitirmeyiz. Dıs varlıgımız harap olsa da, ic varlıgımız gun gun yenilenmektedir. Cunku gecici, hafif sıkıntılarımız bize ağır, sonsuza dek kalan bir yuce gorkem kazandırmaktadır.",
+      "tags": ["sabir", "umut", "zorluk", "teselli"],
+      "theme": "Ic Yenilenme"
+    },
+    {
+      "id": "bible_018",
+      "reference": "Mezmurlar 37:5",
+      "text": "Yolunu Rab'be bırak, O'na guven, O gerekeni yapacaktır.",
+      "tags": ["guven", "sabir", "iman"],
+      "theme": "Teslim Ol"
+    },
+    {
+      "id": "bible_019",
+      "reference": "1. Yuhanna 4:18",
+      "text": "Sevgide korku yoktur. Tam sevgi korkuyu kovar. Cunku korku cezayla ilgilidir. Korkan kisi sevgide yetkinlesememistir.",
+      "tags": ["sevgi", "kaygi", "guven"],
+      "theme": "Sevgi Korkuyu Yener"
+    },
+    {
+      "id": "bible_020",
+      "reference": "Mezmurlar 91:1-2",
+      "text": "Yuceler Yucesi'nin barınagında oturan, Her Seye Gucu Yeten'in golgesinde barınır. Rab icin 'Sıgınagım, kalemdir' derim, 'Tanrımdır, O'na guvenirim.'",
+      "tags": ["guven", "teselli", "dua", "iman"],
+      "theme": "Ilahi Koruma"
+    },
+    {
+      "id": "bible_021",
+      "reference": "Matta 7:7",
+      "text": "Dileyin, size verilecek; arayın, bulacaksınız; kapıyı calın, size acılacaktır.",
+      "tags": ["dua", "umut", "guven"],
+      "theme": "Dua ile Bul"
+    },
+    {
+      "id": "bible_022",
+      "reference": "Galatyalılar 5:22-23",
+      "text": "Ruh'un meyvesi ise sevgi, sevinc, esenlik, sabır, sefkat, iyilik, bagımlılık, yumusaklık ve ozdenetimdir.",
+      "tags": ["sevgi", "sabir", "baris", "merhamet"],
+      "theme": "Ruhun Meyvesi"
+    },
+    {
+      "id": "bible_023",
+      "reference": "Isaya 40:31",
+      "text": "Rab'be umut baglayanlar guclerini tazeler, kartallar gibi kanatlanıp yukselirler.",
+      "tags": ["umut", "guven", "sabir", "zorluk"],
+      "theme": "Guc Yenilemek"
+    },
+    {
+      "id": "bible_024",
+      "reference": "1. Petrus 5:7",
+      "text": "Butun kaygılarınızı O'na yükleyin, cunku O sizi kayırır.",
+      "tags": ["kaygi", "guven", "teselli", "dua"],
+      "theme": "Kaygilarinı Birak"
+    },
+    {
+      "id": "bible_025",
+      "reference": "Romalılar 15:13",
+      "text": "Umut kaynagı olan Tanrı, O'na guvenmeniz sonucu sizi tam bir sevinc ve esenlikle doldursun.",
+      "tags": ["umut", "guven", "baris"],
+      "theme": "Umut Kaynagi"
+    },
+    {
+      "id": "bible_026",
+      "reference": "Mezmurlar 27:1",
+      "text": "Rab benim ısıgım ve kurtulsumdur, kimden korkarım? Rab hayatımın kalesidir, kimden yılgınlık duyarım?",
+      "tags": ["guven", "kaygi", "iman"],
+      "theme": "Korkusuzluk"
+    },
+    {
+      "id": "bible_027",
+      "reference": "2. Timoteos 1:7",
+      "text": "Cunku Tanrı bize korkaklık ruhu degil, guc, sevgi ve oz denetim ruhu vermistir.",
+      "tags": ["guven", "kaygi", "sevgi"],
+      "theme": "Guc Ruhu"
+    },
+    {
+      "id": "bible_028",
+      "reference": "Mika 6:8",
+      "text": "Senden istenen adil davranman, iyilik sevmen ve alcakgonullulukle Tanrı'nla yurumendir.",
+      "tags": ["adalet", "merhamet", "hikmet"],
+      "theme": "Tanri'nin Istegi"
+    },
+    {
+      "id": "bible_029",
+      "reference": "Mezmurlar 103:2-3",
+      "text": "Rab'be ovguler sun, ey canim, iyiliklerinin hicbirini unutma. Butun suclarını bagıslayan, butun hastalıklarını iyilestiren O'dur.",
+      "tags": ["sukur", "tovbe", "merhamet", "teselli"],
+      "theme": "Sukran ve Af"
+    },
+    {
+      "id": "bible_030",
+      "reference": "Yuhanna 16:33",
+      "text": "Dunya'da sıkıntınız olacak. Ama cesur olun, ben dunya'yı yendim!",
+      "tags": ["zorluk", "umut", "guven", "sabir"],
+      "theme": "Cesaret"
+    }
+  ]
+}

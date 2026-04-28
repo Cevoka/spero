@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "JESSE",
+    "slug": "jesse-spero",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "jesse",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cevoka.jesse"
+    },
+    "android": {
+      "package": "com.cevoka.jesse"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

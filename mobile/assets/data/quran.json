@@ -1,0 +1,215 @@
+{
+  "source": "Kuran",
+  "verses": [
+    {
+      "id": "quran_001",
+      "reference": "Bakara Suresi, 2:286",
+      "text": "Allah hic kimseye gucunun yeteceginden fazlasini yuklemez.",
+      "tags": ["sabir", "guven", "zorluk", "umut"],
+      "theme": "Sabirda Huzur"
+    },
+    {
+      "id": "quran_002",
+      "reference": "Insirah Suresi, 94:5-6",
+      "text": "Suphe yok ki her zorlukla birlikte bir kolaylik vardir. Evet, her guclukle birlikte bir kolaylik vardir.",
+      "tags": ["zorluk", "umut", "teselli"],
+      "theme": "Umit"
+    },
+    {
+      "id": "quran_003",
+      "reference": "Bakara Suresi, 2:153",
+      "text": "Ey iman edenler! Sabir ve namaz ile Allah'tan yardim isteyin. Suphe yok ki Allah sabredenlerle beraberdir.",
+      "tags": ["sabir", "dua", "guven", "iman"],
+      "theme": "Sabir ve Dua"
+    },
+    {
+      "id": "quran_004",
+      "reference": "Ibrahim Suresi, 14:7",
+      "text": "Eger sukrederseniz, elbette size nimetimi artiririm.",
+      "tags": ["sukur", "guven", "umut"],
+      "theme": "Sukur"
+    },
+    {
+      "id": "quran_005",
+      "reference": "Ra'd Suresi, 13:28",
+      "text": "Biliniz ki kalpler ancak Allah'i anmakla huzur bulur.",
+      "tags": ["dua", "guven", "kaygi", "teselli"],
+      "theme": "Ic Huzur"
+    },
+    {
+      "id": "quran_006",
+      "reference": "Enbiya Suresi, 21:107",
+      "text": "Seni ancak alemlere rahmet olarak gonderdik.",
+      "tags": ["merhamet", "sevgi", "genel"],
+      "theme": "Rahmet"
+    },
+    {
+      "id": "quran_007",
+      "reference": "Al-i Imran Suresi, 3:139",
+      "text": "Gevsekmeyiniz, uzulmeyin; eger inanmissaniz, ustun olan sizlersiniz.",
+      "tags": ["umut", "guven", "iman", "zorluk"],
+      "theme": "Guc ve Iman"
+    },
+    {
+      "id": "quran_008",
+      "reference": "Talak Suresi, 65:3",
+      "text": "Kim Allah'a guvenirse O ona yeter.",
+      "tags": ["guven", "iman", "kaygi", "teselli"],
+      "theme": "Tevekkul"
+    },
+    {
+      "id": "quran_009",
+      "reference": "Hucurat Suresi, 49:13",
+      "text": "Ey insanlar! Sizi bir erkek ve bir kadından yarattık ve birbirinizle tanışmanız için sizi milletlere ve kabilelere ayırdık.",
+      "tags": ["sevgi", "adalet", "merhamet", "baris"],
+      "theme": "Kardeslik"
+    },
+    {
+      "id": "quran_010",
+      "reference": "Zumer Suresi, 39:53",
+      "text": "De ki: Ey kendi nefisleri aleyhine haddi asan kullarim! Allah'in rahmetinden umit kesmeyin. Allah butun gunahlari bagislar.",
+      "tags": ["tovbe", "umut", "merhamet", "teselli"],
+      "theme": "Affedilmek"
+    },
+    {
+      "id": "quran_011",
+      "reference": "Bakara Suresi, 2:216",
+      "text": "Olur ki hosunuza gitmeyen bir sey sizin icin hayirlidir. Yine olur ki sevdiginiz bir sey sizin icin serdir.",
+      "tags": ["sabir", "hikmet", "guven", "zorluk"],
+      "theme": "Ilahi Hikmet"
+    },
+    {
+      "id": "quran_012",
+      "reference": "Muminun Suresi, 23:115",
+      "text": "Sizi bos yere yarattigimizi ve bize donemeyeceginizi mi sandınız?",
+      "tags": ["hikmet", "iman", "genel"],
+      "theme": "Yasamin Anlami"
+    },
+    {
+      "id": "quran_013",
+      "reference": "Nisa Suresi, 4:32",
+      "text": "Allah'in kiminize kiminizden daha fazla verdigini temenni etmeyin.",
+      "tags": ["sukur", "sabir", "adalet"],
+      "theme": "Kanaatkarlık"
+    },
+    {
+      "id": "quran_014",
+      "reference": "Ankebut Suresi, 29:69",
+      "text": "Bizim ugrumuzda cihat edenlere gelince, biz onlara yollarimizi gosteririz.",
+      "tags": ["umut", "guven", "iman", "sabir"],
+      "theme": "Gayret"
+    },
+    {
+      "id": "quran_015",
+      "reference": "Furkan Suresi, 25:63",
+      "text": "Rahman'in kullari yeryuzunde yumusak yumusak yururler; cahiller onlara laf attigi zaman 'selam' derler.",
+      "tags": ["sabir", "baris", "merhamet", "hikmet"],
+      "theme": "Tevazu"
+    },
+    {
+      "id": "quran_016",
+      "reference": "Hasr Suresi, 59:9",
+      "text": "Kendileri ihtiyac icinde olsalar bile baskalarina oncelik verirler.",
+      "tags": ["sevgi", "merhamet", "sukur"],
+      "theme": "Fedakarlik"
+    },
+    {
+      "id": "quran_017",
+      "reference": "Kehf Suresi, 18:46",
+      "text": "Mal ve cocuklar dunya hayatinin susudur. Baki kalacak salih ameller ise Rabbinin katinda hem sevapca daha hayirlidir hem de umit yonunden daha hayirlidir.",
+      "tags": ["hikmet", "sukur", "genel"],
+      "theme": "Gercek Degerler"
+    },
+    {
+      "id": "quran_018",
+      "reference": "Duha Suresi, 93:5",
+      "text": "Rabbin sana verecek ve sen hos olacaksin.",
+      "tags": ["umut", "guven", "teselli"],
+      "theme": "Umut Vaat"
+    },
+    {
+      "id": "quran_019",
+      "reference": "Tin Suresi, 95:4",
+      "text": "Biz insani en guzel suretde yarattik.",
+      "tags": ["guven", "sevgi", "genel"],
+      "theme": "Insanin Degeri"
+    },
+    {
+      "id": "quran_020",
+      "reference": "Isra Suresi, 17:82",
+      "text": "Biz Kuran'dan muminler icin sifa ve rahmet olan seyler indiriyoruz.",
+      "tags": ["teselli", "dua", "iman"],
+      "theme": "Sifa"
+    },
+    {
+      "id": "quran_021",
+      "reference": "Maide Suresi, 5:8",
+      "text": "Adaletli olun. Bu, takvaya en yakin olandir.",
+      "tags": ["adalet", "hikmet", "iman"],
+      "theme": "Adalet"
+    },
+    {
+      "id": "quran_022",
+      "reference": "Nahl Suresi, 16:97",
+      "text": "Erkek veya kadin, kim mumin olarak iyi is yaparsa, onu mutlaka guzel bir hayatla yasatiriz.",
+      "tags": ["umut", "guven", "iman", "genel"],
+      "theme": "Guzel Hayat"
+    },
+    {
+      "id": "quran_023",
+      "reference": "Hud Suresi, 11:115",
+      "text": "Sabret! Cunku Allah iyilik edenlerin ecrini zayi etmez.",
+      "tags": ["sabir", "umut", "guven"],
+      "theme": "Sabirla Mukafat"
+    },
+    {
+      "id": "quran_024",
+      "reference": "Yusuf Suresi, 12:87",
+      "text": "Allah'in rahmetinden umit kesmeyin. Cunku kafirler toplulugundan baska kimse Allah'in rahmetinden umit kesmez.",
+      "tags": ["umut", "teselli", "guven", "kaygi"],
+      "theme": "Umitsizlige Dusme"
+    },
+    {
+      "id": "quran_025",
+      "reference": "Lokman Suresi, 31:17",
+      "text": "Yavrucugum! Namazi kil, iyiligi emret, kotulukten alıkoy. Basina gelenlere sabret. Dogrusu bunlar azmedilmeye deger islerdir.",
+      "tags": ["sabir", "hikmet", "adalet", "dua"],
+      "theme": "Lokman'in Ogudleri"
+    },
+    {
+      "id": "quran_026",
+      "reference": "Rum Suresi, 30:21",
+      "text": "Kendileri ile huzur bulasınız diye size kendi cinsinizden esler yaratması ve aranıza sevgi ve merhamet koyması da O'nun ayetlerindendir.",
+      "tags": ["sevgi", "merhamet", "sukur"],
+      "theme": "Sevgi ve Merhamet"
+    },
+    {
+      "id": "quran_027",
+      "reference": "Taha Suresi, 20:25-28",
+      "text": "Rabbim! Gogsumu ac, isimi kolaylastir, dilimdeki dugumu coz ki sozumu anlasinlar.",
+      "tags": ["dua", "guven", "kaygi"],
+      "theme": "Hz. Musa'nin Duasi"
+    },
+    {
+      "id": "quran_028",
+      "reference": "Fecr Suresi, 89:27-30",
+      "text": "Ey huzur icindeki nefis! Rabbine don; sen O'ndan O da senden razi olarak. Kullarimin arasina katil ve cennetime gir.",
+      "tags": ["teselli", "umut", "guven", "genel"],
+      "theme": "Huzurlu Ruh"
+    },
+    {
+      "id": "quran_029",
+      "reference": "Hadiid Suresi, 57:22-23",
+      "text": "Yeryuzunde ve kendi nefislerinizde basınıza gelen herhangi bir musibet yoktur ki, biz onu yaratmadan once bir kitapta yazılmıs olmasın. Elinizden cikana uzulmeyin ve size verilene sevinip semirmeyin.",
+      "tags": ["sabir", "hikmet", "zorluk", "teselli"],
+      "theme": "Kader ve Kabul"
+    },
+    {
+      "id": "quran_030",
+      "reference": "Muzzemmil Suresi, 73:8",
+      "text": "Rabbinin adini an ve butun benliginle O'na yon el.",
+      "tags": ["dua", "iman", "guven"],
+      "theme": "Zikir"
+    }
+  ]
+}
