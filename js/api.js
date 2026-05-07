@@ -262,21 +262,46 @@ ${verseText ? 'Asagida bu konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustad
         const body = this._buildRequestBody(systemPrompt, recentMessages);
         const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlaGt4Z291eWpjZXlweG10dmlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY1MjY0MTAsImV4cCI6MjA5MjEwMjQxMH0.MV72tv-63uoV-cBEa0aCF5rgfR4BKufQO1F7zKwjvd8';
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 35000);
+
         const doFetch = async (auth) => fetch(this.API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': auth, 'apikey': ANON },
-            body
+            body,
+            signal: controller.signal
         });
 
         let auth = await this._getAuthHeader();
-        let response = await doFetch(auth);
+        let response;
+        try {
+            response = await doFetch(auth);
+        } catch (e) {
+            clearTimeout(timeoutId);
+            if (e.name === 'AbortError') throw new Error('Istek zaman asimina ugradi. Lutfen tekrar deneyin.');
+            throw new Error('Baglanti hatasi. Internet baglantinizi kontrol edin.');
+        }
+        clearTimeout(timeoutId);
 
-        // 401: token yenile ve bir kez daha dene
+        // 401: Supabase token yenile ve bir kez daha dene
         if (response.status === 401) {
             const newSession = await Supabase._refreshSession();
             if (newSession) {
                 auth = 'Bearer ' + newSession.access_token;
-                response = await doFetch(auth);
+                try {
+                    const ctrl2 = new AbortController();
+                    const t2 = setTimeout(() => ctrl2.abort(), 35000);
+                    response = await fetch(this.API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': auth, 'apikey': ANON },
+                        body,
+                        signal: ctrl2.signal
+                    });
+                    clearTimeout(t2);
+                } catch (e) {
+                    if (e.name === 'AbortError') throw new Error('Istek zaman asimina ugradi. Lutfen tekrar deneyin.');
+                    throw new Error('Baglanti hatasi. Internet baglantinizi kontrol edin.');
+                }
             }
         }
 
@@ -284,10 +309,14 @@ ${verseText ? 'Asagida bu konuyla ilgili kutsal kitap ayetleri ve tasavvuf ustad
             const err = await response.json().catch(() => ({}));
             if (response.status === 401) throw new Error('Oturum suresi doldu. Lutfen tekrar giris yapin.');
             if (response.status === 429) throw new Error('Cok fazla istek gonderildi. Lutfen biraz bekleyin.');
-            throw new Error(err.error?.message || 'Baglanti hatasi: ' + response.status);
+            if (response.status === 504) throw new Error('AI yanit suresi asimina ugradi. Lutfen tekrar deneyin.');
+            throw new Error(err.error || 'Baglanti hatasi: ' + response.status);
         }
 
         const data = await response.json();
+        if (!data.content || !data.content[0] || !data.content[0].text) {
+            throw new Error('AI cevabi alinamadi. Lutfen tekrar deneyin.');
+        }
         return data.content[0].text;
     },
 

@@ -164,8 +164,10 @@ export async function sendMessage(messages, scriptureContext) {
     messages: recent.map((m) => ({ role: m.role, content: m.content })),
   });
 
-  const doFetch = (auth) =>
-    fetch(API_URL, {
+  const makeFetch = (auth) => {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 35000);
+    return fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -173,16 +175,29 @@ export async function sendMessage(messages, scriptureContext) {
         apikey: SUPABASE_ANON_KEY,
       },
       body,
-    });
+      signal: ctrl.signal,
+    }).finally(() => clearTimeout(timer));
+  };
 
   let auth = await _authHeader();
-  let response = await doFetch(auth);
+  let response;
+  try {
+    response = await makeFetch(auth);
+  } catch (e) {
+    if (e.name === 'AbortError') throw new Error('Istek zaman asimina ugradi. Lutfen tekrar deneyin.');
+    throw new Error('Baglanti hatasi. Internet baglantinizi kontrol edin.');
+  }
 
   if (response.status === 401) {
     const fresh = await Supabase._refreshSession();
     if (fresh) {
       auth = 'Bearer ' + fresh.access_token;
-      response = await doFetch(auth);
+      try {
+        response = await makeFetch(auth);
+      } catch (e) {
+        if (e.name === 'AbortError') throw new Error('Istek zaman asimina ugradi. Lutfen tekrar deneyin.');
+        throw new Error('Baglanti hatasi. Internet baglantinizi kontrol edin.');
+      }
     }
   }
 
@@ -190,10 +205,14 @@ export async function sendMessage(messages, scriptureContext) {
     const err = await response.json().catch(() => ({}));
     if (response.status === 401) throw new Error('Oturum suresi doldu. Lutfen tekrar giris yapin.');
     if (response.status === 429) throw new Error('Cok fazla istek gonderildi. Lutfen biraz bekleyin.');
-    throw new Error(err.error?.message || 'Baglanti hatasi: ' + response.status);
+    if (response.status === 504) throw new Error('AI yanit suresi asimina ugradi. Lutfen tekrar deneyin.');
+    throw new Error(err.error || err.error?.message || 'Baglanti hatasi: ' + response.status);
   }
 
   const data = await response.json();
+  if (!data.content || !data.content[0] || !data.content[0].text) {
+    throw new Error('AI cevabi alinamadi. Lutfen tekrar deneyin.');
+  }
   return data.content[0].text;
 }
 

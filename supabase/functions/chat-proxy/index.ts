@@ -42,16 +42,36 @@ Deno.serve(async (req) => {
     return json({ error: 'Mesaj listesi bos.' }, 400)
   }
 
-  const anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': anthropicKey,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({ model, max_tokens, system, messages }),
-  })
+  let anthropicResp: Response
+  try {
+    const ctrl = new AbortController()
+    const timer = setTimeout(() => ctrl.abort(), 28000)
+    anthropicResp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': anthropicKey,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({ model, max_tokens, system, messages }),
+      signal: ctrl.signal,
+    })
+    clearTimeout(timer)
+  } catch (e: unknown) {
+    const isAbort = e instanceof Error && e.name === 'AbortError'
+    if (isAbort) return json({ error: 'AI yanit suresi asimina ugradi. Lutfen tekrar deneyin.' }, 504)
+    return json({ error: 'AI servisiyle baglanti kurulamadi.' }, 502)
+  }
+
+  if (!anthropicResp.ok) {
+    const errBody = await anthropicResp.json().catch(() => ({})) as Record<string, unknown>
+    const errMsg = (errBody as { error?: { message?: string } }).error?.message
+      || 'AI servisi hatasi: ' + anthropicResp.status
+    // Anthropic 401 (gecersiz API anahtari) → 502 ile don, client bunu kendi auth 401'i sanmasin
+    const outStatus = anthropicResp.status === 401 ? 502 : anthropicResp.status
+    return json({ error: errMsg }, outStatus)
+  }
 
   const respBody = await anthropicResp.json().catch(() => ({}))
-  return json(respBody, anthropicResp.status)
+  return json(respBody, 200)
 })
